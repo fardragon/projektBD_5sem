@@ -1,9 +1,0 @@
-C:\Source\Repos\projektbd\ProjektBD\bin\Debug\ProjektBD.exe.config
-C:\Source\Repos\projektbd\ProjektBD\bin\Debug\ProjektBD.exe
-C:\Source\Repos\projektbd\ProjektBD\bin\Debug\ProjektBD.pdb
-C:\Source\Repos\projektbd\ProjektBD\obj\Debug\ProjektBD.Properties.Resources.resources
-C:\Source\Repos\projektbd\ProjektBD\obj\Debug\ProjektBD.csproj.GenerateResource.Cache
-C:\Source\Repos\projektbd\ProjektBD\obj\Debug\ProjektBD.csproj.CoreCompileInputs.cache
-C:\Source\Repos\projektbd\ProjektBD\obj\Debug\ProjektBD.exe
-C:\Source\Repos\projektbd\ProjektBD\obj\Debug\ProjektBD.pdb
-C:\Source\Repos\projektbd\ProjektBD\obj\Debug\ProjektBD.Login.resources

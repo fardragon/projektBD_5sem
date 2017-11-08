@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="projektbd_samochody" Class="DealershipDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=projektbd-serwer.database.windows.net;Initial Catalog=projektbd_samochody;Persist Security Info=True;User ID=uzytkownik" SettingsObjectName="CarDealership.Properties.Settings" SettingsPropertyName="CarDealership_samochodyConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Accessories" Member="Accessories">
+    <Type Name="Accessory">
+      <Column Name="ACCESSORY_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TYPE_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PRICE" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Accessory_Accessories_Install_Order" Member="Accessories_Install_Orders" ThisKey="ACCESSORY_ID" OtherKey="ACCESSORY_ID" Type="Accessories_Install_Order" />
+      <Association Name="Accessory_Mounted_Accessory" Member="Mounted_Accessories" ThisKey="ACCESSORY_ID" OtherKey="ACCESSORY_ID" Type="Mounted_Accessory" />
+      <Association Name="Accessory_Sold_Accessory" Member="Sold_Accessories" ThisKey="ACCESSORY_ID" OtherKey="ACCESSORY_ID" Type="Sold_Accessory" />
+      <Association Name="Accessories_Type_Accessory" Member="Accessories_Type" ThisKey="TYPE_ID" OtherKey="TYPE_ID" Type="Accessories_Type" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Accessories_Install_Orders" Member="Accessories_Install_Orders">
+    <Type Name="Accessories_Install_Order">
+      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ACCESSORY_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Accessory_Accessories_Install_Order" Member="Accessory" ThisKey="ACCESSORY_ID" OtherKey="ACCESSORY_ID" Type="Accessory" IsForeignKey="true" />
+      <Association Name="Active_Order_Accessories_Install_Order" Member="Active_Order" ThisKey="ORDER_ID" OtherKey="ORDER_ID" Type="Active_Order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Accessories_Types" Member="Accessories_Types">
+    <Type Name="Accessories_Type">
+      <Column Name="TYPE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TYPE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Accessories_Type_Accessory" Member="Accessories" ThisKey="TYPE_ID" OtherKey="TYPE_ID" Type="Accessory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Active_Discounts" Member="Active_Discounts">
+    <Type Name="Active_Discount">
+      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DISCOUNT_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Active_Order_Active_Discount" Member="Active_Order" ThisKey="ORDER_ID" OtherKey="ORDER_ID" Type="Active_Order" IsForeignKey="true" />
+      <Association Name="Discount_Active_Discount" Member="Discount" ThisKey="DISCOUNT_ID" OtherKey="DISCOUNT_ID" Type="Discount" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Active_Orders" Member="Active_Orders">
+    <Type Name="Active_Order">
+      <Column Name="ORDER_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CAR_VIN" Type="System.String" DbType="Char(17) NOT NULL" CanBeNull="false" />
+      <Column Name="CUSTOMER_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EMPLOYEE_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ORDER_STATUS_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NOTES" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OPENED_DATE" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="LAST_UPDATE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Active_Order_Accessories_Install_Order" Member="Accessories_Install_Orders" ThisKey="ORDER_ID" OtherKey="ORDER_ID" Type="Accessories_Install_Order" />
+      <Association Name="Active_Order_Active_Discount" Member="Active_Discounts" ThisKey="ORDER_ID" OtherKey="ORDER_ID" Type="Active_Discount" />
+      <Association Name="Cars_for_Sale_Active_Order" Member="Cars_for_Sale" ThisKey="CAR_VIN" OtherKey="CAR_VIN" Type="Cars_for_Sale" IsForeignKey="true" />
+      <Association Name="Customer_Active_Order" Member="Customer" ThisKey="CUSTOMER_ID" OtherKey="CUSTOMER_ID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Order_Statuse_Active_Order" Member="Order_Statuse" ThisKey="ORDER_STATUS_ID" OtherKey="ORDER_STATUS_ID" Type="Order_Statuse" IsForeignKey="true" />
+      <Association Name="Employee_Active_Order" Member="Employee" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cars_for_Sale" Member="Cars_for_Sales">
+    <Type Name="Cars_for_Sale">
+      <Column Name="CAR_VIN" Type="System.String" DbType="Char(17) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MODEL_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEALERSHIP_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="COLOR_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PRODUCTION_YEAR" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Association Name="Cars_for_Sale_Active_Order" Member="Active_Orders" ThisKey="CAR_VIN" OtherKey="CAR_VIN" Type="Active_Order" />
+      <Association Name="Cars_for_Sale_Mounted_Accessory" Member="Mounted_Accessories" ThisKey="CAR_VIN" OtherKey="CAR_VIN" Type="Mounted_Accessory" />
+      <Association Name="Color_Cars_for_Sale" Member="Color" ThisKey="COLOR_ID" OtherKey="COLOR_ID" Type="Color" IsForeignKey="true" />
+      <Association Name="Dealership_Cars_for_Sale" Member="Dealership" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Dealership" IsForeignKey="true" />
+      <Association Name="Model_Cars_for_Sale" Member="Model" ThisKey="MODEL_ID" OtherKey="MODEL_ID" Type="Model" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Colors" Member="Colors">
+    <Type Name="Color">
+      <Column Name="COLOR_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Color_Cars_for_Sale" Member="Cars_for_Sales" ThisKey="COLOR_ID" OtherKey="COLOR_ID" Type="Cars_for_Sale" />
+      <Association Name="Color_Sold_Car" Member="Sold_Cars" ThisKey="COLOR_ID" OtherKey="COLOR_ID" Type="Sold_Car" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customers" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CUSTOMER_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="STREET_ADDRESS" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CITY" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ZIPCODE" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="PHONE" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="MAIL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Customer_Active_Order" Member="Active_Orders" ThisKey="CUSTOMER_ID" OtherKey="CUSTOMER_ID" Type="Active_Order" />
+      <Association Name="Customer_Sold_Car" Member="Sold_Cars" ThisKey="CUSTOMER_ID" OtherKey="CUSTOMER_ID" Type="Sold_Car" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dealerships" Member="Dealerships">
+    <Type Name="Dealership">
+      <Column Name="DEALERSHIP_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MANAGER_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="STREET_ADDRESS" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CITY" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ZIPCODE" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Dealership_Cars_for_Sale" Member="Cars_for_Sales" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Cars_for_Sale" />
+      <Association Name="Dealership_Sold_Car" Member="Sold_Cars" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Sold_Car" />
+      <Association Name="Dealership_Employee" Member="Employees" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Employee" />
+      <Association Name="Employee_Dealership" Member="Employee" ThisKey="MANAGER_ID" OtherKey="EMPLOYEE_ID" Type="Employee" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Discounts" Member="Discounts">
+    <Type Name="Discount">
+      <Column Name="DISCOUNT_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VALUE" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Discount_Active_Discount" Member="Active_Discounts" ThisKey="DISCOUNT_ID" OtherKey="DISCOUNT_ID" Type="Active_Discount" />
+      <Association Name="Discount_Sold_Discount" Member="Sold_Discounts" ThisKey="DISCOUNT_ID" OtherKey="DISCOUNT_ID" Type="Sold_Discount" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Models" Member="Models">
+    <Type Name="Model">
+      <Column Name="MODEL_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BASE_PRICE" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Model_Cars_for_Sale" Member="Cars_for_Sales" ThisKey="MODEL_ID" OtherKey="MODEL_ID" Type="Cars_for_Sale" />
+      <Association Name="Model_Sold_Car" Member="Sold_Cars" ThisKey="MODEL_ID" OtherKey="MODEL_ID" Type="Sold_Car" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Mounted_Accessories" Member="Mounted_Accessories">
+    <Type Name="Mounted_Accessory">
+      <Column Name="ACCESSORY_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CAR_VIN" Type="System.String" DbType="Char(17) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EMPLOYEE_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Accessory_Mounted_Accessory" Member="Accessory" ThisKey="ACCESSORY_ID" OtherKey="ACCESSORY_ID" Type="Accessory" IsForeignKey="true" />
+      <Association Name="Cars_for_Sale_Mounted_Accessory" Member="Cars_for_Sale" ThisKey="CAR_VIN" OtherKey="CAR_VIN" Type="Cars_for_Sale" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Employee_Mounted_Accessory" Member="Employee" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Order_Statuses" Member="Order_Statuses">
+    <Type Name="Order_Statuse">
+      <Column Name="ORDER_STATUS_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="STATUS" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Order_Statuse_Active_Order" Member="Active_Orders" ThisKey="ORDER_STATUS_ID" OtherKey="ORDER_STATUS_ID" Type="Active_Order" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Role">
+      <Column Name="ROLE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE" Member="ROLE1" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_Employee" Member="Employees" ThisKey="ROLE_ID" OtherKey="ROLE_ID" Type="Employee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sold_Accessories" Member="Sold_Accessories">
+    <Type Name="Sold_Accessory">
+      <Column Name="SALE_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ACCESSORY_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Accessory_Sold_Accessory" Member="Accessory" ThisKey="ACCESSORY_ID" OtherKey="ACCESSORY_ID" Type="Accessory" IsForeignKey="true" />
+      <Association Name="Sold_Car_Sold_Accessory" Member="Sold_Car" ThisKey="SALE_ID" OtherKey="SALE_ID" Type="Sold_Car" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sold_Cars" Member="Sold_Cars">
+    <Type Name="Sold_Car">
+      <Column Name="SALE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CAR_VIN" Type="System.String" DbType="Char(17) NOT NULL" CanBeNull="false" />
+      <Column Name="MODEL_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DEALERSHIP_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="COLOR_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PRODUCTION_YEAR" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="EMPLOYEE_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CUSTOMER_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SALE_DATE" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Sold_Car_Sold_Accessory" Member="Sold_Accessories" ThisKey="SALE_ID" OtherKey="SALE_ID" Type="Sold_Accessory" />
+      <Association Name="Sold_Car_Sold_Discount" Member="Sold_Discounts" ThisKey="SALE_ID" OtherKey="SALE_ID" Type="Sold_Discount" />
+      <Association Name="Color_Sold_Car" Member="Color" ThisKey="COLOR_ID" OtherKey="COLOR_ID" Type="Color" IsForeignKey="true" />
+      <Association Name="Customer_Sold_Car" Member="Customer" ThisKey="CUSTOMER_ID" OtherKey="CUSTOMER_ID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Dealership_Sold_Car" Member="Dealership" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Dealership" IsForeignKey="true" />
+      <Association Name="Model_Sold_Car" Member="Model" ThisKey="MODEL_ID" OtherKey="MODEL_ID" Type="Model" IsForeignKey="true" />
+      <Association Name="Employee_Sold_Car" Member="Employee" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sold_Discounts" Member="Sold_Discounts">
+    <Type Name="Sold_Discount">
+      <Column Name="SALE_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DISCOUNT_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Discount_Sold_Discount" Member="Discount" ThisKey="DISCOUNT_ID" OtherKey="DISCOUNT_ID" Type="Discount" IsForeignKey="true" />
+      <Association Name="Sold_Car_Sold_Discount" Member="Sold_Car" ThisKey="SALE_ID" OtherKey="SALE_ID" Type="Sold_Car" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Employees" Member="Employees">
+    <Type Name="Employee">
+      <Column Name="EMPLOYEE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SURNAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DEALERSHIP_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ROLE_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LOGIN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PASSWORD" Type="System.String" DbType="Char(32) NOT NULL" CanBeNull="false" />
+      <Association Name="Employee_Active_Order" Member="Active_Orders" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Active_Order" />
+      <Association Name="Employee_Dealership" Member="Dealerships" ThisKey="EMPLOYEE_ID" OtherKey="MANAGER_ID" Type="Dealership" />
+      <Association Name="Employee_Mounted_Accessory" Member="Mounted_Accessories" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Mounted_Accessory" />
+      <Association Name="Employee_Sold_Car" Member="Sold_Cars" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Sold_Car" />
+      <Association Name="Dealership_Employee" Member="Dealership" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Dealership" IsForeignKey="true" />
+      <Association Name="Role_Employee" Member="Role" ThisKey="ROLE_ID" OtherKey="ROLE_ID" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
