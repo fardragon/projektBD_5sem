@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="projektbd_samochody" Class="DealershipDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=projektbd-serwer.database.windows.net;Initial Catalog=projektbd_samochody;Persist Security Info=True;User ID=uzytkownik" SettingsObjectName="CarDealership.Properties.Settings" SettingsPropertyName="CarDealership_samochodyConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="projektbd_samochody" Class="DealershipDatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=projektbd-serwer.database.windows.net;Initial Catalog=projektbd_samochody;Persist Security Info=True;User ID=uzytkownik" SettingsObjectName="DataLayer.Properties.Settings" SettingsPropertyName="projektbd_samochodyConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Accessories" Member="Accessories">
     <Type Name="Accessory">
       <Column Name="ACCESSORY_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -49,8 +49,8 @@
       <Association Name="Active_Order_Active_Discount" Member="Active_Discounts" ThisKey="ORDER_ID" OtherKey="ORDER_ID" Type="Active_Discount" />
       <Association Name="Cars_for_Sale_Active_Order" Member="Cars_for_Sale" ThisKey="CAR_VIN" OtherKey="CAR_VIN" Type="Cars_for_Sale" IsForeignKey="true" />
       <Association Name="Customer_Active_Order" Member="Customer" ThisKey="CUSTOMER_ID" OtherKey="CUSTOMER_ID" Type="Customer" IsForeignKey="true" />
-      <Association Name="Order_Statuse_Active_Order" Member="Order_Statuse" ThisKey="ORDER_STATUS_ID" OtherKey="ORDER_STATUS_ID" Type="Order_Statuse" IsForeignKey="true" />
       <Association Name="Employee_Active_Order" Member="Employee" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Employee" IsForeignKey="true" />
+      <Association Name="Order_Statuse_Active_Order" Member="Order_Statuse" ThisKey="ORDER_STATUS_ID" OtherKey="ORDER_STATUS_ID" Type="Order_Statuse" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Cars_for_Sale" Member="Cars_for_Sales">
@@ -96,8 +96,8 @@
       <Column Name="CITY" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ZIPCODE" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
       <Association Name="Dealership_Cars_for_Sale" Member="Cars_for_Sales" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Cars_for_Sale" />
-      <Association Name="Dealership_Sold_Car" Member="Sold_Cars" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Sold_Car" />
       <Association Name="Dealership_Employee" Member="Employees" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Employee" />
+      <Association Name="Dealership_Sold_Car" Member="Sold_Cars" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Sold_Car" />
       <Association Name="Employee_Dealership" Member="Employee" ThisKey="MANAGER_ID" OtherKey="EMPLOYEE_ID" Type="Employee" IsForeignKey="true" DeleteRule="SET NULL" />
     </Type>
   </Table>
@@ -108,6 +108,23 @@
       <Column Name="VALUE" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
       <Association Name="Discount_Active_Discount" Member="Active_Discounts" ThisKey="DISCOUNT_ID" OtherKey="DISCOUNT_ID" Type="Active_Discount" />
       <Association Name="Discount_Sold_Discount" Member="Sold_Discounts" ThisKey="DISCOUNT_ID" OtherKey="DISCOUNT_ID" Type="Sold_Discount" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Employees" Member="Employees">
+    <Type Name="Employee">
+      <Column Name="EMPLOYEE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SURNAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DEALERSHIP_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ROLE_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LOGIN" Type="System.String" DbType="Char(32) NOT NULL" CanBeNull="false" />
+      <Column Name="PASSWORD" Type="System.String" DbType="Char(32) NOT NULL" CanBeNull="false" />
+      <Association Name="Employee_Active_Order" Member="Active_Orders" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Active_Order" />
+      <Association Name="Employee_Dealership" Member="Dealerships" ThisKey="EMPLOYEE_ID" OtherKey="MANAGER_ID" Type="Dealership" />
+      <Association Name="Employee_Mounted_Accessory" Member="Mounted_Accessories" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Mounted_Accessory" />
+      <Association Name="Employee_Sold_Car" Member="Sold_Cars" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Sold_Car" />
+      <Association Name="Dealership_Employee" Member="Dealership" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Dealership" IsForeignKey="true" />
+      <Association Name="Role_Employee" Member="Role" ThisKey="ROLE_ID" OtherKey="ROLE_ID" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Models" Member="Models">
@@ -136,19 +153,19 @@
       <Association Name="Order_Statuse_Active_Order" Member="Active_Orders" ThisKey="ORDER_STATUS_ID" OtherKey="ORDER_STATUS_ID" Type="Active_Order" />
     </Type>
   </Table>
-  <Table Name="dbo.Roles" Member="Roles">
-    <Type Name="Role">
-      <Column Name="ROLE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ROLE" Member="ROLE1" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="Role_Employee" Member="Employees" ThisKey="ROLE_ID" OtherKey="ROLE_ID" Type="Employee" />
-    </Type>
-  </Table>
   <Table Name="dbo.Sold_Accessories" Member="Sold_Accessories">
     <Type Name="Sold_Accessory">
       <Column Name="SALE_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ACCESSORY_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="Accessory_Sold_Accessory" Member="Accessory" ThisKey="ACCESSORY_ID" OtherKey="ACCESSORY_ID" Type="Accessory" IsForeignKey="true" />
       <Association Name="Sold_Car_Sold_Accessory" Member="Sold_Car" ThisKey="SALE_ID" OtherKey="SALE_ID" Type="Sold_Car" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Role">
+      <Column Name="ROLE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ROLE" Member="ROLE1" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_Employee" Member="Employees" ThisKey="ROLE_ID" OtherKey="ROLE_ID" Type="Employee" />
     </Type>
   </Table>
   <Table Name="dbo.Sold_Cars" Member="Sold_Cars">
@@ -167,8 +184,8 @@
       <Association Name="Color_Sold_Car" Member="Color" ThisKey="COLOR_ID" OtherKey="COLOR_ID" Type="Color" IsForeignKey="true" />
       <Association Name="Customer_Sold_Car" Member="Customer" ThisKey="CUSTOMER_ID" OtherKey="CUSTOMER_ID" Type="Customer" IsForeignKey="true" />
       <Association Name="Dealership_Sold_Car" Member="Dealership" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Dealership" IsForeignKey="true" />
-      <Association Name="Model_Sold_Car" Member="Model" ThisKey="MODEL_ID" OtherKey="MODEL_ID" Type="Model" IsForeignKey="true" />
       <Association Name="Employee_Sold_Car" Member="Employee" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Employee" IsForeignKey="true" />
+      <Association Name="Model_Sold_Car" Member="Model" ThisKey="MODEL_ID" OtherKey="MODEL_ID" Type="Model" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Sold_Discounts" Member="Sold_Discounts">
@@ -177,23 +194,6 @@
       <Column Name="DISCOUNT_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="Discount_Sold_Discount" Member="Discount" ThisKey="DISCOUNT_ID" OtherKey="DISCOUNT_ID" Type="Discount" IsForeignKey="true" />
       <Association Name="Sold_Car_Sold_Discount" Member="Sold_Car" ThisKey="SALE_ID" OtherKey="SALE_ID" Type="Sold_Car" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Employees" Member="Employees">
-    <Type Name="Employee">
-      <Column Name="EMPLOYEE_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="NAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="SURNAME" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="DEALERSHIP_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ROLE_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="LOGIN" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="PASSWORD" Type="System.String" DbType="Char(32) NOT NULL" CanBeNull="false" />
-      <Association Name="Employee_Active_Order" Member="Active_Orders" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Active_Order" />
-      <Association Name="Employee_Dealership" Member="Dealerships" ThisKey="EMPLOYEE_ID" OtherKey="MANAGER_ID" Type="Dealership" />
-      <Association Name="Employee_Mounted_Accessory" Member="Mounted_Accessories" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Mounted_Accessory" />
-      <Association Name="Employee_Sold_Car" Member="Sold_Cars" ThisKey="EMPLOYEE_ID" OtherKey="EMPLOYEE_ID" Type="Sold_Car" />
-      <Association Name="Dealership_Employee" Member="Dealership" ThisKey="DEALERSHIP_ID" OtherKey="DEALERSHIP_ID" Type="Dealership" IsForeignKey="true" />
-      <Association Name="Role_Employee" Member="Role" ThisKey="ROLE_ID" OtherKey="ROLE_ID" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
