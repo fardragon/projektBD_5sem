@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLayer;
 
 namespace CarDealership
 {
@@ -16,14 +17,13 @@ namespace CarDealership
         {
             InitializeComponent();
             this.NextScreen = Screens.Exit;
-
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            var database = new DealershipDataContext();
-            database.ExecuteCommand("EXEC dbo.reset;");
-
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+            BusinessLayer.AdminLogic.DEBUG_RESET();
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
 
         private void ExitButton_Click(object sender, EventArgs e)

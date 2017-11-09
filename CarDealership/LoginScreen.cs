@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLayer;
 
 
 namespace CarDealership
@@ -26,78 +27,38 @@ namespace CarDealership
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-
-            this.toolTipPassword.Hide(textBox_password);
-            this.toolTipUsername.Hide(textBox_username);
-            string username = this.textBox_username.Text;
-            string password = this.textBox_password.Text;
-            if ((password.Length == 0) || (username.Length == 0))
-            {
-                //username or password is empty
-                System.Media.SystemSounds.Asterisk.Play();
-
-
-                if (password.Length == 0)
-                {
-                    this.toolTipPassword.Show("Empty password", this.textBox_password);
-                }
-
-                if (username.Length == 0)
-                {
-                    this.toolTipUsername.Show("Empty username", this.textBox_username);
-                }
-
-                return;
-            }
-
-            password = CarDealership.Utility.CalculateMD5Hash(password);
-
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
-
-            var database = new DealershipDataContext
+            this.toolTipLogin.Hide(textBox_password);         
+            var user = BusinessLayer.LoginLogic.Login(this.textBox_username.Text, this.textBox_password.Text);
+            bool loggedIn = false;
+            switch (user)
             {
-                Log = System.Console.Out
-            };
-
-
-            try
-            {
-                var user = (from users in database.Employees where users.LOGIN == username && users.PASSWORD == password select users).Single();
-
-                switch(user.Role.ROLE1.ToString())
-                {
-                    case "Administrator":
-                        this.NextScreen = Screens.AdminScreen;
-                        break;
-                    case "Manager":
-                        this.NextScreen = Screens.ManagerScreen;
-                        break;
-                    case "Seller":
-                        this.NextScreen = Screens.SellerScreen;
-                        break;
-                    case "Mechanic":
-                        this.NextScreen = Screens.MechanicScreen;
-                        break;
-                }
-
-                
-
-
-
-                this.Close();
+                case BusinessLayer.UserTypes.Error:
+                    MessageBox.Show(this,"Database connection error", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case BusinessLayer.UserTypes.BadLogin:
+                    this.toolTipLogin.Show("Invalid login and\\or password", this.textBox_password);
+                    System.Media.SystemSounds.Asterisk.Play();
+                    break;
+                case BusinessLayer.UserTypes.Administrator:
+                    this.NextScreen = Screens.AdminScreen;
+                    loggedIn = true;
+                    break;
+                case BusinessLayer.UserTypes.Manager:
+                    this.NextScreen = Screens.ManagerScreen;
+                    loggedIn = true;
+                    break;
+                case BusinessLayer.UserTypes.Seller:
+                    this.NextScreen = Screens.SellerScreen;
+                    loggedIn = true;
+                    break;
+                case BusinessLayer.UserTypes.Mechanic:
+                    this.NextScreen = Screens.MechanicScreen;
+                    loggedIn = true;
+                    break;
             }
-            catch (System.InvalidOperationException)
-            {
-                System.Media.SystemSounds.Asterisk.Play();
-                this.toolTipPassword.Show("Incorrect username or password", this.textBox_password);
-            }
-            catch(System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
-
+            if (loggedIn) this.Close();
         }
 
         private void textBox_username_KeyPress(object sender, KeyPressEventArgs e)

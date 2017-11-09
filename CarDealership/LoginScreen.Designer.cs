@@ -35,8 +35,7 @@
             this.label_username = new System.Windows.Forms.Label();
             this.label_password = new System.Windows.Forms.Label();
             this.loginButton = new System.Windows.Forms.Button();
-            this.toolTipPassword = new System.Windows.Forms.ToolTip(this.components);
-            this.toolTipUsername = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipLogin = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // exitButton
@@ -130,8 +129,7 @@
         private System.Windows.Forms.Label label_username;
         private System.Windows.Forms.Label label_password;
         private System.Windows.Forms.Button loginButton;
-        private System.Windows.Forms.ToolTip toolTipPassword;
-        private System.Windows.Forms.ToolTip toolTipUsername;
+        private System.Windows.Forms.ToolTip toolTipLogin;
     }
 }
 
