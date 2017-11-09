@@ -26,10 +26,39 @@ namespace CarDealership
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            string username = this.textBox_username.Text;
-            string password = CarDealership.Utility.CalculateMD5Hash(this.textBox_password.Text);
 
-            var database = new DealershipDataContext();
+            this.toolTipPassword.Hide(textBox_password);
+            this.toolTipUsername.Hide(textBox_username);
+            string username = this.textBox_username.Text;
+            string password = this.textBox_password.Text;
+            if ((password.Length == 0) || (username.Length == 0))
+            {
+                //username or password is empty
+                System.Media.SystemSounds.Asterisk.Play();
+
+
+                if (password.Length == 0)
+                {
+                    this.toolTipPassword.Show("Empty password", this.textBox_password);
+                }
+
+                if (username.Length == 0)
+                {
+                    this.toolTipUsername.Show("Empty username", this.textBox_username);
+                }
+
+                return;
+            }
+
+            password = CarDealership.Utility.CalculateMD5Hash(password);
+
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+
+            var database = new DealershipDataContext
+            {
+                Log = System.Console.Out
+            };
+
 
             try
             {
@@ -57,15 +86,17 @@ namespace CarDealership
 
                 this.Close();
             }
-            catch (System.InvalidOperationException ex)
+            catch (System.InvalidOperationException)
             {
-                MessageBox.Show(ex.Message);
+                System.Media.SystemSounds.Asterisk.Play();
+                this.toolTipPassword.Show("Incorrect username or password", this.textBox_password);
             }
             catch(System.Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
 
         }
 
@@ -75,11 +106,7 @@ namespace CarDealership
             {
                 e.Handled = true;
             }
-            else if (e.KeyChar == (char)13)
-            {
-                e.Handled = true;
-                this.loginButton.PerformClick();
-            }
+
         }
 
         private void textBox_password_KeyPress(object sender, KeyPressEventArgs e)
@@ -88,11 +115,7 @@ namespace CarDealership
             {
                 e.Handled = true;
             }
-            else if (e.KeyChar == (char)13)
-            {
-                e.Handled = true;
-                this.loginButton.PerformClick();
-            }
+
         }
 
         private void textBox_password_Enter(object sender, EventArgs e)
@@ -109,8 +132,9 @@ namespace CarDealership
             if (!String.IsNullOrEmpty(textBox_username.Text))
             {
                 textBox_username.SelectionStart = 0;
-                textBox_username.SelectionLength = textBox_password.Text.Length;
+                textBox_username.SelectionLength = textBox_username.Text.Length;
             }
         }
+
     }
 }
