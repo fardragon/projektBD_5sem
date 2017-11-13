@@ -10,48 +10,68 @@ namespace BusinessLayer
 {
     public static class LoginLogic
     {
-        public static UserTypes Login(string username, string password)
+        public static LoginData Login(string username, string password)
         {
+            var result = new LoginData
+            {
+                Dealership = -1
+            };
+
             if ((password.Length == 0) || (username.Length == 0))
             {
-                return UserTypes.BadLogin;
+                result.Type = UserTypes.BadLogin;
+                return result;
             }
             var hashedPassword = BusinessLayer.Utility.CalculateMD5Hash(password);         
             try
             {
-                var database = new DataLayer.DealershipDatabaseDataContext();
-#if DEBUG
-                database.Log = System.Console.Out;
-#endif
-                var user = (from users in database.Employees where users.LOGIN == username && users.PASSWORD == hashedPassword select users).Single();          
+                var database = DataLayer.Utility.GetContext();
+
+                var user = (from users in database.Employees where users.LOGIN == username && users.PASSWORD == hashedPassword select users).Single();     
+                if (user.DEALERSHIP_ID.HasValue)
+                {
+                    result.Dealership = user.DEALERSHIP_ID.Value;
+                }
+
                 switch (user.Role.ROLE1.ToString())
                 {
                     case "Administrator":
-                        return UserTypes.Administrator;
+                        result.Type = UserTypes.Administrator;
+                        break;
                     case "Manager":
-                        return UserTypes.Manager;
+                        result.Type = UserTypes.Manager;
+                        break;
                     case "Seller":
-                        return UserTypes.Seller;
+                        result.Type = UserTypes.Seller;
+                        break;
                     case "Mechanic":
-                        return UserTypes.Mechanic;
+                        result.Type = UserTypes.Mechanic;
+                        break;
                     default:
-                        return UserTypes.BadLogin;
+                        result.Type = UserTypes.BadLogin;
+                        break;
                 }
+
+                return result;
+
             }
             catch (System.InvalidOperationException)
             {
-                return UserTypes.BadLogin;
+                result.Type = UserTypes.BadLogin;
+                return result;
             }
 #if DEBUG
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                return UserTypes.Error;
+                MessageBox.Show(ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                result.Type = UserTypes.Error;
+                return result;
             }
 #else
             catch (System.Exception)
             {
-                return UserTypes.Error;
+                result.Type = UserTypes.Error;
+                return result;
             }
 #endif
 

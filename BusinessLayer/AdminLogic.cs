@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using DataLayer;
 
 namespace BusinessLayer
@@ -13,15 +14,12 @@ namespace BusinessLayer
         {
             try
             {
-                var database = new DealershipDatabaseDataContext();
-#if DEBUG
-                database.Log = System.Console.Out;
-#endif
+                var database = DataLayer.Utility.GetContext();
                 database.ExecuteCommand("EXEC dbo.reset;");
             }
             catch (System.Exception ex)
             {
-            	
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }           
         }
     }

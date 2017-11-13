@@ -31,7 +31,7 @@ namespace CarDealership
             this.toolTipLogin.Hide(textBox_password);         
             var user = BusinessLayer.LoginLogic.Login(this.textBox_username.Text, this.textBox_password.Text);
             bool loggedIn = false;
-            switch (user)
+            switch (user.Type)
             {
                 case BusinessLayer.UserTypes.Error:
                     MessageBox.Show(this,"Database connection error", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -58,7 +58,11 @@ namespace CarDealership
                     break;
             }
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
-            if (loggedIn) this.Close();
+            if (loggedIn)
+            {
+                this.DefaultDealership = user.Dealership;
+                this.Close();
+            }
         }
 
         private void textBox_username_KeyPress(object sender, KeyPressEventArgs e)

@@ -33,6 +33,7 @@
             this.ExitButton = new System.Windows.Forms.Button();
             this.LogoutButton = new System.Windows.Forms.Button();
             this.EmployeesTab = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.DGV_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGV_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +45,8 @@
             this.tabControl.SuspendLayout();
             this.HomeTab.SuspendLayout();
             this.EmployeesTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.DebugTab.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +98,7 @@
             // 
             // EmployeesTab
             // 
+            this.EmployeesTab.Controls.Add(this.splitContainer1);
             this.EmployeesTab.Controls.Add(this.dataGridView1);
             this.EmployeesTab.Location = new System.Drawing.Point(4, 22);
             this.EmployeesTab.Name = "EmployeesTab";
@@ -103,6 +107,19 @@
             this.EmployeesTab.Text = "Employees";
             this.EmployeesTab.UseVisualStyleBackColor = true;
             this.EmployeesTab.Enter += new System.EventHandler(this.EmployeesTab_Enter);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.splitContainer1.Size = new System.Drawing.Size(847, 490);
+            this.splitContainer1.SplitterDistance = 199;
+            this.splitContainer1.TabIndex = 1;
             // 
             // dataGridView1
             // 
@@ -113,10 +130,9 @@
             this.DGV_Surname,
             this.DGV_Role,
             this.DGV_Dealership});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(545, 161);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(847, 490);
+            this.dataGridView1.Size = new System.Drawing.Size(616, 423);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -183,6 +199,8 @@
             this.tabControl.ResumeLayout(false);
             this.HomeTab.ResumeLayout(false);
             this.EmployeesTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.DebugTab.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -204,5 +222,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DGV_Surname;
         private System.Windows.Forms.DataGridViewTextBoxColumn DGV_Role;
         private System.Windows.Forms.DataGridViewTextBoxColumn DGV_Dealership;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }

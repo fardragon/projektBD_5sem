@@ -17,4 +17,10 @@ namespace BusinessLayer
         }
 
     }
+
+    public struct LoginData 
+    {
+        public UserTypes Type;
+        public int Dealership;
+    }
 }
