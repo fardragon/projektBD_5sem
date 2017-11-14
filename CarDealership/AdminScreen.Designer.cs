@@ -42,10 +42,12 @@
             this.DGV_Dealership = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DebugTab = new System.Windows.Forms.TabPage();
             this.ResetButton = new System.Windows.Forms.Button();
+            this.employeesView1 = new CarDealership.EmployeesView();
             this.tabControl.SuspendLayout();
             this.HomeTab.SuspendLayout();
             this.EmployeesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.DebugTab.SuspendLayout();
@@ -117,6 +119,10 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.DarkGray;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.employeesView1);
             this.splitContainer1.Size = new System.Drawing.Size(847, 490);
             this.splitContainer1.SplitterDistance = 199;
             this.splitContainer1.TabIndex = 1;
@@ -188,6 +194,14 @@
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
+            // employeesView1
+            // 
+            this.employeesView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.employeesView1.Location = new System.Drawing.Point(0, 0);
+            this.employeesView1.Name = "employeesView1";
+            this.employeesView1.Size = new System.Drawing.Size(644, 490);
+            this.employeesView1.TabIndex = 0;
+            // 
             // AdminScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,6 +213,7 @@
             this.tabControl.ResumeLayout(false);
             this.HomeTab.ResumeLayout(false);
             this.EmployeesTab.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -223,5 +238,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DGV_Role;
         private System.Windows.Forms.DataGridViewTextBoxColumn DGV_Dealership;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private EmployeesView employeesView1;
     }
 }

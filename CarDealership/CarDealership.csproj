@@ -70,6 +70,12 @@
     <Compile Include="AdminScreen.Designer.cs">
       <DependentUpon>AdminScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="EmployeesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EmployeesView.Designer.cs">
+      <DependentUpon>EmployeesView.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     <Compile Include="Utility.cs" />
     <EmbeddedResource Include="AdminScreen.resx">
       <DependentUpon>AdminScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeesView.resx">
+      <DependentUpon>EmployeesView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>
