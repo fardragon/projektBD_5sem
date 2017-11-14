@@ -34,6 +34,7 @@
             this.LogoutButton = new System.Windows.Forms.Button();
             this.EmployeesTab = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.employeesView1 = new CarDealership.EmployeesView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.DGV_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGV_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,11 +43,12 @@
             this.DGV_Dealership = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DebugTab = new System.Windows.Forms.TabPage();
             this.ResetButton = new System.Windows.Forms.Button();
-            this.employeesView1 = new CarDealership.EmployeesView();
+            this.buttonEDIT = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.HomeTab.SuspendLayout();
             this.EmployeesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -65,6 +67,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(855, 516);
             this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // HomeTab
             // 
@@ -108,7 +111,6 @@
             this.EmployeesTab.TabIndex = 2;
             this.EmployeesTab.Text = "Employees";
             this.EmployeesTab.UseVisualStyleBackColor = true;
-            this.EmployeesTab.Enter += new System.EventHandler(this.EmployeesTab_Enter);
             // 
             // splitContainer1
             // 
@@ -119,13 +121,23 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.splitContainer1.Panel1.Controls.Add(this.buttonEDIT);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.employeesView1);
             this.splitContainer1.Size = new System.Drawing.Size(847, 490);
             this.splitContainer1.SplitterDistance = 199;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // employeesView1
+            // 
+            this.employeesView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.employeesView1.Location = new System.Drawing.Point(0, 0);
+            this.employeesView1.Name = "employeesView1";
+            this.employeesView1.Size = new System.Drawing.Size(644, 490);
+            this.employeesView1.TabIndex = 0;
             // 
             // dataGridView1
             // 
@@ -140,7 +152,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(616, 423);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // DGV_ID
             // 
@@ -194,13 +205,15 @@
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
-            // employeesView1
+            // buttonEDIT
             // 
-            this.employeesView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.employeesView1.Location = new System.Drawing.Point(0, 0);
-            this.employeesView1.Name = "employeesView1";
-            this.employeesView1.Size = new System.Drawing.Size(644, 490);
-            this.employeesView1.TabIndex = 0;
+            this.buttonEDIT.Location = new System.Drawing.Point(69, 77);
+            this.buttonEDIT.Name = "buttonEDIT";
+            this.buttonEDIT.Size = new System.Drawing.Size(75, 23);
+            this.buttonEDIT.TabIndex = 0;
+            this.buttonEDIT.Text = "Edit";
+            this.buttonEDIT.UseVisualStyleBackColor = true;
+            this.buttonEDIT.Click += new System.EventHandler(this.buttonEDIT_Click);
             // 
             // AdminScreen
             // 
@@ -213,6 +226,7 @@
             this.tabControl.ResumeLayout(false);
             this.HomeTab.ResumeLayout(false);
             this.EmployeesTab.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -239,5 +253,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DGV_Dealership;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private EmployeesView employeesView1;
+        private System.Windows.Forms.Button buttonEDIT;
     }
 }

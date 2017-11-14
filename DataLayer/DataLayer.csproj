@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DealershipDatabase.cs">
+      <DependentUpon>DealershipDatabase.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Utility.cs" />
     <Compile Include="DealershipDatabase.designer.cs">
       <AutoGen>True</AutoGen>

@@ -37,15 +37,26 @@ namespace CarDealership
             this.Close();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            switch ((sender as TabControl).SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    this.employeesView1.View();
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void EmployeesTab_Enter(object sender, EventArgs e)
+        private void buttonEDIT_Click(object sender, EventArgs e)
         {
-            
-        }
+            var id = this.employeesView1.CurrentID();
+            var dialog = new EmployeeEdit(id);
+            dialog.ShowDialog(this);
 
+        }
     }
 }
