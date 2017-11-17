@@ -34,6 +34,7 @@
             this.LogoutButton = new System.Windows.Forms.Button();
             this.EmployeesTab = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.buttonEditEmp = new System.Windows.Forms.Button();
             this.employeesView1 = new CarDealership.EmployeesView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.DGV_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,7 +44,8 @@
             this.DGV_Dealership = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DebugTab = new System.Windows.Forms.TabPage();
             this.ResetButton = new System.Windows.Forms.Button();
-            this.buttonEDIT = new System.Windows.Forms.Button();
+            this.buttonDelEmp = new System.Windows.Forms.Button();
+            this.buttonAddEmp = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.HomeTab.SuspendLayout();
             this.EmployeesTab.SuspendLayout();
@@ -121,22 +123,34 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.DarkGray;
-            this.splitContainer1.Panel1.Controls.Add(this.buttonEDIT);
+            this.splitContainer1.Panel1.Controls.Add(this.buttonAddEmp);
+            this.splitContainer1.Panel1.Controls.Add(this.buttonDelEmp);
+            this.splitContainer1.Panel1.Controls.Add(this.buttonEditEmp);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.employeesView1);
             this.splitContainer1.Size = new System.Drawing.Size(847, 490);
-            this.splitContainer1.SplitterDistance = 199;
+            this.splitContainer1.SplitterDistance = 177;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // buttonEditEmp
+            // 
+            this.buttonEditEmp.Location = new System.Drawing.Point(31, 104);
+            this.buttonEditEmp.Name = "buttonEditEmp";
+            this.buttonEditEmp.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditEmp.TabIndex = 0;
+            this.buttonEditEmp.Text = "Edit";
+            this.buttonEditEmp.UseVisualStyleBackColor = true;
+            this.buttonEditEmp.Click += new System.EventHandler(this.buttonEDIT_Click);
             // 
             // employeesView1
             // 
             this.employeesView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.employeesView1.Location = new System.Drawing.Point(0, 0);
             this.employeesView1.Name = "employeesView1";
-            this.employeesView1.Size = new System.Drawing.Size(644, 490);
+            this.employeesView1.Size = new System.Drawing.Size(666, 490);
             this.employeesView1.TabIndex = 0;
             // 
             // dataGridView1
@@ -205,15 +219,25 @@
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
-            // buttonEDIT
+            // buttonDelEmp
             // 
-            this.buttonEDIT.Location = new System.Drawing.Point(69, 77);
-            this.buttonEDIT.Name = "buttonEDIT";
-            this.buttonEDIT.Size = new System.Drawing.Size(75, 23);
-            this.buttonEDIT.TabIndex = 0;
-            this.buttonEDIT.Text = "Edit";
-            this.buttonEDIT.UseVisualStyleBackColor = true;
-            this.buttonEDIT.Click += new System.EventHandler(this.buttonEDIT_Click);
+            this.buttonDelEmp.Location = new System.Drawing.Point(31, 75);
+            this.buttonDelEmp.Name = "buttonDelEmp";
+            this.buttonDelEmp.Size = new System.Drawing.Size(75, 23);
+            this.buttonDelEmp.TabIndex = 1;
+            this.buttonDelEmp.Text = "Delete";
+            this.buttonDelEmp.UseVisualStyleBackColor = true;
+            this.buttonDelEmp.Click += new System.EventHandler(this.buttonDelEmp_Click);
+            // 
+            // buttonAddEmp
+            // 
+            this.buttonAddEmp.Location = new System.Drawing.Point(31, 46);
+            this.buttonAddEmp.Name = "buttonAddEmp";
+            this.buttonAddEmp.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddEmp.TabIndex = 2;
+            this.buttonAddEmp.Text = "Add";
+            this.buttonAddEmp.UseVisualStyleBackColor = true;
+            this.buttonAddEmp.Click += new System.EventHandler(this.buttonAddEmp_Click);
             // 
             // AdminScreen
             // 
@@ -253,6 +277,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DGV_Dealership;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private EmployeesView employeesView1;
-        private System.Windows.Forms.Button buttonEDIT;
+        private System.Windows.Forms.Button buttonEditEmp;
+        private System.Windows.Forms.Button buttonDelEmp;
+        private System.Windows.Forms.Button buttonAddEmp;
     }
 }

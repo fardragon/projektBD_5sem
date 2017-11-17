@@ -60,30 +60,30 @@ namespace DataLayer
     partial void InsertDiscount(Discount instance);
     partial void UpdateDiscount(Discount instance);
     partial void DeleteDiscount(Discount instance);
-    partial void InsertEmployee(Employee instance);
-    partial void UpdateEmployee(Employee instance);
-    partial void DeleteEmployee(Employee instance);
     partial void InsertModel(Model instance);
     partial void UpdateModel(Model instance);
     partial void DeleteModel(Model instance);
-    partial void InsertMounted_Accessory(Mounted_Accessory instance);
-    partial void UpdateMounted_Accessory(Mounted_Accessory instance);
-    partial void DeleteMounted_Accessory(Mounted_Accessory instance);
     partial void InsertOrder_Statuse(Order_Statuse instance);
     partial void UpdateOrder_Statuse(Order_Statuse instance);
     partial void DeleteOrder_Statuse(Order_Statuse instance);
     partial void InsertSold_Accessory(Sold_Accessory instance);
     partial void UpdateSold_Accessory(Sold_Accessory instance);
     partial void DeleteSold_Accessory(Sold_Accessory instance);
-    partial void InsertRole(Role instance);
-    partial void UpdateRole(Role instance);
-    partial void DeleteRole(Role instance);
     partial void InsertSold_Car(Sold_Car instance);
     partial void UpdateSold_Car(Sold_Car instance);
     partial void DeleteSold_Car(Sold_Car instance);
     partial void InsertSold_Discount(Sold_Discount instance);
     partial void UpdateSold_Discount(Sold_Discount instance);
     partial void DeleteSold_Discount(Sold_Discount instance);
+    partial void InsertRole(Role instance);
+    partial void UpdateRole(Role instance);
+    partial void DeleteRole(Role instance);
+    partial void InsertEmployee(Employee instance);
+    partial void UpdateEmployee(Employee instance);
+    partial void DeleteEmployee(Employee instance);
+    partial void InsertMounted_Accessory(Mounted_Accessory instance);
+    partial void UpdateMounted_Accessory(Mounted_Accessory instance);
+    partial void DeleteMounted_Accessory(Mounted_Accessory instance);
     #endregion
 		
 		public DealershipDatabaseDataContext() : 
@@ -196,27 +196,11 @@ namespace DataLayer
 			}
 		}
 		
-		public System.Data.Linq.Table<Employee> Employees
-		{
-			get
-			{
-				return this.GetTable<Employee>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Model> Models
 		{
 			get
 			{
 				return this.GetTable<Model>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Mounted_Accessory> Mounted_Accessories
-		{
-			get
-			{
-				return this.GetTable<Mounted_Accessory>();
 			}
 		}
 		
@@ -236,14 +220,6 @@ namespace DataLayer
 			}
 		}
 		
-		public System.Data.Linq.Table<Role> Roles
-		{
-			get
-			{
-				return this.GetTable<Role>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Sold_Car> Sold_Cars
 		{
 			get
@@ -257,6 +233,30 @@ namespace DataLayer
 			get
 			{
 				return this.GetTable<Sold_Discount>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Role> Roles
+		{
+			get
+			{
+				return this.GetTable<Role>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Employee> Employees
+		{
+			get
+			{
+				return this.GetTable<Employee>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Mounted_Accessory> Mounted_Accessories
+		{
+			get
+			{
+				return this.GetTable<Mounted_Accessory>();
 			}
 		}
 	}
@@ -277,9 +277,9 @@ namespace DataLayer
 		
 		private EntitySet<Accessories_Install_Order> _Accessories_Install_Orders;
 		
-		private EntitySet<Mounted_Accessory> _Mounted_Accessories;
-		
 		private EntitySet<Sold_Accessory> _Sold_Accessories;
+		
+		private EntitySet<Mounted_Accessory> _Mounted_Accessories;
 		
 		private EntityRef<Accessories_Type> _Accessories_Type;
 		
@@ -300,8 +300,8 @@ namespace DataLayer
 		public Accessory()
 		{
 			this._Accessories_Install_Orders = new EntitySet<Accessories_Install_Order>(new Action<Accessories_Install_Order>(this.attach_Accessories_Install_Orders), new Action<Accessories_Install_Order>(this.detach_Accessories_Install_Orders));
-			this._Mounted_Accessories = new EntitySet<Mounted_Accessory>(new Action<Mounted_Accessory>(this.attach_Mounted_Accessories), new Action<Mounted_Accessory>(this.detach_Mounted_Accessories));
 			this._Sold_Accessories = new EntitySet<Sold_Accessory>(new Action<Sold_Accessory>(this.attach_Sold_Accessories), new Action<Sold_Accessory>(this.detach_Sold_Accessories));
+			this._Mounted_Accessories = new EntitySet<Mounted_Accessory>(new Action<Mounted_Accessory>(this.attach_Mounted_Accessories), new Action<Mounted_Accessory>(this.detach_Mounted_Accessories));
 			this._Accessories_Type = default(EntityRef<Accessories_Type>);
 			OnCreated();
 		}
@@ -403,19 +403,6 @@ namespace DataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Accessory_Mounted_Accessory", Storage="_Mounted_Accessories", ThisKey="ACCESSORY_ID", OtherKey="ACCESSORY_ID")]
-		public EntitySet<Mounted_Accessory> Mounted_Accessories
-		{
-			get
-			{
-				return this._Mounted_Accessories;
-			}
-			set
-			{
-				this._Mounted_Accessories.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Accessory_Sold_Accessory", Storage="_Sold_Accessories", ThisKey="ACCESSORY_ID", OtherKey="ACCESSORY_ID")]
 		public EntitySet<Sold_Accessory> Sold_Accessories
 		{
@@ -426,6 +413,19 @@ namespace DataLayer
 			set
 			{
 				this._Sold_Accessories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Accessory_Mounted_Accessory", Storage="_Mounted_Accessories", ThisKey="ACCESSORY_ID", OtherKey="ACCESSORY_ID")]
+		public EntitySet<Mounted_Accessory> Mounted_Accessories
+		{
+			get
+			{
+				return this._Mounted_Accessories;
+			}
+			set
+			{
+				this._Mounted_Accessories.Assign(value);
 			}
 		}
 		
@@ -495,18 +495,6 @@ namespace DataLayer
 			entity.Accessory = null;
 		}
 		
-		private void attach_Mounted_Accessories(Mounted_Accessory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Accessory = this;
-		}
-		
-		private void detach_Mounted_Accessories(Mounted_Accessory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Accessory = null;
-		}
-		
 		private void attach_Sold_Accessories(Sold_Accessory entity)
 		{
 			this.SendPropertyChanging();
@@ -514,6 +502,18 @@ namespace DataLayer
 		}
 		
 		private void detach_Sold_Accessories(Sold_Accessory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Accessory = null;
+		}
+		
+		private void attach_Mounted_Accessories(Mounted_Accessory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Accessory = this;
+		}
+		
+		private void detach_Mounted_Accessories(Mounted_Accessory entity)
 		{
 			this.SendPropertyChanging();
 			entity.Accessory = null;
@@ -1000,9 +1000,9 @@ namespace DataLayer
 		
 		private EntityRef<Customer> _Customer;
 		
-		private EntityRef<Employee> _Employee;
-		
 		private EntityRef<Order_Statuse> _Order_Statuse;
+		
+		private EntityRef<Employee> _Employee;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1032,8 +1032,8 @@ namespace DataLayer
 			this._Active_Discounts = new EntitySet<Active_Discount>(new Action<Active_Discount>(this.attach_Active_Discounts), new Action<Active_Discount>(this.detach_Active_Discounts));
 			this._Cars_for_Sale = default(EntityRef<Cars_for_Sale>);
 			this._Customer = default(EntityRef<Customer>);
-			this._Employee = default(EntityRef<Employee>);
 			this._Order_Statuse = default(EntityRef<Order_Statuse>);
+			this._Employee = default(EntityRef<Employee>);
 			OnCreated();
 		}
 		
@@ -1307,40 +1307,6 @@ namespace DataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Active_Order", Storage="_Employee", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID", IsForeignKey=true)]
-		public Employee Employee
-		{
-			get
-			{
-				return this._Employee.Entity;
-			}
-			set
-			{
-				Employee previousValue = this._Employee.Entity;
-				if (((previousValue != value) 
-							|| (this._Employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Employee.Entity = null;
-						previousValue.Active_Orders.Remove(this);
-					}
-					this._Employee.Entity = value;
-					if ((value != null))
-					{
-						value.Active_Orders.Add(this);
-						this._EMPLOYEE_ID = value.EMPLOYEE_ID;
-					}
-					else
-					{
-						this._EMPLOYEE_ID = default(int);
-					}
-					this.SendPropertyChanged("Employee");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_Statuse_Active_Order", Storage="_Order_Statuse", ThisKey="ORDER_STATUS_ID", OtherKey="ORDER_STATUS_ID", IsForeignKey=true)]
 		public Order_Statuse Order_Statuse
 		{
@@ -1371,6 +1337,40 @@ namespace DataLayer
 						this._ORDER_STATUS_ID = default(int);
 					}
 					this.SendPropertyChanged("Order_Statuse");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Active_Order", Storage="_Employee", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID", IsForeignKey=true)]
+		public Employee Employee
+		{
+			get
+			{
+				return this._Employee.Entity;
+			}
+			set
+			{
+				Employee previousValue = this._Employee.Entity;
+				if (((previousValue != value) 
+							|| (this._Employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Employee.Entity = null;
+						previousValue.Active_Orders.Remove(this);
+					}
+					this._Employee.Entity = value;
+					if ((value != null))
+					{
+						value.Active_Orders.Add(this);
+						this._EMPLOYEE_ID = value.EMPLOYEE_ID;
+					}
+					else
+					{
+						this._EMPLOYEE_ID = default(int);
+					}
+					this.SendPropertyChanged("Employee");
 				}
 			}
 		}
@@ -2179,9 +2179,9 @@ namespace DataLayer
 		
 		private EntitySet<Cars_for_Sale> _Cars_for_Sales;
 		
-		private EntitySet<Employee> _Employees;
-		
 		private EntitySet<Sold_Car> _Sold_Cars;
+		
+		private EntitySet<Employee> _Employees;
 		
 		private EntityRef<Employee> _Employee;
 		
@@ -2204,8 +2204,8 @@ namespace DataLayer
 		public Dealership()
 		{
 			this._Cars_for_Sales = new EntitySet<Cars_for_Sale>(new Action<Cars_for_Sale>(this.attach_Cars_for_Sales), new Action<Cars_for_Sale>(this.detach_Cars_for_Sales));
-			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
 			this._Sold_Cars = new EntitySet<Sold_Car>(new Action<Sold_Car>(this.attach_Sold_Cars), new Action<Sold_Car>(this.detach_Sold_Cars));
+			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
 			this._Employee = default(EntityRef<Employee>);
 			OnCreated();
 		}
@@ -2327,19 +2327,6 @@ namespace DataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Employee", Storage="_Employees", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID")]
-		public EntitySet<Employee> Employees
-		{
-			get
-			{
-				return this._Employees;
-			}
-			set
-			{
-				this._Employees.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Sold_Car", Storage="_Sold_Cars", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID")]
 		public EntitySet<Sold_Car> Sold_Cars
 		{
@@ -2350,6 +2337,19 @@ namespace DataLayer
 			set
 			{
 				this._Sold_Cars.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Employee", Storage="_Employees", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID")]
+		public EntitySet<Employee> Employees
+		{
+			get
+			{
+				return this._Employees;
+			}
+			set
+			{
+				this._Employees.Assign(value);
 			}
 		}
 		
@@ -2419,18 +2419,6 @@ namespace DataLayer
 			entity.Dealership = null;
 		}
 		
-		private void attach_Employees(Employee entity)
-		{
-			this.SendPropertyChanging();
-			entity.Dealership = this;
-		}
-		
-		private void detach_Employees(Employee entity)
-		{
-			this.SendPropertyChanging();
-			entity.Dealership = null;
-		}
-		
 		private void attach_Sold_Cars(Sold_Car entity)
 		{
 			this.SendPropertyChanging();
@@ -2438,6 +2426,18 @@ namespace DataLayer
 		}
 		
 		private void detach_Sold_Cars(Sold_Car entity)
+		{
+			this.SendPropertyChanging();
+			entity.Dealership = null;
+		}
+		
+		private void attach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.Dealership = this;
+		}
+		
+		private void detach_Employees(Employee entity)
 		{
 			this.SendPropertyChanging();
 			entity.Dealership = null;
@@ -2610,406 +2610,6 @@ namespace DataLayer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Employees")]
-	public partial class Employee : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _EMPLOYEE_ID;
-		
-		private string _NAME;
-		
-		private string _SURNAME;
-		
-		private System.Nullable<int> _DEALERSHIP_ID;
-		
-		private int _ROLE_ID;
-		
-		private string _LOGIN;
-		
-		private string _PASSWORD;
-		
-		private EntitySet<Active_Order> _Active_Orders;
-		
-		private EntitySet<Dealership> _Dealerships;
-		
-		private EntitySet<Mounted_Accessory> _Mounted_Accessories;
-		
-		private EntitySet<Sold_Car> _Sold_Cars;
-		
-		private EntityRef<Dealership> _Dealership;
-		
-		private EntityRef<Role> _Role;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnEMPLOYEE_IDChanging(int value);
-    partial void OnEMPLOYEE_IDChanged();
-    partial void OnNAMEChanging(string value);
-    partial void OnNAMEChanged();
-    partial void OnSURNAMEChanging(string value);
-    partial void OnSURNAMEChanged();
-    partial void OnDEALERSHIP_IDChanging(System.Nullable<int> value);
-    partial void OnDEALERSHIP_IDChanged();
-    partial void OnROLE_IDChanging(int value);
-    partial void OnROLE_IDChanged();
-    partial void OnLOGINChanging(string value);
-    partial void OnLOGINChanged();
-    partial void OnPASSWORDChanging(string value);
-    partial void OnPASSWORDChanged();
-    #endregion
-		
-		public Employee()
-		{
-			this._Active_Orders = new EntitySet<Active_Order>(new Action<Active_Order>(this.attach_Active_Orders), new Action<Active_Order>(this.detach_Active_Orders));
-			this._Dealerships = new EntitySet<Dealership>(new Action<Dealership>(this.attach_Dealerships), new Action<Dealership>(this.detach_Dealerships));
-			this._Mounted_Accessories = new EntitySet<Mounted_Accessory>(new Action<Mounted_Accessory>(this.attach_Mounted_Accessories), new Action<Mounted_Accessory>(this.detach_Mounted_Accessories));
-			this._Sold_Cars = new EntitySet<Sold_Car>(new Action<Sold_Car>(this.attach_Sold_Cars), new Action<Sold_Car>(this.detach_Sold_Cars));
-			this._Dealership = default(EntityRef<Dealership>);
-			this._Role = default(EntityRef<Role>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int EMPLOYEE_ID
-		{
-			get
-			{
-				return this._EMPLOYEE_ID;
-			}
-			set
-			{
-				if ((this._EMPLOYEE_ID != value))
-				{
-					this.OnEMPLOYEE_IDChanging(value);
-					this.SendPropertyChanging();
-					this._EMPLOYEE_ID = value;
-					this.SendPropertyChanged("EMPLOYEE_ID");
-					this.OnEMPLOYEE_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string NAME
-		{
-			get
-			{
-				return this._NAME;
-			}
-			set
-			{
-				if ((this._NAME != value))
-				{
-					this.OnNAMEChanging(value);
-					this.SendPropertyChanging();
-					this._NAME = value;
-					this.SendPropertyChanged("NAME");
-					this.OnNAMEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SURNAME", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string SURNAME
-		{
-			get
-			{
-				return this._SURNAME;
-			}
-			set
-			{
-				if ((this._SURNAME != value))
-				{
-					this.OnSURNAMEChanging(value);
-					this.SendPropertyChanging();
-					this._SURNAME = value;
-					this.SendPropertyChanged("SURNAME");
-					this.OnSURNAMEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEALERSHIP_ID", DbType="Int")]
-		public System.Nullable<int> DEALERSHIP_ID
-		{
-			get
-			{
-				return this._DEALERSHIP_ID;
-			}
-			set
-			{
-				if ((this._DEALERSHIP_ID != value))
-				{
-					if (this._Dealership.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDEALERSHIP_IDChanging(value);
-					this.SendPropertyChanging();
-					this._DEALERSHIP_ID = value;
-					this.SendPropertyChanged("DEALERSHIP_ID");
-					this.OnDEALERSHIP_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ROLE_ID", DbType="Int NOT NULL")]
-		public int ROLE_ID
-		{
-			get
-			{
-				return this._ROLE_ID;
-			}
-			set
-			{
-				if ((this._ROLE_ID != value))
-				{
-					if (this._Role.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnROLE_IDChanging(value);
-					this.SendPropertyChanging();
-					this._ROLE_ID = value;
-					this.SendPropertyChanged("ROLE_ID");
-					this.OnROLE_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOGIN", DbType="Char(32) NOT NULL", CanBeNull=false)]
-		public string LOGIN
-		{
-			get
-			{
-				return this._LOGIN;
-			}
-			set
-			{
-				if ((this._LOGIN != value))
-				{
-					this.OnLOGINChanging(value);
-					this.SendPropertyChanging();
-					this._LOGIN = value;
-					this.SendPropertyChanged("LOGIN");
-					this.OnLOGINChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="Char(32) NOT NULL", CanBeNull=false)]
-		public string PASSWORD
-		{
-			get
-			{
-				return this._PASSWORD;
-			}
-			set
-			{
-				if ((this._PASSWORD != value))
-				{
-					this.OnPASSWORDChanging(value);
-					this.SendPropertyChanging();
-					this._PASSWORD = value;
-					this.SendPropertyChanged("PASSWORD");
-					this.OnPASSWORDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Active_Order", Storage="_Active_Orders", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID")]
-		public EntitySet<Active_Order> Active_Orders
-		{
-			get
-			{
-				return this._Active_Orders;
-			}
-			set
-			{
-				this._Active_Orders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Dealership", Storage="_Dealerships", ThisKey="EMPLOYEE_ID", OtherKey="MANAGER_ID")]
-		public EntitySet<Dealership> Dealerships
-		{
-			get
-			{
-				return this._Dealerships;
-			}
-			set
-			{
-				this._Dealerships.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Mounted_Accessory", Storage="_Mounted_Accessories", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID")]
-		public EntitySet<Mounted_Accessory> Mounted_Accessories
-		{
-			get
-			{
-				return this._Mounted_Accessories;
-			}
-			set
-			{
-				this._Mounted_Accessories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Sold_Car", Storage="_Sold_Cars", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID")]
-		public EntitySet<Sold_Car> Sold_Cars
-		{
-			get
-			{
-				return this._Sold_Cars;
-			}
-			set
-			{
-				this._Sold_Cars.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Employee", Storage="_Dealership", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID", IsForeignKey=true)]
-		public Dealership Dealership
-		{
-			get
-			{
-				return this._Dealership.Entity;
-			}
-			set
-			{
-				Dealership previousValue = this._Dealership.Entity;
-				if (((previousValue != value) 
-							|| (this._Dealership.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Dealership.Entity = null;
-						previousValue.Employees.Remove(this);
-					}
-					this._Dealership.Entity = value;
-					if ((value != null))
-					{
-						value.Employees.Add(this);
-						this._DEALERSHIP_ID = value.DEALERSHIP_ID;
-					}
-					else
-					{
-						this._DEALERSHIP_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Dealership");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Employee", Storage="_Role", ThisKey="ROLE_ID", OtherKey="ROLE_ID", IsForeignKey=true)]
-		public Role Role
-		{
-			get
-			{
-				return this._Role.Entity;
-			}
-			set
-			{
-				Role previousValue = this._Role.Entity;
-				if (((previousValue != value) 
-							|| (this._Role.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Role.Entity = null;
-						previousValue.Employees.Remove(this);
-					}
-					this._Role.Entity = value;
-					if ((value != null))
-					{
-						value.Employees.Add(this);
-						this._ROLE_ID = value.ROLE_ID;
-					}
-					else
-					{
-						this._ROLE_ID = default(int);
-					}
-					this.SendPropertyChanged("Role");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Active_Orders(Active_Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = this;
-		}
-		
-		private void detach_Active_Orders(Active_Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = null;
-		}
-		
-		private void attach_Dealerships(Dealership entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = this;
-		}
-		
-		private void detach_Dealerships(Dealership entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = null;
-		}
-		
-		private void attach_Mounted_Accessories(Mounted_Accessory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = this;
-		}
-		
-		private void detach_Mounted_Accessories(Mounted_Accessory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = null;
-		}
-		
-		private void attach_Sold_Cars(Sold_Car entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = this;
-		}
-		
-		private void detach_Sold_Cars(Sold_Car entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Models")]
 	public partial class Model : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3173,239 +2773,6 @@ namespace DataLayer
 		{
 			this.SendPropertyChanging();
 			entity.Model = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Mounted_Accessories")]
-	public partial class Mounted_Accessory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ACCESSORY_ID;
-		
-		private string _CAR_VIN;
-		
-		private System.Nullable<int> _EMPLOYEE_ID;
-		
-		private EntityRef<Accessory> _Accessory;
-		
-		private EntityRef<Cars_for_Sale> _Cars_for_Sale;
-		
-		private EntityRef<Employee> _Employee;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnACCESSORY_IDChanging(int value);
-    partial void OnACCESSORY_IDChanged();
-    partial void OnCAR_VINChanging(string value);
-    partial void OnCAR_VINChanged();
-    partial void OnEMPLOYEE_IDChanging(System.Nullable<int> value);
-    partial void OnEMPLOYEE_IDChanged();
-    #endregion
-		
-		public Mounted_Accessory()
-		{
-			this._Accessory = default(EntityRef<Accessory>);
-			this._Cars_for_Sale = default(EntityRef<Cars_for_Sale>);
-			this._Employee = default(EntityRef<Employee>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ACCESSORY_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ACCESSORY_ID
-		{
-			get
-			{
-				return this._ACCESSORY_ID;
-			}
-			set
-			{
-				if ((this._ACCESSORY_ID != value))
-				{
-					if (this._Accessory.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnACCESSORY_IDChanging(value);
-					this.SendPropertyChanging();
-					this._ACCESSORY_ID = value;
-					this.SendPropertyChanged("ACCESSORY_ID");
-					this.OnACCESSORY_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CAR_VIN", DbType="Char(17) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string CAR_VIN
-		{
-			get
-			{
-				return this._CAR_VIN;
-			}
-			set
-			{
-				if ((this._CAR_VIN != value))
-				{
-					if (this._Cars_for_Sale.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCAR_VINChanging(value);
-					this.SendPropertyChanging();
-					this._CAR_VIN = value;
-					this.SendPropertyChanged("CAR_VIN");
-					this.OnCAR_VINChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_ID", DbType="Int")]
-		public System.Nullable<int> EMPLOYEE_ID
-		{
-			get
-			{
-				return this._EMPLOYEE_ID;
-			}
-			set
-			{
-				if ((this._EMPLOYEE_ID != value))
-				{
-					if (this._Employee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEMPLOYEE_IDChanging(value);
-					this.SendPropertyChanging();
-					this._EMPLOYEE_ID = value;
-					this.SendPropertyChanged("EMPLOYEE_ID");
-					this.OnEMPLOYEE_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Accessory_Mounted_Accessory", Storage="_Accessory", ThisKey="ACCESSORY_ID", OtherKey="ACCESSORY_ID", IsForeignKey=true)]
-		public Accessory Accessory
-		{
-			get
-			{
-				return this._Accessory.Entity;
-			}
-			set
-			{
-				Accessory previousValue = this._Accessory.Entity;
-				if (((previousValue != value) 
-							|| (this._Accessory.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Accessory.Entity = null;
-						previousValue.Mounted_Accessories.Remove(this);
-					}
-					this._Accessory.Entity = value;
-					if ((value != null))
-					{
-						value.Mounted_Accessories.Add(this);
-						this._ACCESSORY_ID = value.ACCESSORY_ID;
-					}
-					else
-					{
-						this._ACCESSORY_ID = default(int);
-					}
-					this.SendPropertyChanged("Accessory");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cars_for_Sale_Mounted_Accessory", Storage="_Cars_for_Sale", ThisKey="CAR_VIN", OtherKey="CAR_VIN", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Cars_for_Sale Cars_for_Sale
-		{
-			get
-			{
-				return this._Cars_for_Sale.Entity;
-			}
-			set
-			{
-				Cars_for_Sale previousValue = this._Cars_for_Sale.Entity;
-				if (((previousValue != value) 
-							|| (this._Cars_for_Sale.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Cars_for_Sale.Entity = null;
-						previousValue.Mounted_Accessories.Remove(this);
-					}
-					this._Cars_for_Sale.Entity = value;
-					if ((value != null))
-					{
-						value.Mounted_Accessories.Add(this);
-						this._CAR_VIN = value.CAR_VIN;
-					}
-					else
-					{
-						this._CAR_VIN = default(string);
-					}
-					this.SendPropertyChanged("Cars_for_Sale");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Mounted_Accessory", Storage="_Employee", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID", IsForeignKey=true)]
-		public Employee Employee
-		{
-			get
-			{
-				return this._Employee.Entity;
-			}
-			set
-			{
-				Employee previousValue = this._Employee.Entity;
-				if (((previousValue != value) 
-							|| (this._Employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Employee.Entity = null;
-						previousValue.Mounted_Accessories.Remove(this);
-					}
-					this._Employee.Entity = value;
-					if ((value != null))
-					{
-						value.Mounted_Accessories.Add(this);
-						this._EMPLOYEE_ID = value.EMPLOYEE_ID;
-					}
-					else
-					{
-						this._EMPLOYEE_ID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Employee");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -3691,120 +3058,6 @@ namespace DataLayer
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
-	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ROLE_ID;
-		
-		private string _ROLE1;
-		
-		private EntitySet<Employee> _Employees;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnROLE_IDChanging(int value);
-    partial void OnROLE_IDChanged();
-    partial void OnROLE1Changing(string value);
-    partial void OnROLE1Changed();
-    #endregion
-		
-		public Role()
-		{
-			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ROLE_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ROLE_ID
-		{
-			get
-			{
-				return this._ROLE_ID;
-			}
-			set
-			{
-				if ((this._ROLE_ID != value))
-				{
-					this.OnROLE_IDChanging(value);
-					this.SendPropertyChanging();
-					this._ROLE_ID = value;
-					this.SendPropertyChanged("ROLE_ID");
-					this.OnROLE_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="ROLE", Storage="_ROLE1", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
-		public string ROLE1
-		{
-			get
-			{
-				return this._ROLE1;
-			}
-			set
-			{
-				if ((this._ROLE1 != value))
-				{
-					this.OnROLE1Changing(value);
-					this.SendPropertyChanging();
-					this._ROLE1 = value;
-					this.SendPropertyChanged("ROLE1");
-					this.OnROLE1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Employee", Storage="_Employees", ThisKey="ROLE_ID", OtherKey="ROLE_ID")]
-		public EntitySet<Employee> Employees
-		{
-			get
-			{
-				return this._Employees;
-			}
-			set
-			{
-				this._Employees.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Employees(Employee entity)
-		{
-			this.SendPropertyChanging();
-			entity.Role = this;
-		}
-		
-		private void detach_Employees(Employee entity)
-		{
-			this.SendPropertyChanging();
-			entity.Role = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sold_Cars")]
 	public partial class Sold_Car : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3839,9 +3092,9 @@ namespace DataLayer
 		
 		private EntityRef<Dealership> _Dealership;
 		
-		private EntityRef<Employee> _Employee;
-		
 		private EntityRef<Model> _Model;
+		
+		private EntityRef<Employee> _Employee;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3874,8 +3127,8 @@ namespace DataLayer
 			this._Color = default(EntityRef<Color>);
 			this._Customer = default(EntityRef<Customer>);
 			this._Dealership = default(EntityRef<Dealership>);
-			this._Employee = default(EntityRef<Employee>);
 			this._Model = default(EntityRef<Model>);
+			this._Employee = default(EntityRef<Employee>);
 			OnCreated();
 		}
 		
@@ -4207,40 +3460,6 @@ namespace DataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Sold_Car", Storage="_Employee", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID", IsForeignKey=true)]
-		public Employee Employee
-		{
-			get
-			{
-				return this._Employee.Entity;
-			}
-			set
-			{
-				Employee previousValue = this._Employee.Entity;
-				if (((previousValue != value) 
-							|| (this._Employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Employee.Entity = null;
-						previousValue.Sold_Cars.Remove(this);
-					}
-					this._Employee.Entity = value;
-					if ((value != null))
-					{
-						value.Sold_Cars.Add(this);
-						this._EMPLOYEE_ID = value.EMPLOYEE_ID;
-					}
-					else
-					{
-						this._EMPLOYEE_ID = default(int);
-					}
-					this.SendPropertyChanged("Employee");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Model_Sold_Car", Storage="_Model", ThisKey="MODEL_ID", OtherKey="MODEL_ID", IsForeignKey=true)]
 		public Model Model
 		{
@@ -4271,6 +3490,40 @@ namespace DataLayer
 						this._MODEL_ID = default(int);
 					}
 					this.SendPropertyChanged("Model");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Sold_Car", Storage="_Employee", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID", IsForeignKey=true)]
+		public Employee Employee
+		{
+			get
+			{
+				return this._Employee.Entity;
+			}
+			set
+			{
+				Employee previousValue = this._Employee.Entity;
+				if (((previousValue != value) 
+							|| (this._Employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Employee.Entity = null;
+						previousValue.Sold_Cars.Remove(this);
+					}
+					this._Employee.Entity = value;
+					if ((value != null))
+					{
+						value.Sold_Cars.Add(this);
+						this._EMPLOYEE_ID = value.EMPLOYEE_ID;
+					}
+					else
+					{
+						this._EMPLOYEE_ID = default(int);
+					}
+					this.SendPropertyChanged("Employee");
 				}
 			}
 		}
@@ -4463,6 +3716,660 @@ namespace DataLayer
 						this._SALE_ID = default(int);
 					}
 					this.SendPropertyChanged("Sold_Car");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
+	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ROLE_ID;
+		
+		private string _ROLE_NAME;
+		
+		private EntitySet<Employee> _Employees;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnROLE_IDChanging(int value);
+    partial void OnROLE_IDChanged();
+    partial void OnROLE_NAMEChanging(string value);
+    partial void OnROLE_NAMEChanged();
+    #endregion
+		
+		public Role()
+		{
+			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ROLE_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ROLE_ID
+		{
+			get
+			{
+				return this._ROLE_ID;
+			}
+			set
+			{
+				if ((this._ROLE_ID != value))
+				{
+					this.OnROLE_IDChanging(value);
+					this.SendPropertyChanging();
+					this._ROLE_ID = value;
+					this.SendPropertyChanged("ROLE_ID");
+					this.OnROLE_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ROLE_NAME", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string ROLE_NAME
+		{
+			get
+			{
+				return this._ROLE_NAME;
+			}
+			set
+			{
+				if ((this._ROLE_NAME != value))
+				{
+					this.OnROLE_NAMEChanging(value);
+					this.SendPropertyChanging();
+					this._ROLE_NAME = value;
+					this.SendPropertyChanged("ROLE_NAME");
+					this.OnROLE_NAMEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Employee", Storage="_Employees", ThisKey="ROLE_ID", OtherKey="ROLE_ID")]
+		public EntitySet<Employee> Employees
+		{
+			get
+			{
+				return this._Employees;
+			}
+			set
+			{
+				this._Employees.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.Role = this;
+		}
+		
+		private void detach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.Role = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Employees")]
+	public partial class Employee : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _EMPLOYEE_ID;
+		
+		private string _NAME;
+		
+		private string _SURNAME;
+		
+		private System.Nullable<int> _DEALERSHIP_ID;
+		
+		private int _ROLE_ID;
+		
+		private string _LOGIN;
+		
+		private string _PASSWORD;
+		
+		private EntitySet<Active_Order> _Active_Orders;
+		
+		private EntitySet<Dealership> _Dealerships;
+		
+		private EntitySet<Sold_Car> _Sold_Cars;
+		
+		private EntityRef<Dealership> _Dealership;
+		
+		private EntityRef<Role> _Role;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnEMPLOYEE_IDChanging(int value);
+    partial void OnEMPLOYEE_IDChanged();
+    partial void OnNAMEChanging(string value);
+    partial void OnNAMEChanged();
+    partial void OnSURNAMEChanging(string value);
+    partial void OnSURNAMEChanged();
+    partial void OnDEALERSHIP_IDChanging(System.Nullable<int> value);
+    partial void OnDEALERSHIP_IDChanged();
+    partial void OnROLE_IDChanging(int value);
+    partial void OnROLE_IDChanged();
+    partial void OnLOGINChanging(string value);
+    partial void OnLOGINChanged();
+    partial void OnPASSWORDChanging(string value);
+    partial void OnPASSWORDChanged();
+    #endregion
+		
+		public Employee()
+		{
+			this._Active_Orders = new EntitySet<Active_Order>(new Action<Active_Order>(this.attach_Active_Orders), new Action<Active_Order>(this.detach_Active_Orders));
+			this._Dealerships = new EntitySet<Dealership>(new Action<Dealership>(this.attach_Dealerships), new Action<Dealership>(this.detach_Dealerships));
+			this._Sold_Cars = new EntitySet<Sold_Car>(new Action<Sold_Car>(this.attach_Sold_Cars), new Action<Sold_Car>(this.detach_Sold_Cars));
+			this._Dealership = default(EntityRef<Dealership>);
+			this._Role = default(EntityRef<Role>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int EMPLOYEE_ID
+		{
+			get
+			{
+				return this._EMPLOYEE_ID;
+			}
+			set
+			{
+				if ((this._EMPLOYEE_ID != value))
+				{
+					this.OnEMPLOYEE_IDChanging(value);
+					this.SendPropertyChanging();
+					this._EMPLOYEE_ID = value;
+					this.SendPropertyChanged("EMPLOYEE_ID");
+					this.OnEMPLOYEE_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NAME", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string NAME
+		{
+			get
+			{
+				return this._NAME;
+			}
+			set
+			{
+				if ((this._NAME != value))
+				{
+					this.OnNAMEChanging(value);
+					this.SendPropertyChanging();
+					this._NAME = value;
+					this.SendPropertyChanged("NAME");
+					this.OnNAMEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SURNAME", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string SURNAME
+		{
+			get
+			{
+				return this._SURNAME;
+			}
+			set
+			{
+				if ((this._SURNAME != value))
+				{
+					this.OnSURNAMEChanging(value);
+					this.SendPropertyChanging();
+					this._SURNAME = value;
+					this.SendPropertyChanged("SURNAME");
+					this.OnSURNAMEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEALERSHIP_ID", DbType="Int")]
+		public System.Nullable<int> DEALERSHIP_ID
+		{
+			get
+			{
+				return this._DEALERSHIP_ID;
+			}
+			set
+			{
+				if ((this._DEALERSHIP_ID != value))
+				{
+					if (this._Dealership.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDEALERSHIP_IDChanging(value);
+					this.SendPropertyChanging();
+					this._DEALERSHIP_ID = value;
+					this.SendPropertyChanged("DEALERSHIP_ID");
+					this.OnDEALERSHIP_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ROLE_ID", DbType="Int NOT NULL")]
+		public int ROLE_ID
+		{
+			get
+			{
+				return this._ROLE_ID;
+			}
+			set
+			{
+				if ((this._ROLE_ID != value))
+				{
+					if (this._Role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnROLE_IDChanging(value);
+					this.SendPropertyChanging();
+					this._ROLE_ID = value;
+					this.SendPropertyChanged("ROLE_ID");
+					this.OnROLE_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LOGIN", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string LOGIN
+		{
+			get
+			{
+				return this._LOGIN;
+			}
+			set
+			{
+				if ((this._LOGIN != value))
+				{
+					this.OnLOGINChanging(value);
+					this.SendPropertyChanging();
+					this._LOGIN = value;
+					this.SendPropertyChanged("LOGIN");
+					this.OnLOGINChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PASSWORD", DbType="Char(32) NOT NULL", CanBeNull=false)]
+		public string PASSWORD
+		{
+			get
+			{
+				return this._PASSWORD;
+			}
+			set
+			{
+				if ((this._PASSWORD != value))
+				{
+					this.OnPASSWORDChanging(value);
+					this.SendPropertyChanging();
+					this._PASSWORD = value;
+					this.SendPropertyChanged("PASSWORD");
+					this.OnPASSWORDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Active_Order", Storage="_Active_Orders", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID")]
+		public EntitySet<Active_Order> Active_Orders
+		{
+			get
+			{
+				return this._Active_Orders;
+			}
+			set
+			{
+				this._Active_Orders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Dealership", Storage="_Dealerships", ThisKey="EMPLOYEE_ID", OtherKey="MANAGER_ID")]
+		public EntitySet<Dealership> Dealerships
+		{
+			get
+			{
+				return this._Dealerships;
+			}
+			set
+			{
+				this._Dealerships.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Sold_Car", Storage="_Sold_Cars", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID")]
+		public EntitySet<Sold_Car> Sold_Cars
+		{
+			get
+			{
+				return this._Sold_Cars;
+			}
+			set
+			{
+				this._Sold_Cars.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Employee", Storage="_Dealership", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID", IsForeignKey=true)]
+		public Dealership Dealership
+		{
+			get
+			{
+				return this._Dealership.Entity;
+			}
+			set
+			{
+				Dealership previousValue = this._Dealership.Entity;
+				if (((previousValue != value) 
+							|| (this._Dealership.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Dealership.Entity = null;
+						previousValue.Employees.Remove(this);
+					}
+					this._Dealership.Entity = value;
+					if ((value != null))
+					{
+						value.Employees.Add(this);
+						this._DEALERSHIP_ID = value.DEALERSHIP_ID;
+					}
+					else
+					{
+						this._DEALERSHIP_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Dealership");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Employee", Storage="_Role", ThisKey="ROLE_ID", OtherKey="ROLE_ID", IsForeignKey=true)]
+		public Role Role
+		{
+			get
+			{
+				return this._Role.Entity;
+			}
+			set
+			{
+				Role previousValue = this._Role.Entity;
+				if (((previousValue != value) 
+							|| (this._Role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Role.Entity = null;
+						previousValue.Employees.Remove(this);
+					}
+					this._Role.Entity = value;
+					if ((value != null))
+					{
+						value.Employees.Add(this);
+						this._ROLE_ID = value.ROLE_ID;
+					}
+					else
+					{
+						this._ROLE_ID = default(int);
+					}
+					this.SendPropertyChanged("Role");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Active_Orders(Active_Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = this;
+		}
+		
+		private void detach_Active_Orders(Active_Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = null;
+		}
+		
+		private void attach_Dealerships(Dealership entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = this;
+		}
+		
+		private void detach_Dealerships(Dealership entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = null;
+		}
+		
+		private void attach_Sold_Cars(Sold_Car entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = this;
+		}
+		
+		private void detach_Sold_Cars(Sold_Car entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Mounted_Accessories")]
+	public partial class Mounted_Accessory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ACCESSORY_ID;
+		
+		private string _CAR_VIN;
+		
+		private EntityRef<Accessory> _Accessory;
+		
+		private EntityRef<Cars_for_Sale> _Cars_for_Sale;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnACCESSORY_IDChanging(int value);
+    partial void OnACCESSORY_IDChanged();
+    partial void OnCAR_VINChanging(string value);
+    partial void OnCAR_VINChanged();
+    #endregion
+		
+		public Mounted_Accessory()
+		{
+			this._Accessory = default(EntityRef<Accessory>);
+			this._Cars_for_Sale = default(EntityRef<Cars_for_Sale>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ACCESSORY_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ACCESSORY_ID
+		{
+			get
+			{
+				return this._ACCESSORY_ID;
+			}
+			set
+			{
+				if ((this._ACCESSORY_ID != value))
+				{
+					if (this._Accessory.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnACCESSORY_IDChanging(value);
+					this.SendPropertyChanging();
+					this._ACCESSORY_ID = value;
+					this.SendPropertyChanged("ACCESSORY_ID");
+					this.OnACCESSORY_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CAR_VIN", DbType="Char(17) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CAR_VIN
+		{
+			get
+			{
+				return this._CAR_VIN;
+			}
+			set
+			{
+				if ((this._CAR_VIN != value))
+				{
+					if (this._Cars_for_Sale.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCAR_VINChanging(value);
+					this.SendPropertyChanging();
+					this._CAR_VIN = value;
+					this.SendPropertyChanged("CAR_VIN");
+					this.OnCAR_VINChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Accessory_Mounted_Accessory", Storage="_Accessory", ThisKey="ACCESSORY_ID", OtherKey="ACCESSORY_ID", IsForeignKey=true)]
+		public Accessory Accessory
+		{
+			get
+			{
+				return this._Accessory.Entity;
+			}
+			set
+			{
+				Accessory previousValue = this._Accessory.Entity;
+				if (((previousValue != value) 
+							|| (this._Accessory.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Accessory.Entity = null;
+						previousValue.Mounted_Accessories.Remove(this);
+					}
+					this._Accessory.Entity = value;
+					if ((value != null))
+					{
+						value.Mounted_Accessories.Add(this);
+						this._ACCESSORY_ID = value.ACCESSORY_ID;
+					}
+					else
+					{
+						this._ACCESSORY_ID = default(int);
+					}
+					this.SendPropertyChanged("Accessory");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cars_for_Sale_Mounted_Accessory", Storage="_Cars_for_Sale", ThisKey="CAR_VIN", OtherKey="CAR_VIN", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Cars_for_Sale Cars_for_Sale
+		{
+			get
+			{
+				return this._Cars_for_Sale.Entity;
+			}
+			set
+			{
+				Cars_for_Sale previousValue = this._Cars_for_Sale.Entity;
+				if (((previousValue != value) 
+							|| (this._Cars_for_Sale.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Cars_for_Sale.Entity = null;
+						previousValue.Mounted_Accessories.Remove(this);
+					}
+					this._Cars_for_Sale.Entity = value;
+					if ((value != null))
+					{
+						value.Mounted_Accessories.Add(this);
+						this._CAR_VIN = value.CAR_VIN;
+					}
+					else
+					{
+						this._CAR_VIN = default(string);
+					}
+					this.SendPropertyChanged("Cars_for_Sale");
 				}
 			}
 		}

@@ -12,32 +12,12 @@ using DataLayer;
 
 namespace CarDealership
 {
-    public partial class EmployeeEdit : Form
+    public partial class EmployeeAdd : Form
     {
-        int id;
-        public EmployeeEdit(int EmployeeID)
+        public EmployeeAdd()
         {
             InitializeComponent();
-            id = EmployeeID;
-            Initialize();
         }
-
-        private void Initialize()
-        {
-            var criteria = new Employee()
-            {
-                EMPLOYEE_ID = id
-            };
-            var emp = BusinessLayer.DataAcquisition.GetEmployees(criteria).Single();
-            this.textBoxNAME.Text = emp.NAME;
-            this.textBoxSURNAME.Text = emp.SURNAME;
-            this.textBoxUSERNAME.Text = emp.LOGIN;
-            this.labelID.Text = id.ToString();
-
-            this.dealershipSelector1.ChangeSelected(emp.DEALERSHIP_ID);
-            this.roleSelector1.ChangeSelected(emp.Role.ROLE_NAME);
-        }
-
         private void dealershipSelector1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right) this.dealershipSelector1.ClearSelection();
@@ -86,6 +66,12 @@ namespace CarDealership
                 this.toolTipEdit.Show("Login cannot be empty", this.textBoxUSERNAME);
                 return;
             }
+            if (this.textBoxPASSWORD.Text.Length == 0)
+            {
+                System.Media.SystemSounds.Asterisk.Play();
+                this.toolTipEdit.Show("Password cannot be empty", this.textBoxPASSWORD);
+                return;
+            }
             string name = this.textBoxNAME.Text;
             string surname = this.textBoxSURNAME.Text;
             string login = this.textBoxUSERNAME.Text;
@@ -101,9 +87,7 @@ namespace CarDealership
                 dealership = (this.dealershipSelector1.SelectedValue as Dealership).DEALERSHIP_ID;
             }
 
-
-
-            BusinessLayer.DataUpdate.EmployeeUpdate(id,name,surname,role,dealership,login,password);
+            BusinessLayer.DataAddition.AddEmployee(name, surname, role, dealership, login, password);
             this.DialogResult = DialogResult.Yes;
             this.Close();
         }

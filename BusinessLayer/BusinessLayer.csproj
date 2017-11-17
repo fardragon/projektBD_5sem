@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminLogic.cs" />
+    <Compile Include="DataAcquisition.cs" />
+    <Compile Include="DataAddition.cs" />
+    <Compile Include="DataDeletion.cs" />
+    <Compile Include="DataUpdate.cs" />
     <Compile Include="LoginLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility.cs" />

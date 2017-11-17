@@ -22,7 +22,7 @@ namespace CarDealership
         private void ResetButton_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
-            BusinessLayer.AdminLogic.DEBUG_RESET();
+            BusinessLayer.DataAcquisition.DEBUG_RESET();
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
 
@@ -55,8 +55,22 @@ namespace CarDealership
         {
             var id = this.employeesView1.CurrentID();
             var dialog = new EmployeeEdit(id);
-            dialog.ShowDialog(this);
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes) this.employeesView1.View();
+        }
 
+        private void buttonDelEmp_Click(object sender, EventArgs e)
+        {
+            var id = this.employeesView1.CurrentID();
+            BusinessLayer.DataDeletion.DeleteEmployee(id);
+            this.employeesView1.View();
+        }
+
+        private void buttonAddEmp_Click(object sender, EventArgs e)
+        {
+            var dialog = new EmployeeAdd();
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes) this.employeesView1.View();
         }
     }
 }

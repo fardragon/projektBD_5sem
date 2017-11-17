@@ -33,7 +33,7 @@ namespace BusinessLayer
                     result.Dealership = user.DEALERSHIP_ID.Value;
                 }
 
-                switch (user.Role.ROLE1.ToString())
+                switch (user.Role.ROLE_NAME.ToString())
                 {
                     case "Administrator":
                         result.Type = UserTypes.Administrator;

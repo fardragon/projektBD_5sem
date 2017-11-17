@@ -28,8 +28,8 @@ namespace CarDealership
         private void LoginButton_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
-            this.toolTipLogin.Hide(textBox_password);         
-            var user = BusinessLayer.LoginLogic.Login(this.textBox_username.Text, this.textBox_password.Text);
+            this.toolTipLogin.Hide(textBoxPassword);         
+            var user = BusinessLayer.LoginLogic.Login(this.textBoxUsername.Text, this.textBoxPassword.Text);
             bool loggedIn = false;
             switch (user.Type)
             {
@@ -37,7 +37,7 @@ namespace CarDealership
                     MessageBox.Show(this,"Database connection error", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
                 case BusinessLayer.UserTypes.BadLogin:
-                    this.toolTipLogin.Show("Invalid login and\\or password", this.textBox_password);
+                    this.toolTipLogin.Show("Invalid login and\\or password", this.textBoxPassword);
                     System.Media.SystemSounds.Asterisk.Play();
                     break;
                 case BusinessLayer.UserTypes.Administrator:
@@ -65,41 +65,38 @@ namespace CarDealership
             }
         }
 
-        private void textBox_username_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxUsername_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar >= 127)
+            if (e.KeyChar > 127)
             {
                 e.Handled = true;
             }
-
         }
 
-        private void textBox_password_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar >= 127)
+            if (e.KeyChar > 127)
             {
                 e.Handled = true;
             }
-
         }
 
-        private void textBox_password_Enter(object sender, EventArgs e)
+        private void textBoxPassword_Enter(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(textBox_password.Text))
+            if (!String.IsNullOrEmpty(textBoxPassword.Text))
             {
-                textBox_password.SelectionStart = 0;
-                textBox_password.SelectionLength = textBox_password.Text.Length;
+                textBoxPassword.SelectionStart = 0;
+                textBoxPassword.SelectionLength = textBoxPassword.Text.Length;
             }
         }
 
-        private void textBox_username_Enter(object sender, EventArgs e)
+        private void textBoxUsername_Enter(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(textBox_username.Text))
+            if (!String.IsNullOrEmpty(textBoxUsername.Text))
             {
-                textBox_username.SelectionStart = 0;
-                textBox_username.SelectionLength = textBox_username.Text.Length;
+                textBoxUsername.SelectionStart = 0;
+                textBoxUsername.SelectionLength = textBoxUsername.Text.Length;
             }
         }
-
     }
 }

@@ -64,6 +64,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DealershipSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DealershipSelector.Designer.cs">
+      <DependentUpon>DealershipSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RoleSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\RoleSelector.Designer.cs">
+      <DependentUpon>RoleSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AdminScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +87,12 @@
     </Compile>
     <Compile Include="Controls\EmployeesView.Designer.cs">
       <DependentUpon>EmployeesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EmployeeAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EmployeeAdd.Designer.cs">
+      <DependentUpon>EmployeeAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\EmployeeEdit.cs">
       <SubType>Form</SubType>
@@ -117,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EmployeesView.resx">
       <DependentUpon>EmployeesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EmployeeAdd.resx">
+      <DependentUpon>EmployeeAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EmployeeEdit.resx">
       <DependentUpon>EmployeeEdit.cs</DependentUpon>

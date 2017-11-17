@@ -1,6 +1,6 @@
 ﻿namespace CarDealership
 {
-    partial class EmployeeEdit
+    partial class EmployeeAdd
     {
         /// <summary>
         /// Required designer variable.
@@ -27,12 +27,10 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
-        {  
+        {
             this.components = new System.ComponentModel.Container();
             this.buttonCONFIRM = new System.Windows.Forms.Button();
             this.buttonEXIT = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelID = new System.Windows.Forms.Label();
             this.textBoxNAME = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,7 +48,7 @@
             // 
             // buttonCONFIRM
             // 
-            this.buttonCONFIRM.Location = new System.Drawing.Point(174, 204);
+            this.buttonCONFIRM.Location = new System.Drawing.Point(177, 178);
             this.buttonCONFIRM.Name = "buttonCONFIRM";
             this.buttonCONFIRM.Size = new System.Drawing.Size(73, 23);
             this.buttonCONFIRM.TabIndex = 7;
@@ -61,7 +59,7 @@
             // buttonEXIT
             // 
             this.buttonEXIT.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonEXIT.Location = new System.Drawing.Point(102, 204);
+            this.buttonEXIT.Location = new System.Drawing.Point(105, 178);
             this.buttonEXIT.Name = "buttonEXIT";
             this.buttonEXIT.Size = new System.Drawing.Size(66, 23);
             this.buttonEXIT.TabIndex = 8;
@@ -69,27 +67,9 @@
             this.buttonEXIT.UseVisualStyleBackColor = true;
             this.buttonEXIT.Click += new System.EventHandler(this.buttonEXIT_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Editing emoployee with ID:";
-            // 
-            // labelID
-            // 
-            this.labelID.AutoSize = true;
-            this.labelID.Location = new System.Drawing.Point(150, 9);
-            this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(18, 13);
-            this.labelID.TabIndex = 0;
-            this.labelID.Text = "ID";
-            // 
             // textBoxNAME
             // 
-            this.textBoxNAME.Location = new System.Drawing.Point(102, 45);
+            this.textBoxNAME.Location = new System.Drawing.Point(105, 19);
             this.textBoxNAME.Name = "textBoxNAME";
             this.textBoxNAME.Size = new System.Drawing.Size(145, 20);
             this.textBoxNAME.TabIndex = 1;
@@ -98,7 +78,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(58, 48);
+            this.label2.Location = new System.Drawing.Point(61, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 0;
@@ -107,7 +87,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 75);
+            this.label3.Location = new System.Drawing.Point(47, 49);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 0;
@@ -115,7 +95,7 @@
             // 
             // textBoxSURNAME
             // 
-            this.textBoxSURNAME.Location = new System.Drawing.Point(102, 72);
+            this.textBoxSURNAME.Location = new System.Drawing.Point(105, 46);
             this.textBoxSURNAME.Name = "textBoxSURNAME";
             this.textBoxSURNAME.Size = new System.Drawing.Size(145, 20);
             this.textBoxSURNAME.TabIndex = 2;
@@ -124,7 +104,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(36, 101);
+            this.label4.Location = new System.Drawing.Point(39, 75);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
             this.label4.TabIndex = 0;
@@ -133,7 +113,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(64, 128);
+            this.label5.Location = new System.Drawing.Point(67, 102);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 0;
@@ -142,7 +122,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(38, 155);
+            this.label6.Location = new System.Drawing.Point(41, 129);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(58, 13);
             this.label6.TabIndex = 0;
@@ -150,7 +130,7 @@
             // 
             // textBoxUSERNAME
             // 
-            this.textBoxUSERNAME.Location = new System.Drawing.Point(102, 152);
+            this.textBoxUSERNAME.Location = new System.Drawing.Point(105, 126);
             this.textBoxUSERNAME.MaxLength = 50;
             this.textBoxUSERNAME.Name = "textBoxUSERNAME";
             this.textBoxUSERNAME.Size = new System.Drawing.Size(145, 20);
@@ -160,7 +140,7 @@
             // 
             // textBoxPASSWORD
             // 
-            this.textBoxPASSWORD.Location = new System.Drawing.Point(102, 178);
+            this.textBoxPASSWORD.Location = new System.Drawing.Point(105, 152);
             this.textBoxPASSWORD.MaxLength = 30;
             this.textBoxPASSWORD.Name = "textBoxPASSWORD";
             this.textBoxPASSWORD.PasswordChar = '×';
@@ -172,7 +152,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 181);
+            this.label7.Location = new System.Drawing.Point(18, 155);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(81, 13);
             this.label7.TabIndex = 0;
@@ -181,7 +161,7 @@
             // roleSelector1
             // 
             this.roleSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.roleSelector1.Location = new System.Drawing.Point(102, 125);
+            this.roleSelector1.Location = new System.Drawing.Point(105, 99);
             this.roleSelector1.Name = "roleSelector1";
             this.roleSelector1.Size = new System.Drawing.Size(145, 21);
             this.roleSelector1.TabIndex = 4;
@@ -190,20 +170,20 @@
             // 
             this.dealershipSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dealershipSelector1.FormattingEnabled = true;
-            this.dealershipSelector1.Location = new System.Drawing.Point(102, 99);
+            this.dealershipSelector1.Location = new System.Drawing.Point(105, 73);
             this.dealershipSelector1.Name = "dealershipSelector1";
             this.dealershipSelector1.Size = new System.Drawing.Size(145, 21);
             this.dealershipSelector1.TabIndex = 3;
             this.dealershipSelector1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dealershipSelector1_KeyPress);
             this.dealershipSelector1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dealershipSelector1_MouseDown);
             // 
-            // EmployeeEdit
+            // EmployeeAdd
             // 
             this.AcceptButton = this.buttonCONFIRM;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonEXIT;
-            this.ClientSize = new System.Drawing.Size(310, 239);
+            this.ClientSize = new System.Drawing.Size(310, 219);
             this.Controls.Add(this.dealershipSelector1);
             this.Controls.Add(this.roleSelector1);
             this.Controls.Add(this.label7);
@@ -216,12 +196,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxNAME);
-            this.Controls.Add(this.labelID);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonEXIT);
             this.Controls.Add(this.buttonCONFIRM);
-            this.Name = "EmployeeEdit";
-            this.Text = "EmployeeEdit";
+            this.Name = "EmployeeAdd";
+            this.Text = "EmployeeAdd";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,8 +209,6 @@
 
         private System.Windows.Forms.Button buttonCONFIRM;
         private System.Windows.Forms.Button buttonEXIT;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelID;
         private System.Windows.Forms.TextBox textBoxNAME;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

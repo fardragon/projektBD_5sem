@@ -27,12 +27,14 @@ namespace CarDealership
 
         private void Populate()
         {
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
             dataGridView.Rows.Clear();
-            var list = BusinessLayer.AdminLogic.GetEmployees();
+            var list = BusinessLayer.DataAcquisition.GetEmployees(null);
             foreach (Employee emp in list)
             {
-                dataGridView.Rows.Add(emp.EMPLOYEE_ID, emp.NAME, emp.SURNAME, emp.DEALERSHIP_ID, emp.Role.ROLE1.ToString(), emp.LOGIN, emp.PASSWORD);
+                dataGridView.Rows.Add(emp.EMPLOYEE_ID, emp.NAME, emp.SURNAME, emp.DEALERSHIP_ID, emp.Role.ROLE_NAME, emp.LOGIN, emp.PASSWORD);
             }
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
 
         public void View()
