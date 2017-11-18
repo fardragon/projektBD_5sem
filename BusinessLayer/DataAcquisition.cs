@@ -60,6 +60,23 @@ namespace BusinessLayer
             return Enumerable.Empty<Employee>().AsQueryable();
         }
 
+        public static IQueryable<Employee> GetEmployees(string name, string surname, string dealership, string role)
+        {
+            var criteria = new Employee();
+            if (!String.IsNullOrEmpty(name)) criteria.NAME = name;
+            if (!String.IsNullOrEmpty(surname)) criteria.SURNAME = surname;
+            if (!String.IsNullOrEmpty(role)) criteria.ROLE_ID = BusinessLayer.DataAcquisition.GetRoleID(role);
+            if (String.IsNullOrEmpty(dealership))
+            {
+                criteria.DEALERSHIP_ID = null;
+            }
+            else
+            {
+                criteria.DEALERSHIP_ID = System.Int32.Parse(dealership);
+            }
+            return BusinessLayer.DataAcquisition.GetEmployees(criteria);
+        }
+
         public static IQueryable<Dealership> GetDealerships(Dealership criteria)
         {
             try
@@ -76,6 +93,7 @@ namespace BusinessLayer
                               where
 
                               ((criteria.DEALERSHIP_ID == 0) || (deal.DEALERSHIP_ID == criteria.DEALERSHIP_ID))
+
 
                               select deal;
                     return res;
@@ -118,6 +136,56 @@ namespace BusinessLayer
             return Enumerable.Empty<Role>().AsQueryable();
         }
 
+        public static int GetRoleID(string ROLE_NAME)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var res = (
+                          from rol in database.Roles
+                          where
+                          rol.ROLE_NAME == ROLE_NAME
+                          select rol
+                          ).Single();
+
+                return res.ROLE_ID;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return 0;
+        }
+
+        public static IQueryable<Employee> GetManagers(int dealershipid)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var res = 
+                          from man in database.Employees
+                          where
+                          (man.DEALERSHIP_ID == dealershipid)
+                          &&
+                          (man.Role.ROLE_NAME == "Manager")
+                          select man;
+
+                return res;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return Enumerable.Empty<Employee>().AsQueryable();
+        }
 
     }
 }

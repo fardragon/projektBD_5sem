@@ -17,6 +17,7 @@ namespace CarDealership
         {
             InitializeComponent();
             this.NextScreen = Screens.Exit;
+            this.roleSelector1.AllowNull();
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
@@ -45,6 +46,16 @@ namespace CarDealership
                     break;
                 case 1:
                     this.employeesView1.View();
+                    this.textBoxNameEmp.Clear();
+                    this.textBoxSurnameEmp.Clear();
+                    this.roleSelector1.Initialize();
+                    this.roleSelector1.AllowNull();
+                    this.roleSelector1.SelectedIndex = 0;
+                    this.dealershipSelector1.Initialize();
+                    this.dealershipSelector1.SelectedIndex = 0;                 
+                    break;
+                case 2:
+                    this.dealershipsView1.View();
                     break;
                 default:
                     break;
@@ -71,6 +82,35 @@ namespace CarDealership
             var dialog = new EmployeeAdd();
             var result = dialog.ShowDialog(this);
             if (result == DialogResult.Yes) this.employeesView1.View();
+        }
+
+        private void buttonFilerEmp_Click(object sender, EventArgs e)
+        {
+            this.employeesView1.Filter(this.textBoxNameEmp.Text, this.textBoxSurnameEmp.Text, this.dealershipSelector1.SelectedItem.ToString(), this.roleSelector1.SelectedItem.ToString());
+        }
+
+        private void buttonResetEmp_Click(object sender, EventArgs e)
+        {
+            this.textBoxNameEmp.Clear();
+            this.textBoxSurnameEmp.Clear();
+            this.roleSelector1.SelectedIndex = 0;
+            this.dealershipSelector1.SelectedIndex = 0;
+            this.buttonFilterEmp.PerformClick();
+        }
+
+        private void buttonAddDeal_Click(object sender, EventArgs e)
+        {
+            var dialog = new DealershipAdd();
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes) this.dealershipsView1.View();
+
+        }
+
+        private void buttonEditDeal_Click(object sender, EventArgs e)
+        {
+            var dialog = new DealershipEdit(this.dealershipsView1.CurrentID());
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes) this.dealershipsView1.View();
         }
     }
 }

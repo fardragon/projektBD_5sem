@@ -19,13 +19,15 @@ namespace CarDealership.Controls
             Initialize();
         }
 
-        private void Initialize()
+        public void Initialize()
         {
-            
+            this.Items.Clear();
+            this.Items.Add("");   
             var dealerships = BusinessLayer.DataAcquisition.GetDealerships(null);
-            this.BindingContext = new BindingContext();
-            this.DataSource = dealerships;
-            this.DisplayMember = "DEALERSHIP_ID";
+            foreach (Dealership deal in dealerships)
+            {
+                this.Items.Add(deal.DEALERSHIP_ID);
+            }
             this.DropDownStyle = ComboBoxStyle.DropDownList;
             
         }
@@ -37,13 +39,8 @@ namespace CarDealership.Controls
             }
             else
             {
-                this.SelectedIndex = -1;
+                this.SelectedIndex = 0;
             }
-        }
-
-        public void ClearSelection()
-        {
-            this.SelectedIndex = -1;
         }
     }
 }

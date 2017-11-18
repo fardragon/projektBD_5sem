@@ -69,9 +69,6 @@ namespace DataLayer
     partial void InsertSold_Accessory(Sold_Accessory instance);
     partial void UpdateSold_Accessory(Sold_Accessory instance);
     partial void DeleteSold_Accessory(Sold_Accessory instance);
-    partial void InsertSold_Car(Sold_Car instance);
-    partial void UpdateSold_Car(Sold_Car instance);
-    partial void DeleteSold_Car(Sold_Car instance);
     partial void InsertSold_Discount(Sold_Discount instance);
     partial void UpdateSold_Discount(Sold_Discount instance);
     partial void DeleteSold_Discount(Sold_Discount instance);
@@ -84,6 +81,9 @@ namespace DataLayer
     partial void InsertMounted_Accessory(Mounted_Accessory instance);
     partial void UpdateMounted_Accessory(Mounted_Accessory instance);
     partial void DeleteMounted_Accessory(Mounted_Accessory instance);
+    partial void InsertSold_Car(Sold_Car instance);
+    partial void UpdateSold_Car(Sold_Car instance);
+    partial void DeleteSold_Car(Sold_Car instance);
     #endregion
 		
 		public DealershipDatabaseDataContext() : 
@@ -220,14 +220,6 @@ namespace DataLayer
 			}
 		}
 		
-		public System.Data.Linq.Table<Sold_Car> Sold_Cars
-		{
-			get
-			{
-				return this.GetTable<Sold_Car>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Sold_Discount> Sold_Discounts
 		{
 			get
@@ -257,6 +249,14 @@ namespace DataLayer
 			get
 			{
 				return this.GetTable<Mounted_Accessory>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Sold_Car> Sold_Cars
+		{
+			get
+			{
+				return this.GetTable<Sold_Car>();
 			}
 		}
 	}
@@ -2179,9 +2179,9 @@ namespace DataLayer
 		
 		private EntitySet<Cars_for_Sale> _Cars_for_Sales;
 		
-		private EntitySet<Sold_Car> _Sold_Cars;
-		
 		private EntitySet<Employee> _Employees;
+		
+		private EntitySet<Sold_Car> _Sold_Cars;
 		
 		private EntityRef<Employee> _Employee;
 		
@@ -2204,8 +2204,8 @@ namespace DataLayer
 		public Dealership()
 		{
 			this._Cars_for_Sales = new EntitySet<Cars_for_Sale>(new Action<Cars_for_Sale>(this.attach_Cars_for_Sales), new Action<Cars_for_Sale>(this.detach_Cars_for_Sales));
-			this._Sold_Cars = new EntitySet<Sold_Car>(new Action<Sold_Car>(this.attach_Sold_Cars), new Action<Sold_Car>(this.detach_Sold_Cars));
 			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
+			this._Sold_Cars = new EntitySet<Sold_Car>(new Action<Sold_Car>(this.attach_Sold_Cars), new Action<Sold_Car>(this.detach_Sold_Cars));
 			this._Employee = default(EntityRef<Employee>);
 			OnCreated();
 		}
@@ -2327,19 +2327,6 @@ namespace DataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Sold_Car", Storage="_Sold_Cars", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID")]
-		public EntitySet<Sold_Car> Sold_Cars
-		{
-			get
-			{
-				return this._Sold_Cars;
-			}
-			set
-			{
-				this._Sold_Cars.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Employee", Storage="_Employees", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID")]
 		public EntitySet<Employee> Employees
 		{
@@ -2350,6 +2337,19 @@ namespace DataLayer
 			set
 			{
 				this._Employees.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Sold_Car", Storage="_Sold_Cars", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID")]
+		public EntitySet<Sold_Car> Sold_Cars
+		{
+			get
+			{
+				return this._Sold_Cars;
+			}
+			set
+			{
+				this._Sold_Cars.Assign(value);
 			}
 		}
 		
@@ -2419,18 +2419,6 @@ namespace DataLayer
 			entity.Dealership = null;
 		}
 		
-		private void attach_Sold_Cars(Sold_Car entity)
-		{
-			this.SendPropertyChanging();
-			entity.Dealership = this;
-		}
-		
-		private void detach_Sold_Cars(Sold_Car entity)
-		{
-			this.SendPropertyChanging();
-			entity.Dealership = null;
-		}
-		
 		private void attach_Employees(Employee entity)
 		{
 			this.SendPropertyChanging();
@@ -2438,6 +2426,18 @@ namespace DataLayer
 		}
 		
 		private void detach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.Dealership = null;
+		}
+		
+		private void attach_Sold_Cars(Sold_Car entity)
+		{
+			this.SendPropertyChanging();
+			entity.Dealership = this;
+		}
+		
+		private void detach_Sold_Cars(Sold_Car entity)
 		{
 			this.SendPropertyChanging();
 			entity.Dealership = null;
@@ -3003,7 +3003,7 @@ namespace DataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sold_Car_Sold_Accessory", Storage="_Sold_Car", ThisKey="SALE_ID", OtherKey="SALE_ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sold_Car_Sold_Accessory", Storage="_Sold_Car", ThisKey="SALE_ID", OtherKey="SALE_ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Sold_Car Sold_Car
 		{
 			get
@@ -3055,521 +3055,6 @@ namespace DataLayer
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sold_Cars")]
-	public partial class Sold_Car : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _SALE_ID;
-		
-		private string _CAR_VIN;
-		
-		private int _MODEL_ID;
-		
-		private int _DEALERSHIP_ID;
-		
-		private int _COLOR_ID;
-		
-		private string _PRODUCTION_YEAR;
-		
-		private int _EMPLOYEE_ID;
-		
-		private int _CUSTOMER_ID;
-		
-		private System.DateTime _SALE_DATE;
-		
-		private EntitySet<Sold_Accessory> _Sold_Accessories;
-		
-		private EntitySet<Sold_Discount> _Sold_Discounts;
-		
-		private EntityRef<Color> _Color;
-		
-		private EntityRef<Customer> _Customer;
-		
-		private EntityRef<Dealership> _Dealership;
-		
-		private EntityRef<Model> _Model;
-		
-		private EntityRef<Employee> _Employee;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnSALE_IDChanging(int value);
-    partial void OnSALE_IDChanged();
-    partial void OnCAR_VINChanging(string value);
-    partial void OnCAR_VINChanged();
-    partial void OnMODEL_IDChanging(int value);
-    partial void OnMODEL_IDChanged();
-    partial void OnDEALERSHIP_IDChanging(int value);
-    partial void OnDEALERSHIP_IDChanged();
-    partial void OnCOLOR_IDChanging(int value);
-    partial void OnCOLOR_IDChanged();
-    partial void OnPRODUCTION_YEARChanging(string value);
-    partial void OnPRODUCTION_YEARChanged();
-    partial void OnEMPLOYEE_IDChanging(int value);
-    partial void OnEMPLOYEE_IDChanged();
-    partial void OnCUSTOMER_IDChanging(int value);
-    partial void OnCUSTOMER_IDChanged();
-    partial void OnSALE_DATEChanging(System.DateTime value);
-    partial void OnSALE_DATEChanged();
-    #endregion
-		
-		public Sold_Car()
-		{
-			this._Sold_Accessories = new EntitySet<Sold_Accessory>(new Action<Sold_Accessory>(this.attach_Sold_Accessories), new Action<Sold_Accessory>(this.detach_Sold_Accessories));
-			this._Sold_Discounts = new EntitySet<Sold_Discount>(new Action<Sold_Discount>(this.attach_Sold_Discounts), new Action<Sold_Discount>(this.detach_Sold_Discounts));
-			this._Color = default(EntityRef<Color>);
-			this._Customer = default(EntityRef<Customer>);
-			this._Dealership = default(EntityRef<Dealership>);
-			this._Model = default(EntityRef<Model>);
-			this._Employee = default(EntityRef<Employee>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SALE_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int SALE_ID
-		{
-			get
-			{
-				return this._SALE_ID;
-			}
-			set
-			{
-				if ((this._SALE_ID != value))
-				{
-					this.OnSALE_IDChanging(value);
-					this.SendPropertyChanging();
-					this._SALE_ID = value;
-					this.SendPropertyChanged("SALE_ID");
-					this.OnSALE_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CAR_VIN", DbType="Char(17) NOT NULL", CanBeNull=false)]
-		public string CAR_VIN
-		{
-			get
-			{
-				return this._CAR_VIN;
-			}
-			set
-			{
-				if ((this._CAR_VIN != value))
-				{
-					this.OnCAR_VINChanging(value);
-					this.SendPropertyChanging();
-					this._CAR_VIN = value;
-					this.SendPropertyChanged("CAR_VIN");
-					this.OnCAR_VINChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MODEL_ID", DbType="Int NOT NULL")]
-		public int MODEL_ID
-		{
-			get
-			{
-				return this._MODEL_ID;
-			}
-			set
-			{
-				if ((this._MODEL_ID != value))
-				{
-					if (this._Model.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMODEL_IDChanging(value);
-					this.SendPropertyChanging();
-					this._MODEL_ID = value;
-					this.SendPropertyChanged("MODEL_ID");
-					this.OnMODEL_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEALERSHIP_ID", DbType="Int NOT NULL")]
-		public int DEALERSHIP_ID
-		{
-			get
-			{
-				return this._DEALERSHIP_ID;
-			}
-			set
-			{
-				if ((this._DEALERSHIP_ID != value))
-				{
-					if (this._Dealership.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDEALERSHIP_IDChanging(value);
-					this.SendPropertyChanging();
-					this._DEALERSHIP_ID = value;
-					this.SendPropertyChanged("DEALERSHIP_ID");
-					this.OnDEALERSHIP_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COLOR_ID", DbType="Int NOT NULL")]
-		public int COLOR_ID
-		{
-			get
-			{
-				return this._COLOR_ID;
-			}
-			set
-			{
-				if ((this._COLOR_ID != value))
-				{
-					if (this._Color.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCOLOR_IDChanging(value);
-					this.SendPropertyChanging();
-					this._COLOR_ID = value;
-					this.SendPropertyChanged("COLOR_ID");
-					this.OnCOLOR_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCTION_YEAR", DbType="Char(4) NOT NULL", CanBeNull=false)]
-		public string PRODUCTION_YEAR
-		{
-			get
-			{
-				return this._PRODUCTION_YEAR;
-			}
-			set
-			{
-				if ((this._PRODUCTION_YEAR != value))
-				{
-					this.OnPRODUCTION_YEARChanging(value);
-					this.SendPropertyChanging();
-					this._PRODUCTION_YEAR = value;
-					this.SendPropertyChanged("PRODUCTION_YEAR");
-					this.OnPRODUCTION_YEARChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_ID", DbType="Int NOT NULL")]
-		public int EMPLOYEE_ID
-		{
-			get
-			{
-				return this._EMPLOYEE_ID;
-			}
-			set
-			{
-				if ((this._EMPLOYEE_ID != value))
-				{
-					if (this._Employee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEMPLOYEE_IDChanging(value);
-					this.SendPropertyChanging();
-					this._EMPLOYEE_ID = value;
-					this.SendPropertyChanged("EMPLOYEE_ID");
-					this.OnEMPLOYEE_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUSTOMER_ID", DbType="Int NOT NULL")]
-		public int CUSTOMER_ID
-		{
-			get
-			{
-				return this._CUSTOMER_ID;
-			}
-			set
-			{
-				if ((this._CUSTOMER_ID != value))
-				{
-					if (this._Customer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCUSTOMER_IDChanging(value);
-					this.SendPropertyChanging();
-					this._CUSTOMER_ID = value;
-					this.SendPropertyChanged("CUSTOMER_ID");
-					this.OnCUSTOMER_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SALE_DATE", DbType="Date NOT NULL")]
-		public System.DateTime SALE_DATE
-		{
-			get
-			{
-				return this._SALE_DATE;
-			}
-			set
-			{
-				if ((this._SALE_DATE != value))
-				{
-					this.OnSALE_DATEChanging(value);
-					this.SendPropertyChanging();
-					this._SALE_DATE = value;
-					this.SendPropertyChanged("SALE_DATE");
-					this.OnSALE_DATEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sold_Car_Sold_Accessory", Storage="_Sold_Accessories", ThisKey="SALE_ID", OtherKey="SALE_ID")]
-		public EntitySet<Sold_Accessory> Sold_Accessories
-		{
-			get
-			{
-				return this._Sold_Accessories;
-			}
-			set
-			{
-				this._Sold_Accessories.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sold_Car_Sold_Discount", Storage="_Sold_Discounts", ThisKey="SALE_ID", OtherKey="SALE_ID")]
-		public EntitySet<Sold_Discount> Sold_Discounts
-		{
-			get
-			{
-				return this._Sold_Discounts;
-			}
-			set
-			{
-				this._Sold_Discounts.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Color_Sold_Car", Storage="_Color", ThisKey="COLOR_ID", OtherKey="COLOR_ID", IsForeignKey=true)]
-		public Color Color
-		{
-			get
-			{
-				return this._Color.Entity;
-			}
-			set
-			{
-				Color previousValue = this._Color.Entity;
-				if (((previousValue != value) 
-							|| (this._Color.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Color.Entity = null;
-						previousValue.Sold_Cars.Remove(this);
-					}
-					this._Color.Entity = value;
-					if ((value != null))
-					{
-						value.Sold_Cars.Add(this);
-						this._COLOR_ID = value.COLOR_ID;
-					}
-					else
-					{
-						this._COLOR_ID = default(int);
-					}
-					this.SendPropertyChanged("Color");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Sold_Car", Storage="_Customer", ThisKey="CUSTOMER_ID", OtherKey="CUSTOMER_ID", IsForeignKey=true)]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.Sold_Cars.Remove(this);
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.Sold_Cars.Add(this);
-						this._CUSTOMER_ID = value.CUSTOMER_ID;
-					}
-					else
-					{
-						this._CUSTOMER_ID = default(int);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Sold_Car", Storage="_Dealership", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID", IsForeignKey=true)]
-		public Dealership Dealership
-		{
-			get
-			{
-				return this._Dealership.Entity;
-			}
-			set
-			{
-				Dealership previousValue = this._Dealership.Entity;
-				if (((previousValue != value) 
-							|| (this._Dealership.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Dealership.Entity = null;
-						previousValue.Sold_Cars.Remove(this);
-					}
-					this._Dealership.Entity = value;
-					if ((value != null))
-					{
-						value.Sold_Cars.Add(this);
-						this._DEALERSHIP_ID = value.DEALERSHIP_ID;
-					}
-					else
-					{
-						this._DEALERSHIP_ID = default(int);
-					}
-					this.SendPropertyChanged("Dealership");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Model_Sold_Car", Storage="_Model", ThisKey="MODEL_ID", OtherKey="MODEL_ID", IsForeignKey=true)]
-		public Model Model
-		{
-			get
-			{
-				return this._Model.Entity;
-			}
-			set
-			{
-				Model previousValue = this._Model.Entity;
-				if (((previousValue != value) 
-							|| (this._Model.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Model.Entity = null;
-						previousValue.Sold_Cars.Remove(this);
-					}
-					this._Model.Entity = value;
-					if ((value != null))
-					{
-						value.Sold_Cars.Add(this);
-						this._MODEL_ID = value.MODEL_ID;
-					}
-					else
-					{
-						this._MODEL_ID = default(int);
-					}
-					this.SendPropertyChanged("Model");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Sold_Car", Storage="_Employee", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID", IsForeignKey=true)]
-		public Employee Employee
-		{
-			get
-			{
-				return this._Employee.Entity;
-			}
-			set
-			{
-				Employee previousValue = this._Employee.Entity;
-				if (((previousValue != value) 
-							|| (this._Employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Employee.Entity = null;
-						previousValue.Sold_Cars.Remove(this);
-					}
-					this._Employee.Entity = value;
-					if ((value != null))
-					{
-						value.Sold_Cars.Add(this);
-						this._EMPLOYEE_ID = value.EMPLOYEE_ID;
-					}
-					else
-					{
-						this._EMPLOYEE_ID = default(int);
-					}
-					this.SendPropertyChanged("Employee");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Sold_Accessories(Sold_Accessory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Sold_Car = this;
-		}
-		
-		private void detach_Sold_Accessories(Sold_Accessory entity)
-		{
-			this.SendPropertyChanging();
-			entity.Sold_Car = null;
-		}
-		
-		private void attach_Sold_Discounts(Sold_Discount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Sold_Car = this;
-		}
-		
-		private void detach_Sold_Discounts(Sold_Discount entity)
-		{
-			this.SendPropertyChanging();
-			entity.Sold_Car = null;
 		}
 	}
 	
@@ -3686,7 +3171,7 @@ namespace DataLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sold_Car_Sold_Discount", Storage="_Sold_Car", ThisKey="SALE_ID", OtherKey="SALE_ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sold_Car_Sold_Discount", Storage="_Sold_Car", ThisKey="SALE_ID", OtherKey="SALE_ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Sold_Car Sold_Car
 		{
 			get
@@ -4392,6 +3877,521 @@ namespace DataLayer
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sold_Cars")]
+	public partial class Sold_Car : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _SALE_ID;
+		
+		private string _CAR_VIN;
+		
+		private int _MODEL_ID;
+		
+		private System.Nullable<int> _DEALERSHIP_ID;
+		
+		private int _COLOR_ID;
+		
+		private string _PRODUCTION_YEAR;
+		
+		private System.Nullable<int> _EMPLOYEE_ID;
+		
+		private int _CUSTOMER_ID;
+		
+		private System.DateTime _SALE_DATE;
+		
+		private EntitySet<Sold_Accessory> _Sold_Accessories;
+		
+		private EntitySet<Sold_Discount> _Sold_Discounts;
+		
+		private EntityRef<Color> _Color;
+		
+		private EntityRef<Customer> _Customer;
+		
+		private EntityRef<Dealership> _Dealership;
+		
+		private EntityRef<Employee> _Employee;
+		
+		private EntityRef<Model> _Model;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSALE_IDChanging(int value);
+    partial void OnSALE_IDChanged();
+    partial void OnCAR_VINChanging(string value);
+    partial void OnCAR_VINChanged();
+    partial void OnMODEL_IDChanging(int value);
+    partial void OnMODEL_IDChanged();
+    partial void OnDEALERSHIP_IDChanging(System.Nullable<int> value);
+    partial void OnDEALERSHIP_IDChanged();
+    partial void OnCOLOR_IDChanging(int value);
+    partial void OnCOLOR_IDChanged();
+    partial void OnPRODUCTION_YEARChanging(string value);
+    partial void OnPRODUCTION_YEARChanged();
+    partial void OnEMPLOYEE_IDChanging(System.Nullable<int> value);
+    partial void OnEMPLOYEE_IDChanged();
+    partial void OnCUSTOMER_IDChanging(int value);
+    partial void OnCUSTOMER_IDChanged();
+    partial void OnSALE_DATEChanging(System.DateTime value);
+    partial void OnSALE_DATEChanged();
+    #endregion
+		
+		public Sold_Car()
+		{
+			this._Sold_Accessories = new EntitySet<Sold_Accessory>(new Action<Sold_Accessory>(this.attach_Sold_Accessories), new Action<Sold_Accessory>(this.detach_Sold_Accessories));
+			this._Sold_Discounts = new EntitySet<Sold_Discount>(new Action<Sold_Discount>(this.attach_Sold_Discounts), new Action<Sold_Discount>(this.detach_Sold_Discounts));
+			this._Color = default(EntityRef<Color>);
+			this._Customer = default(EntityRef<Customer>);
+			this._Dealership = default(EntityRef<Dealership>);
+			this._Employee = default(EntityRef<Employee>);
+			this._Model = default(EntityRef<Model>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SALE_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SALE_ID
+		{
+			get
+			{
+				return this._SALE_ID;
+			}
+			set
+			{
+				if ((this._SALE_ID != value))
+				{
+					this.OnSALE_IDChanging(value);
+					this.SendPropertyChanging();
+					this._SALE_ID = value;
+					this.SendPropertyChanged("SALE_ID");
+					this.OnSALE_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CAR_VIN", DbType="Char(17) NOT NULL", CanBeNull=false)]
+		public string CAR_VIN
+		{
+			get
+			{
+				return this._CAR_VIN;
+			}
+			set
+			{
+				if ((this._CAR_VIN != value))
+				{
+					this.OnCAR_VINChanging(value);
+					this.SendPropertyChanging();
+					this._CAR_VIN = value;
+					this.SendPropertyChanged("CAR_VIN");
+					this.OnCAR_VINChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MODEL_ID", DbType="Int NOT NULL")]
+		public int MODEL_ID
+		{
+			get
+			{
+				return this._MODEL_ID;
+			}
+			set
+			{
+				if ((this._MODEL_ID != value))
+				{
+					if (this._Model.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMODEL_IDChanging(value);
+					this.SendPropertyChanging();
+					this._MODEL_ID = value;
+					this.SendPropertyChanged("MODEL_ID");
+					this.OnMODEL_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DEALERSHIP_ID", DbType="Int")]
+		public System.Nullable<int> DEALERSHIP_ID
+		{
+			get
+			{
+				return this._DEALERSHIP_ID;
+			}
+			set
+			{
+				if ((this._DEALERSHIP_ID != value))
+				{
+					if (this._Dealership.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDEALERSHIP_IDChanging(value);
+					this.SendPropertyChanging();
+					this._DEALERSHIP_ID = value;
+					this.SendPropertyChanged("DEALERSHIP_ID");
+					this.OnDEALERSHIP_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_COLOR_ID", DbType="Int NOT NULL")]
+		public int COLOR_ID
+		{
+			get
+			{
+				return this._COLOR_ID;
+			}
+			set
+			{
+				if ((this._COLOR_ID != value))
+				{
+					if (this._Color.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCOLOR_IDChanging(value);
+					this.SendPropertyChanging();
+					this._COLOR_ID = value;
+					this.SendPropertyChanged("COLOR_ID");
+					this.OnCOLOR_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PRODUCTION_YEAR", DbType="Char(4) NOT NULL", CanBeNull=false)]
+		public string PRODUCTION_YEAR
+		{
+			get
+			{
+				return this._PRODUCTION_YEAR;
+			}
+			set
+			{
+				if ((this._PRODUCTION_YEAR != value))
+				{
+					this.OnPRODUCTION_YEARChanging(value);
+					this.SendPropertyChanging();
+					this._PRODUCTION_YEAR = value;
+					this.SendPropertyChanged("PRODUCTION_YEAR");
+					this.OnPRODUCTION_YEARChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYEE_ID", DbType="Int")]
+		public System.Nullable<int> EMPLOYEE_ID
+		{
+			get
+			{
+				return this._EMPLOYEE_ID;
+			}
+			set
+			{
+				if ((this._EMPLOYEE_ID != value))
+				{
+					if (this._Employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEMPLOYEE_IDChanging(value);
+					this.SendPropertyChanging();
+					this._EMPLOYEE_ID = value;
+					this.SendPropertyChanged("EMPLOYEE_ID");
+					this.OnEMPLOYEE_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CUSTOMER_ID", DbType="Int NOT NULL")]
+		public int CUSTOMER_ID
+		{
+			get
+			{
+				return this._CUSTOMER_ID;
+			}
+			set
+			{
+				if ((this._CUSTOMER_ID != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCUSTOMER_IDChanging(value);
+					this.SendPropertyChanging();
+					this._CUSTOMER_ID = value;
+					this.SendPropertyChanged("CUSTOMER_ID");
+					this.OnCUSTOMER_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SALE_DATE", DbType="Date NOT NULL")]
+		public System.DateTime SALE_DATE
+		{
+			get
+			{
+				return this._SALE_DATE;
+			}
+			set
+			{
+				if ((this._SALE_DATE != value))
+				{
+					this.OnSALE_DATEChanging(value);
+					this.SendPropertyChanging();
+					this._SALE_DATE = value;
+					this.SendPropertyChanged("SALE_DATE");
+					this.OnSALE_DATEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sold_Car_Sold_Accessory", Storage="_Sold_Accessories", ThisKey="SALE_ID", OtherKey="SALE_ID")]
+		public EntitySet<Sold_Accessory> Sold_Accessories
+		{
+			get
+			{
+				return this._Sold_Accessories;
+			}
+			set
+			{
+				this._Sold_Accessories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Sold_Car_Sold_Discount", Storage="_Sold_Discounts", ThisKey="SALE_ID", OtherKey="SALE_ID")]
+		public EntitySet<Sold_Discount> Sold_Discounts
+		{
+			get
+			{
+				return this._Sold_Discounts;
+			}
+			set
+			{
+				this._Sold_Discounts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Color_Sold_Car", Storage="_Color", ThisKey="COLOR_ID", OtherKey="COLOR_ID", IsForeignKey=true)]
+		public Color Color
+		{
+			get
+			{
+				return this._Color.Entity;
+			}
+			set
+			{
+				Color previousValue = this._Color.Entity;
+				if (((previousValue != value) 
+							|| (this._Color.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Color.Entity = null;
+						previousValue.Sold_Cars.Remove(this);
+					}
+					this._Color.Entity = value;
+					if ((value != null))
+					{
+						value.Sold_Cars.Add(this);
+						this._COLOR_ID = value.COLOR_ID;
+					}
+					else
+					{
+						this._COLOR_ID = default(int);
+					}
+					this.SendPropertyChanged("Color");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Sold_Car", Storage="_Customer", ThisKey="CUSTOMER_ID", OtherKey="CUSTOMER_ID", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.Sold_Cars.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.Sold_Cars.Add(this);
+						this._CUSTOMER_ID = value.CUSTOMER_ID;
+					}
+					else
+					{
+						this._CUSTOMER_ID = default(int);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dealership_Sold_Car", Storage="_Dealership", ThisKey="DEALERSHIP_ID", OtherKey="DEALERSHIP_ID", IsForeignKey=true, DeleteRule="SET NULL")]
+		public Dealership Dealership
+		{
+			get
+			{
+				return this._Dealership.Entity;
+			}
+			set
+			{
+				Dealership previousValue = this._Dealership.Entity;
+				if (((previousValue != value) 
+							|| (this._Dealership.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Dealership.Entity = null;
+						previousValue.Sold_Cars.Remove(this);
+					}
+					this._Dealership.Entity = value;
+					if ((value != null))
+					{
+						value.Sold_Cars.Add(this);
+						this._DEALERSHIP_ID = value.DEALERSHIP_ID;
+					}
+					else
+					{
+						this._DEALERSHIP_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Dealership");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Sold_Car", Storage="_Employee", ThisKey="EMPLOYEE_ID", OtherKey="EMPLOYEE_ID", IsForeignKey=true, DeleteRule="SET NULL")]
+		public Employee Employee
+		{
+			get
+			{
+				return this._Employee.Entity;
+			}
+			set
+			{
+				Employee previousValue = this._Employee.Entity;
+				if (((previousValue != value) 
+							|| (this._Employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Employee.Entity = null;
+						previousValue.Sold_Cars.Remove(this);
+					}
+					this._Employee.Entity = value;
+					if ((value != null))
+					{
+						value.Sold_Cars.Add(this);
+						this._EMPLOYEE_ID = value.EMPLOYEE_ID;
+					}
+					else
+					{
+						this._EMPLOYEE_ID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Employee");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Model_Sold_Car", Storage="_Model", ThisKey="MODEL_ID", OtherKey="MODEL_ID", IsForeignKey=true)]
+		public Model Model
+		{
+			get
+			{
+				return this._Model.Entity;
+			}
+			set
+			{
+				Model previousValue = this._Model.Entity;
+				if (((previousValue != value) 
+							|| (this._Model.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Model.Entity = null;
+						previousValue.Sold_Cars.Remove(this);
+					}
+					this._Model.Entity = value;
+					if ((value != null))
+					{
+						value.Sold_Cars.Add(this);
+						this._MODEL_ID = value.MODEL_ID;
+					}
+					else
+					{
+						this._MODEL_ID = default(int);
+					}
+					this.SendPropertyChanged("Model");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Sold_Accessories(Sold_Accessory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Sold_Car = this;
+		}
+		
+		private void detach_Sold_Accessories(Sold_Accessory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Sold_Car = null;
+		}
+		
+		private void attach_Sold_Discounts(Sold_Discount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Sold_Car = this;
+		}
+		
+		private void detach_Sold_Discounts(Sold_Discount entity)
+		{
+			this.SendPropertyChanging();
+			entity.Sold_Car = null;
 		}
 	}
 }

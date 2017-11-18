@@ -20,18 +20,27 @@ namespace CarDealership.Controls
             Initialize();
         }
 
-        private void Initialize()
+        public void Initialize()
         {
-           var roles = BusinessLayer.DataAcquisition.GetRoles(null);
-           this.BindingContext = new BindingContext();
-           this.DataSource = roles;
-           this.DisplayMember = "ROLE_NAME";
-           this.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.Items.Clear();
+            var roles = BusinessLayer.DataAcquisition.GetRoles(null);
+            foreach (Role rol in roles)
+            {
+                this.Items.Add(rol.ROLE_NAME);
+            }
+            this.DropDownStyle = ComboBoxStyle.DropDownList;
+            if (this.Items.Count > 0) this.SelectedIndex = 0;
         }
 
         public void ChangeSelected(string selection)
         {
             this.SelectedIndex = this.FindStringExact(selection);
+        }
+
+        public void AllowNull()
+        {
+            this.Items.Insert(0, "");
+            this.SelectedIndex = 0;
         }
     }
 }

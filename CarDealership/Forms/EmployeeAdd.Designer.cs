@@ -174,8 +174,6 @@
             this.dealershipSelector1.Name = "dealershipSelector1";
             this.dealershipSelector1.Size = new System.Drawing.Size(145, 21);
             this.dealershipSelector1.TabIndex = 3;
-            this.dealershipSelector1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dealershipSelector1_KeyPress);
-            this.dealershipSelector1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dealershipSelector1_MouseDown);
             // 
             // EmployeeAdd
             // 

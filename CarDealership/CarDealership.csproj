@@ -70,6 +70,12 @@
     <Compile Include="Controls\DealershipSelector.Designer.cs">
       <DependentUpon>DealershipSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DealershipsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DealershipsView.Designer.cs">
+      <DependentUpon>DealershipsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RoleSelector.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -87,6 +93,18 @@
     </Compile>
     <Compile Include="Controls\EmployeesView.Designer.cs">
       <DependentUpon>EmployeesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DealershipAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DealershipAdd.Designer.cs">
+      <DependentUpon>DealershipAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DealershipEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DealershipEdit.Designer.cs">
+      <DependentUpon>DealershipEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\EmployeeAdd.cs">
       <SubType>Form</SubType>
@@ -130,11 +148,20 @@
       <DependentUpon>SellerScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="Controls\DealershipsView.resx">
+      <DependentUpon>DealershipsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminScreen.resx">
       <DependentUpon>AdminScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EmployeesView.resx">
       <DependentUpon>EmployeesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DealershipAdd.resx">
+      <DependentUpon>DealershipAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DealershipEdit.resx">
+      <DependentUpon>DealershipEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EmployeeAdd.resx">
       <DependentUpon>EmployeeAdd.cs</DependentUpon>

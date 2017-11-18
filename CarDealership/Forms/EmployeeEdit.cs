@@ -38,14 +38,10 @@ namespace CarDealership
             this.roleSelector1.ChangeSelected(emp.Role.ROLE_NAME);
         }
 
-        private void dealershipSelector1_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right) this.dealershipSelector1.ClearSelection();
-        }
 
         private void buttonEXIT_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort;
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -90,19 +86,8 @@ namespace CarDealership
             string surname = this.textBoxSURNAME.Text;
             string login = this.textBoxUSERNAME.Text;
             string password = this.textBoxPASSWORD.Text;
-            int role = (this.roleSelector1.SelectedValue as Role).ROLE_ID;
-            int? dealership;
-            if (this.dealershipSelector1.SelectedIndex == -1)
-            {
-                dealership = null;
-            }
-            else
-            {
-                dealership = (this.dealershipSelector1.SelectedValue as Dealership).DEALERSHIP_ID;
-            }
-
-
-
+            string role = this.roleSelector1.SelectedItem.ToString();
+            string dealership = this.dealershipSelector1.SelectedItem.ToString();
             BusinessLayer.DataUpdate.EmployeeUpdate(id,name,surname,role,dealership,login,password);
             this.DialogResult = DialogResult.Yes;
             this.Close();
@@ -141,11 +126,6 @@ namespace CarDealership
                 textBoxNAME.SelectionStart = 0;
                 textBoxNAME.SelectionLength = textBoxNAME.Text.Length;
             }
-        }
-
-        private void dealershipSelector1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Back) this.dealershipSelector1.ClearSelection();
         }
 
     }
