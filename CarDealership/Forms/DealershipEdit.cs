@@ -30,6 +30,11 @@ namespace CarDealership
             //
             this.labelID.Text = DealershipID.ToString();
             //
+            var deal = BusinessLayer.DataAcquisition.GetDealership(DealershipID);
+            this.textBoxAdress.Text = deal.STREET_ADDRESS;
+            this.textBoxCity.Text = deal.CITY;
+            this.textBoxZipcode.Text = deal.ZIPCODE;
+            if (deal.MANAGER_ID.HasValue) this.comboBoxManager.SelectedIndex = this.comboBoxManager.FindStringExact(deal.MANAGER_ID.ToString());
 
         }
 

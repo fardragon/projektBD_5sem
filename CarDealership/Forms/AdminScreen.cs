@@ -95,7 +95,7 @@ namespace CarDealership
             this.textBoxSurnameEmp.Clear();
             this.roleSelector1.SelectedIndex = 0;
             this.dealershipSelector1.SelectedIndex = 0;
-            this.buttonFilterEmp.PerformClick();
+            this.employeesView1.View();
         }
 
         private void buttonAddDeal_Click(object sender, EventArgs e)

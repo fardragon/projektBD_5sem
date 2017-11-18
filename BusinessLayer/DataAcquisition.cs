@@ -186,6 +186,60 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Employee>().AsQueryable();
         }
+        public static Dealership GetDealership(int id)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var res = (from deal in database.Dealerships
+                           where
+                           (deal.DEALERSHIP_ID == id)
+                           select deal).Single();
+                           return res;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return new Dealership();
+        }
 
+        public static int GetEmployeeOrdersCount(int id)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var res =  (from order in database.Active_Orders
+                           where
+                           (order.EMPLOYEE_ID == id)
+                           select order).Count();
+                return res;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return 0;
+        }
+        public static int GetEmployeeSalesCount(int id)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var res = (from sale in database.Sold_Cars
+                           where
+                           (sale.EMPLOYEE_ID == id)
+                           select sale).Count();
+                return res;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return 0;
+        }
     }
+
+
+    
 }

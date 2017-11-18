@@ -112,7 +112,6 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "EmployeesView";
             this.Size = new System.Drawing.Size(440, 341);
-            this.Enter += new System.EventHandler(this.EmployeesView_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

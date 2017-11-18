@@ -12,18 +12,15 @@ using DataLayer;
 
 namespace CarDealership
 {
+
     public partial class EmployeesView : UserControl
     {
         public EmployeesView()
         {
             InitializeComponent();
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            
         }
 
-        private void EmployeesView_Enter(object sender, EventArgs e)
-        {
-        }
 
         public void View()
         {

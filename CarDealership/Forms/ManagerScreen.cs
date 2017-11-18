@@ -12,11 +12,25 @@ namespace CarDealership
 {
     public partial class ManagerScreen : ScreenForm
     {
-        public ManagerScreen()
+        private int dealershipID;
+        public ManagerScreen(int DealershipID)
         {
             InitializeComponent();
             this.NextScreen = Screens.Exit;
+            dealershipID = DealershipID;
+            this.employeesManagerView1.SetDealershipID(DealershipID);
+        }
 
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch ((sender as TabControl).SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    this.employeesManagerView1.View();
+                    break;
+            }
         }
     }
 }
