@@ -30,10 +30,10 @@ namespace CarDealership
                         Screen = new AdminScreen();
                         break;
                     case Screens.SellerScreen:
-                        Screen = new SellerScreen();
+                        Screen = new SellerScreen(Screen.DefaultDealership);
                         break;
                     case Screens.ManagerScreen:
-                        Screen = new ManagerScreen();
+                        Screen = new ManagerScreen(Screen.DefaultDealership);
                         break;
                     case Screens.MechanicScreen:
                         Screen = new MechanicScreen();

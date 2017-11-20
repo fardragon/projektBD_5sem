@@ -10,12 +10,18 @@ using System.Windows.Forms;
 
 namespace CarDealership
 {
-    public partial class ManagerScreen : ScreenForm
+    public partial class SellerScreen : ScreenForm
     {
-        public ManagerScreen()
+        public SellerScreen(int Dealership)
         {
             InitializeComponent();
             this.NextScreen = Screens.Exit;
+            this.DefaultDealership = Dealership;
+            this.DealerShipSelector1.Value = Dealership;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }

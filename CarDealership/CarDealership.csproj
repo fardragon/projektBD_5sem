@@ -64,47 +64,125 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminScreen.cs">
+    <Compile Include="Controls\DealershipSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DealershipSelector.Designer.cs">
+      <DependentUpon>DealershipSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DealershipsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DealershipsView.Designer.cs">
+      <DependentUpon>DealershipsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EmployeesManagerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EmployeesManagerView.Designer.cs">
+      <DependentUpon>EmployeesManagerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RoleSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\RoleSelector.Designer.cs">
+      <DependentUpon>RoleSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminScreen.Designer.cs">
+    <Compile Include="Forms\AdminScreen.Designer.cs">
       <DependentUpon>AdminScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginScreen.cs">
+    <Compile Include="Controls\EmployeesView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EmployeesView.Designer.cs">
+      <DependentUpon>EmployeesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DealershipAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginScreen.Designer.cs">
+    <Compile Include="Forms\DealershipAdd.Designer.cs">
+      <DependentUpon>DealershipAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DealershipEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DealershipEdit.Designer.cs">
+      <DependentUpon>DealershipEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EmployeeAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EmployeeAdd.Designer.cs">
+      <DependentUpon>EmployeeAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\EmployeeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EmployeeEdit.Designer.cs">
+      <DependentUpon>EmployeeEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginScreen.Designer.cs">
       <DependentUpon>LoginScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManagerScreen.cs">
+    <Compile Include="Forms\ManagerScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManagerScreen.Designer.cs">
+    <Compile Include="Forms\ManagerScreen.Designer.cs">
       <DependentUpon>ManagerScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="MechanicScreen.cs">
+    <Compile Include="Forms\MechanicScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MechanicScreen.Designer.cs">
+    <Compile Include="Forms\MechanicScreen.Designer.cs">
       <DependentUpon>MechanicScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScreenForm.cs">
+    <Compile Include="Forms\ScreenForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SellerScreen.cs">
+    <Compile Include="Forms\SellerScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SellerScreen.Designer.cs">
+    <Compile Include="Forms\SellerScreen.Designer.cs">
       <DependentUpon>SellerScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
-    <EmbeddedResource Include="AdminScreen.resx">
+    <EmbeddedResource Include="Controls\DealershipsView.resx">
+      <DependentUpon>DealershipsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EmployeesManagerView.resx">
+      <DependentUpon>EmployeesManagerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminScreen.resx">
       <DependentUpon>AdminScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginScreen.resx">
+    <EmbeddedResource Include="Controls\EmployeesView.resx">
+      <DependentUpon>EmployeesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DealershipAdd.resx">
+      <DependentUpon>DealershipAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DealershipEdit.resx">
+      <DependentUpon>DealershipEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EmployeeAdd.resx">
+      <DependentUpon>EmployeeAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EmployeeEdit.resx">
+      <DependentUpon>EmployeeEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManagerScreen.resx">
+      <DependentUpon>ManagerScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -116,6 +194,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Forms\SellerScreen.resx">
+      <DependentUpon>SellerScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,6 +229,10 @@
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
       <Project>{1f21bcbb-89c2-4986-89de-cc5439ab08de}</Project>
       <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{8cc5b23f-0a58-4a72-ba7a-02f9a480f472}</Project>
+      <Name>DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
