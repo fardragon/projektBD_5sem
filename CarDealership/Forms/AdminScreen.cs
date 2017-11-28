@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLayer;
 
-namespace CarDealership
+namespace CarDealership.Forms
 {
     public partial class AdminScreen : ScreenForm
     {
-        public AdminScreen()
+        public AdminScreen(int employeeID)
         {
             InitializeComponent();
+            this.EmployeeID = employeeID;
             this.NextScreen = Screens.Exit;
             this.roleSelector1.AllowNull();
         }
@@ -57,6 +58,9 @@ namespace CarDealership
                 case 2:
                     this.dealershipsView1.View();
                     break;
+                case 3:
+                    this.modelsView1.View();
+                    break;
                 default:
                     break;
             }
@@ -73,6 +77,12 @@ namespace CarDealership
         private void buttonDelEmp_Click(object sender, EventArgs e)
         {
             var id = this.employeesView1.CurrentID();
+            if (id == this.EmployeeID)
+            {
+                System.Windows.Forms.MessageBox.Show("Cannot delete yourself");
+                System.Media.SystemSounds.Asterisk.Play();
+                return;
+            }
             BusinessLayer.DataDeletion.DeleteEmployee(id);
             this.employeesView1.View();
         }
@@ -108,9 +118,25 @@ namespace CarDealership
 
         private void buttonEditDeal_Click(object sender, EventArgs e)
         {
-            var dialog = new DealershipEdit(this.dealershipsView1.CurrentID());
+            var dialog = new Forms.DealershipEdit(this.dealershipsView1.CurrentID());
             var result = dialog.ShowDialog(this);
             if (result == DialogResult.Yes) this.dealershipsView1.View();
+        }
+
+        private void ChPwdButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new CarDealership.Forms.PasswordChange(this.EmployeeID);
+            dialog.ShowDialog(this);
+        }
+
+        private void ModelAddButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.ModelAdd();
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes)
+            {
+                this.modelsView1.View();
+            }
         }
     }
 }

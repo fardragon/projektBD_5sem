@@ -12,12 +12,12 @@ namespace CarDealership
 {
     public partial class ManagerScreen : ScreenForm
     {
-        private int dealershipID;
-        public ManagerScreen(int DealershipID)
+        public ManagerScreen(int DealershipID,int EmployeeID)
         {
             InitializeComponent();
             this.NextScreen = Screens.Exit;
-            dealershipID = DealershipID;
+            this.DefaultDealership = DealershipID;
+            this.EmployeeID = EmployeeID;
             this.employeesManagerView1.SetDealershipID(DealershipID);
         }
 

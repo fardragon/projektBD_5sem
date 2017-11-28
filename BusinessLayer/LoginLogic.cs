@@ -14,7 +14,8 @@ namespace BusinessLayer
         {
             var result = new LoginData
             {
-                Dealership = -1
+                Dealership = -1,
+                ID = -1
             };
 
             if ((password.Length == 0) || (username.Length == 0))
@@ -32,7 +33,7 @@ namespace BusinessLayer
                 {
                     result.Dealership = user.DEALERSHIP_ID.Value;
                 }
-
+                result.ID = user.EMPLOYEE_ID;
                 switch (user.Role.ROLE_NAME.ToString())
                 {
                     case "Administrator":

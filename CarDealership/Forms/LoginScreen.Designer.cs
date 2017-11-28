@@ -1,4 +1,4 @@
-﻿namespace CarDealership
+﻿namespace CarDealership.Forms
 {
     partial class LoginScreen
     {

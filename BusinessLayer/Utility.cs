@@ -22,5 +22,6 @@ namespace BusinessLayer
     {
         public UserTypes Type;
         public int Dealership;
+        public int ID;
     }
 }

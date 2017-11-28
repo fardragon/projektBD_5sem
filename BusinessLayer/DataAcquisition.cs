@@ -238,6 +238,52 @@ namespace BusinessLayer
             }
             return 0;
         }
+        public static bool CheckPassword(int id, string password)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var res = (
+                          from emp in database.Employees
+                          where
+                          emp.EMPLOYEE_ID == id
+                          select emp
+                          ).Single();
+
+                return res.PASSWORD == BusinessLayer.Utility.CalculateMD5Hash(password);
+                
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return false;
+
+        }
+
+        public static IQueryable<Model> GetModels()
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var res = database.Models.AsQueryable();
+                return res;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return Enumerable.Empty<Model>().AsQueryable();
+        }
+
     }
 
 

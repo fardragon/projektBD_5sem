@@ -7,36 +7,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLayer;
 using DataLayer;
+
 
 namespace CarDealership.Controls
 {
-    public partial class DealershipsView : UserControl
+    public partial class ModelsView : UserControl
     {
-        public DealershipsView()
+        public ModelsView()
         {
             InitializeComponent();
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         public void View()
         {
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
             dataGridView.Rows.Clear();
-            var list = BusinessLayer.DataAcquisition.GetDealerships(null);
-            foreach (Dealership deal in list)
+            var models = BusinessLayer.DataAcquisition.GetModels();
+            foreach (Model m in models)
             {
-                // TODO
-                // manager name
-                dataGridView.Rows.Add(deal.DEALERSHIP_ID,deal.STREET_ADDRESS,deal.CITY,deal.ZIPCODE,deal.MANAGER_ID.ToString());
+                dataGridView.Rows.Add(m.MODEL_ID, m.NAME, m.BASE_PRICE);
             }
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
 
-        public int CurrentID()
-        {
-            return (int)dataGridView.CurrentRow.Cells[0].Value;
-        }
     }
-
-
 }

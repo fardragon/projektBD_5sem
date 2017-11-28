@@ -1,4 +1,4 @@
-﻿namespace CarDealership
+﻿namespace CarDealership.Forms
 {
     partial class AdminScreen
     {
@@ -30,6 +30,7 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.HomeTab = new System.Windows.Forms.TabPage();
+            this.ChPwdButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.LogoutButton = new System.Windows.Forms.Button();
             this.EmployeesTab = new System.Windows.Forms.TabPage();
@@ -56,11 +57,15 @@
             this.DGV_Dealership = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DealershipsTab = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.buttonEditDeal = new System.Windows.Forms.Button();
             this.buttonAddDeal = new System.Windows.Forms.Button();
             this.dealershipsView1 = new CarDealership.Controls.DealershipsView();
+            this.ModelsTab = new System.Windows.Forms.TabPage();
+            this.modelsView1 = new CarDealership.Controls.ModelsView();
             this.DebugTab = new System.Windows.Forms.TabPage();
             this.ResetButton = new System.Windows.Forms.Button();
-            this.buttonEditDeal = new System.Windows.Forms.Button();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.ModelAddButton = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.HomeTab.SuspendLayout();
             this.EmployeesTab.SuspendLayout();
@@ -74,7 +79,12 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.ModelsTab.SuspendLayout();
             this.DebugTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -82,6 +92,7 @@
             this.tabControl.Controls.Add(this.HomeTab);
             this.tabControl.Controls.Add(this.EmployeesTab);
             this.tabControl.Controls.Add(this.DealershipsTab);
+            this.tabControl.Controls.Add(this.ModelsTab);
             this.tabControl.Controls.Add(this.DebugTab);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.HotTrack = true;
@@ -95,6 +106,7 @@
             // HomeTab
             // 
             this.HomeTab.BackColor = System.Drawing.Color.DarkGray;
+            this.HomeTab.Controls.Add(this.ChPwdButton);
             this.HomeTab.Controls.Add(this.ExitButton);
             this.HomeTab.Controls.Add(this.LogoutButton);
             this.HomeTab.Location = new System.Drawing.Point(4, 22);
@@ -103,6 +115,16 @@
             this.HomeTab.Size = new System.Drawing.Size(847, 490);
             this.HomeTab.TabIndex = 0;
             this.HomeTab.Text = "Home";
+            // 
+            // ChPwdButton
+            // 
+            this.ChPwdButton.Location = new System.Drawing.Point(46, 334);
+            this.ChPwdButton.Name = "ChPwdButton";
+            this.ChPwdButton.Size = new System.Drawing.Size(126, 23);
+            this.ChPwdButton.TabIndex = 2;
+            this.ChPwdButton.Text = "Change password";
+            this.ChPwdButton.UseVisualStyleBackColor = true;
+            this.ChPwdButton.Click += new System.EventHandler(this.ChPwdButton_Click);
             // 
             // ExitButton
             // 
@@ -234,6 +256,18 @@
             "Administrator",
             "Manager",
             "Mechanic",
+            "Seller",
+            "Administrator",
+            "Manager",
+            "Mechanic",
+            "Seller",
+            "Administrator",
+            "Manager",
+            "Mechanic",
+            "Seller",
+            "Administrator",
+            "Manager",
+            "Mechanic",
             "Seller"});
             this.roleSelector1.Location = new System.Drawing.Point(71, 107);
             this.roleSelector1.Name = "roleSelector1";
@@ -245,6 +279,15 @@
             this.dealershipSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dealershipSelector1.FormattingEnabled = true;
             this.dealershipSelector1.Items.AddRange(new object[] {
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
             "",
             1,
             2,
@@ -385,6 +428,16 @@
             this.splitContainer2.SplitterDistance = 206;
             this.splitContainer2.TabIndex = 0;
             // 
+            // buttonEditDeal
+            // 
+            this.buttonEditDeal.Location = new System.Drawing.Point(58, 139);
+            this.buttonEditDeal.Name = "buttonEditDeal";
+            this.buttonEditDeal.Size = new System.Drawing.Size(75, 23);
+            this.buttonEditDeal.TabIndex = 1;
+            this.buttonEditDeal.Text = "Edit";
+            this.buttonEditDeal.UseVisualStyleBackColor = true;
+            this.buttonEditDeal.Click += new System.EventHandler(this.buttonEditDeal_Click);
+            // 
             // buttonAddDeal
             // 
             this.buttonAddDeal.Location = new System.Drawing.Point(58, 110);
@@ -402,6 +455,24 @@
             this.dealershipsView1.Name = "dealershipsView1";
             this.dealershipsView1.Size = new System.Drawing.Size(637, 490);
             this.dealershipsView1.TabIndex = 0;
+            // 
+            // ModelsTab
+            // 
+            this.ModelsTab.Controls.Add(this.splitContainer3);
+            this.ModelsTab.Location = new System.Drawing.Point(4, 22);
+            this.ModelsTab.Name = "ModelsTab";
+            this.ModelsTab.Size = new System.Drawing.Size(847, 490);
+            this.ModelsTab.TabIndex = 4;
+            this.ModelsTab.Text = "Car Models";
+            this.ModelsTab.UseVisualStyleBackColor = true;
+            // 
+            // modelsView1
+            // 
+            this.modelsView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modelsView1.Location = new System.Drawing.Point(0, 0);
+            this.modelsView1.Name = "modelsView1";
+            this.modelsView1.Size = new System.Drawing.Size(637, 490);
+            this.modelsView1.TabIndex = 0;
             // 
             // DebugTab
             // 
@@ -424,15 +495,33 @@
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
-            // buttonEditDeal
+            // splitContainer3
             // 
-            this.buttonEditDeal.Location = new System.Drawing.Point(58, 139);
-            this.buttonEditDeal.Name = "buttonEditDeal";
-            this.buttonEditDeal.Size = new System.Drawing.Size(75, 23);
-            this.buttonEditDeal.TabIndex = 1;
-            this.buttonEditDeal.Text = "Edit";
-            this.buttonEditDeal.UseVisualStyleBackColor = true;
-            this.buttonEditDeal.Click += new System.EventHandler(this.buttonEditDeal_Click);
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.splitContainer3.Panel1.Controls.Add(this.ModelAddButton);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.modelsView1);
+            this.splitContainer3.Size = new System.Drawing.Size(847, 490);
+            this.splitContainer3.SplitterDistance = 206;
+            this.splitContainer3.TabIndex = 1;
+            // 
+            // ModelAddButton
+            // 
+            this.ModelAddButton.Location = new System.Drawing.Point(54, 194);
+            this.ModelAddButton.Name = "ModelAddButton";
+            this.ModelAddButton.Size = new System.Drawing.Size(75, 23);
+            this.ModelAddButton.TabIndex = 0;
+            this.ModelAddButton.Text = "Add";
+            this.ModelAddButton.UseVisualStyleBackColor = true;
+            this.ModelAddButton.Click += new System.EventHandler(this.ModelAddButton_Click);
             // 
             // AdminScreen
             // 
@@ -456,7 +545,12 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.ModelsTab.ResumeLayout(false);
             this.DebugTab.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -496,5 +590,10 @@
         private Controls.DealershipsView dealershipsView1;
         private System.Windows.Forms.Button buttonAddDeal;
         private System.Windows.Forms.Button buttonEditDeal;
+        private System.Windows.Forms.Button ChPwdButton;
+        private System.Windows.Forms.TabPage ModelsTab;
+        private Controls.ModelsView modelsView1;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.Button ModelAddButton;
     }
 }

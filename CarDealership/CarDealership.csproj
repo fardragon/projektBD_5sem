@@ -82,6 +82,12 @@
     <Compile Include="Controls\EmployeesManagerView.Designer.cs">
       <DependentUpon>EmployeesManagerView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ModelsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ModelsView.Designer.cs">
+      <DependentUpon>ModelsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RoleSelector.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -142,6 +148,24 @@
     <Compile Include="Forms\MechanicScreen.Designer.cs">
       <DependentUpon>MechanicScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ModelAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModelAdd.Designer.cs">
+      <DependentUpon>ModelAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PasswordChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PasswordChange.Designer.cs">
+      <DependentUpon>PasswordChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SellerAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SellerAdd.Designer.cs">
+      <DependentUpon>SellerAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\ScreenForm.cs">
@@ -159,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EmployeesManagerView.resx">
       <DependentUpon>EmployeesManagerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ModelsView.resx">
+      <DependentUpon>ModelsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminScreen.resx">
       <DependentUpon>AdminScreen.cs</DependentUpon>
@@ -183,6 +210,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ManagerScreen.resx">
       <DependentUpon>ManagerScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModelAdd.resx">
+      <DependentUpon>ModelAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PasswordChange.resx">
+      <DependentUpon>PasswordChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SellerAdd.resx">
+      <DependentUpon>SellerAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

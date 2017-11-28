@@ -84,5 +84,30 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public static void ChangePassword(int id, string password)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var emp = (
+                          from res in database.Employees
+                          where
+                          res.EMPLOYEE_ID == id
+                          select res
+                          ).Single();
+                emp.PASSWORD = BusinessLayer.Utility.CalculateMD5Hash(password);              
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
