@@ -30,13 +30,13 @@ namespace CarDealership
                         Screen = new Forms.AdminScreen(Screen.EmployeeID);
                         break;
                     case Screens.SellerScreen:
-                        Screen = new SellerScreen(Screen.DefaultDealership);
+                        Screen = new Forms.SellerScreen(Screen.DefaultDealership,Screen.EmployeeID);
                         break;
                     case Screens.ManagerScreen:
-                        Screen = new ManagerScreen(Screen.DefaultDealership,Screen.EmployeeID);
+                        Screen = new Forms.ManagerScreen(Screen.DefaultDealership,Screen.EmployeeID);
                         break;
                     case Screens.MechanicScreen:
-                        Screen = new MechanicScreen();
+                        Screen = new Forms.MechanicScreen();
                         break;
                 }
                 Application.Run(Screen);

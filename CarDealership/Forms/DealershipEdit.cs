@@ -66,8 +66,7 @@ namespace CarDealership.Forms
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort;
-            this.Close();
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void buttonConfirm_Click(object sender, EventArgs e)
@@ -76,23 +75,32 @@ namespace CarDealership.Forms
             {
                 this.toolTip.Show("Address cannot be empty", this.textBoxAdress);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (this.textBoxCity.Text.Length < 0)
             {
                 this.toolTip.Show("City cannot be empty", this.textBoxCity);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (this.textBoxZipcode.Text.Length < 0)
             {
                 this.toolTip.Show("Zipcode cannot be empty", this.textBoxZipcode);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
-            BusinessLayer.DataUpdate.DealershipUpdate(DealershipID, this.textBoxAdress.Text, this.textBoxCity.Text, this.textBoxZipcode.Text, this.comboBoxManager.SelectedItem.ToString().Substring(0,this.comboBoxManager.SelectedItem.ToString().IndexOf(":")));
+            if (String.IsNullOrEmpty(this.comboBoxManager.SelectedItem.ToString()))
+            {
+                BusinessLayer.DataUpdate.DealershipUpdate(DealershipID, this.textBoxAdress.Text, this.textBoxCity.Text, this.textBoxZipcode.Text, null);
+            }
+            else
+            {
+                BusinessLayer.DataUpdate.DealershipUpdate(DealershipID, this.textBoxAdress.Text, this.textBoxCity.Text, this.textBoxZipcode.Text, this.comboBoxManager.SelectedItem.ToString().Substring(0, this.comboBoxManager.SelectedItem.ToString().IndexOf(":")));
+            }
             this.DialogResult = DialogResult.Yes;
-            this.Close();
         }
 
  

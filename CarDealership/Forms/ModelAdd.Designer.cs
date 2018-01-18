@@ -63,7 +63,7 @@
             // PriceTextbox
             // 
             this.PriceTextbox.Location = new System.Drawing.Point(69, 38);
-            this.PriceTextbox.Mask = "999999999.00";
+            this.PriceTextbox.Mask = "99999999.00";
             this.PriceTextbox.Name = "PriceTextbox";
             this.PriceTextbox.Size = new System.Drawing.Size(159, 20);
             this.PriceTextbox.TabIndex = 2;

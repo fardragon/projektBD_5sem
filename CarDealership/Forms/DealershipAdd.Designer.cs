@@ -80,6 +80,7 @@
             // 
             // buttonExit
             // 
+            this.buttonExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonExit.Location = new System.Drawing.Point(61, 179);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(75, 23);
@@ -122,6 +123,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonExit;
             this.ClientSize = new System.Drawing.Size(284, 216);
+            this.ControlBox = false;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -130,8 +132,9 @@
             this.Controls.Add(this.textBoxZipcode);
             this.Controls.Add(this.textBoxCity);
             this.Controls.Add(this.textBoxAdress);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "DealershipAdd";
-            this.Text = "DealershipAdd";
+            this.Text = "Add new dealership";
             this.ResumeLayout(false);
             this.PerformLayout();
 

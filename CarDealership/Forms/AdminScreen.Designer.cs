@@ -48,7 +48,7 @@
             this.buttonAddEmp = new System.Windows.Forms.Button();
             this.buttonDelEmp = new System.Windows.Forms.Button();
             this.buttonEditEmp = new System.Windows.Forms.Button();
-            this.employeesView1 = new CarDealership.EmployeesView();
+            this.employeesView1 = new CarDealership.Controls.EmployeesView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.DGV_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGV_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,11 +61,21 @@
             this.buttonAddDeal = new System.Windows.Forms.Button();
             this.dealershipsView1 = new CarDealership.Controls.DealershipsView();
             this.ModelsTab = new System.Windows.Forms.TabPage();
-            this.modelsView1 = new CarDealership.Controls.ModelsView();
-            this.DebugTab = new System.Windows.Forms.TabPage();
-            this.ResetButton = new System.Windows.Forms.Button();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.ModelAddButton = new System.Windows.Forms.Button();
+            this.modelsView1 = new CarDealership.Controls.ModelsView();
+            this._ColorsTab = new System.Windows.Forms.TabPage();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.AddClrButton = new System.Windows.Forms.Button();
+            this.colorsView = new CarDealership.Controls.ColorsView();
+            this.CarsTab = new System.Windows.Forms.TabPage();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.carsView1 = new CarDealership.Controls.CarsView();
+            this.CustomersTab = new System.Windows.Forms.TabPage();
+            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.customersView = new CarDealership.Controls.CustomersView();
+            this.DebugTab = new System.Windows.Forms.TabPage();
+            this.ResetButton = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.HomeTab.SuspendLayout();
             this.EmployeesTab.SuspendLayout();
@@ -80,11 +90,24 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.ModelsTab.SuspendLayout();
-            this.DebugTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this._ColorsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
+            this.splitContainer5.Panel1.SuspendLayout();
+            this.splitContainer5.Panel2.SuspendLayout();
+            this.splitContainer5.SuspendLayout();
+            this.CarsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            this.CustomersTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
+            this.splitContainer6.Panel2.SuspendLayout();
+            this.splitContainer6.SuspendLayout();
+            this.DebugTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -93,6 +116,9 @@
             this.tabControl.Controls.Add(this.EmployeesTab);
             this.tabControl.Controls.Add(this.DealershipsTab);
             this.tabControl.Controls.Add(this.ModelsTab);
+            this.tabControl.Controls.Add(this._ColorsTab);
+            this.tabControl.Controls.Add(this.CarsTab);
+            this.tabControl.Controls.Add(this.CustomersTab);
             this.tabControl.Controls.Add(this.DebugTab);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.HotTrack = true;
@@ -256,18 +282,6 @@
             "Administrator",
             "Manager",
             "Mechanic",
-            "Seller",
-            "Administrator",
-            "Manager",
-            "Mechanic",
-            "Seller",
-            "Administrator",
-            "Manager",
-            "Mechanic",
-            "Seller",
-            "Administrator",
-            "Manager",
-            "Mechanic",
             "Seller"});
             this.roleSelector1.Location = new System.Drawing.Point(71, 107);
             this.roleSelector1.Name = "roleSelector1";
@@ -279,6 +293,39 @@
             this.dealershipSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dealershipSelector1.FormattingEnabled = true;
             this.dealershipSelector1.Items.AddRange(new object[] {
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
             "",
             1,
             2,
@@ -466,35 +513,6 @@
             this.ModelsTab.Text = "Car Models";
             this.ModelsTab.UseVisualStyleBackColor = true;
             // 
-            // modelsView1
-            // 
-            this.modelsView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modelsView1.Location = new System.Drawing.Point(0, 0);
-            this.modelsView1.Name = "modelsView1";
-            this.modelsView1.Size = new System.Drawing.Size(637, 490);
-            this.modelsView1.TabIndex = 0;
-            // 
-            // DebugTab
-            // 
-            this.DebugTab.BackColor = System.Drawing.Color.DarkGray;
-            this.DebugTab.Controls.Add(this.ResetButton);
-            this.DebugTab.Location = new System.Drawing.Point(4, 22);
-            this.DebugTab.Name = "DebugTab";
-            this.DebugTab.Padding = new System.Windows.Forms.Padding(3);
-            this.DebugTab.Size = new System.Drawing.Size(847, 490);
-            this.DebugTab.TabIndex = 1;
-            this.DebugTab.Text = "Debug";
-            // 
-            // ResetButton
-            // 
-            this.ResetButton.Location = new System.Drawing.Point(8, 6);
-            this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(75, 23);
-            this.ResetButton.TabIndex = 0;
-            this.ResetButton.Text = "Reset DB";
-            this.ResetButton.UseVisualStyleBackColor = true;
-            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
-            // 
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -523,6 +541,147 @@
             this.ModelAddButton.UseVisualStyleBackColor = true;
             this.ModelAddButton.Click += new System.EventHandler(this.ModelAddButton_Click);
             // 
+            // modelsView1
+            // 
+            this.modelsView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modelsView1.Location = new System.Drawing.Point(0, 0);
+            this.modelsView1.Name = "modelsView1";
+            this.modelsView1.Size = new System.Drawing.Size(637, 490);
+            this.modelsView1.TabIndex = 0;
+            // 
+            // _ColorsTab
+            // 
+            this._ColorsTab.Controls.Add(this.splitContainer5);
+            this._ColorsTab.Location = new System.Drawing.Point(4, 22);
+            this._ColorsTab.Name = "_ColorsTab";
+            this._ColorsTab.Size = new System.Drawing.Size(847, 490);
+            this._ColorsTab.TabIndex = 6;
+            this._ColorsTab.Text = "Colors";
+            this._ColorsTab.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer5
+            // 
+            this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer5.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer5.Name = "splitContainer5";
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.splitContainer5.Panel1.Controls.Add(this.AddClrButton);
+            // 
+            // splitContainer5.Panel2
+            // 
+            this.splitContainer5.Panel2.Controls.Add(this.colorsView);
+            this.splitContainer5.Size = new System.Drawing.Size(847, 490);
+            this.splitContainer5.SplitterDistance = 282;
+            this.splitContainer5.TabIndex = 0;
+            // 
+            // AddClrButton
+            // 
+            this.AddClrButton.Location = new System.Drawing.Point(98, 75);
+            this.AddClrButton.Name = "AddClrButton";
+            this.AddClrButton.Size = new System.Drawing.Size(75, 23);
+            this.AddClrButton.TabIndex = 0;
+            this.AddClrButton.Text = "Add";
+            this.AddClrButton.UseVisualStyleBackColor = true;
+            this.AddClrButton.Click += new System.EventHandler(this.AddClrButton_Click);
+            // 
+            // colorsView
+            // 
+            this.colorsView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.colorsView.Location = new System.Drawing.Point(0, 0);
+            this.colorsView.Name = "colorsView";
+            this.colorsView.Size = new System.Drawing.Size(561, 490);
+            this.colorsView.TabIndex = 0;
+            // 
+            // CarsTab
+            // 
+            this.CarsTab.Controls.Add(this.splitContainer4);
+            this.CarsTab.Location = new System.Drawing.Point(4, 22);
+            this.CarsTab.Name = "CarsTab";
+            this.CarsTab.Size = new System.Drawing.Size(847, 490);
+            this.CarsTab.TabIndex = 5;
+            this.CarsTab.Text = "Cars";
+            this.CarsTab.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.BackColor = System.Drawing.Color.DarkGray;
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.carsView1);
+            this.splitContainer4.Size = new System.Drawing.Size(847, 490);
+            this.splitContainer4.SplitterDistance = 175;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // carsView1
+            // 
+            this.carsView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.carsView1.Location = new System.Drawing.Point(0, 0);
+            this.carsView1.Name = "carsView1";
+            this.carsView1.Size = new System.Drawing.Size(668, 490);
+            this.carsView1.TabIndex = 0;
+            // 
+            // CustomersTab
+            // 
+            this.CustomersTab.Controls.Add(this.splitContainer6);
+            this.CustomersTab.Location = new System.Drawing.Point(4, 22);
+            this.CustomersTab.Name = "CustomersTab";
+            this.CustomersTab.Size = new System.Drawing.Size(847, 490);
+            this.CustomersTab.TabIndex = 7;
+            this.CustomersTab.Text = "Customers";
+            this.CustomersTab.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer6
+            // 
+            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer6.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer6.Name = "splitContainer6";
+            // 
+            // splitContainer6.Panel2
+            // 
+            this.splitContainer6.Panel2.Controls.Add(this.customersView);
+            this.splitContainer6.Size = new System.Drawing.Size(847, 490);
+            this.splitContainer6.SplitterDistance = 181;
+            this.splitContainer6.TabIndex = 0;
+            // 
+            // customersView
+            // 
+            this.customersView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customersView.Location = new System.Drawing.Point(0, 0);
+            this.customersView.Name = "customersView";
+            this.customersView.Size = new System.Drawing.Size(662, 490);
+            this.customersView.TabIndex = 0;
+            // 
+            // DebugTab
+            // 
+            this.DebugTab.BackColor = System.Drawing.Color.DarkGray;
+            this.DebugTab.Controls.Add(this.ResetButton);
+            this.DebugTab.Location = new System.Drawing.Point(4, 22);
+            this.DebugTab.Name = "DebugTab";
+            this.DebugTab.Padding = new System.Windows.Forms.Padding(3);
+            this.DebugTab.Size = new System.Drawing.Size(847, 490);
+            this.DebugTab.TabIndex = 1;
+            this.DebugTab.Text = "Debug";
+            // 
+            // ResetButton
+            // 
+            this.ResetButton.Location = new System.Drawing.Point(8, 6);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(75, 23);
+            this.ResetButton.TabIndex = 0;
+            this.ResetButton.Text = "Reset DB";
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
             // AdminScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -546,11 +705,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ModelsTab.ResumeLayout(false);
-            this.DebugTab.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this._ColorsTab.ResumeLayout(false);
+            this.splitContainer5.Panel1.ResumeLayout(false);
+            this.splitContainer5.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
+            this.splitContainer5.ResumeLayout(false);
+            this.CarsTab.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            this.CustomersTab.ResumeLayout(false);
+            this.splitContainer6.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
+            this.splitContainer6.ResumeLayout(false);
+            this.DebugTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -571,7 +743,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DGV_Role;
         private System.Windows.Forms.DataGridViewTextBoxColumn DGV_Dealership;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private EmployeesView employeesView1;
+        private Controls.EmployeesView employeesView1;
         private System.Windows.Forms.Button buttonEditEmp;
         private System.Windows.Forms.Button buttonDelEmp;
         private System.Windows.Forms.Button buttonAddEmp;
@@ -595,5 +767,15 @@
         private Controls.ModelsView modelsView1;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button ModelAddButton;
+        private System.Windows.Forms.TabPage CarsTab;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.TabPage _ColorsTab;
+        private System.Windows.Forms.SplitContainer splitContainer5;
+        private Controls.ColorsView colorsView;
+        private System.Windows.Forms.Button AddClrButton;
+        private Controls.CarsView carsView1;
+        private System.Windows.Forms.TabPage CustomersTab;
+        private System.Windows.Forms.SplitContainer splitContainer6;
+        private Controls.CustomersView customersView;
     }
 }

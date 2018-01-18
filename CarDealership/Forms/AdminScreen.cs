@@ -19,13 +19,12 @@ namespace CarDealership.Forms
             this.EmployeeID = employeeID;
             this.NextScreen = Screens.Exit;
             this.roleSelector1.AllowNull();
+            this.carsView1.SetShowOrderedCars(true);
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
-            BusinessLayer.DataAcquisition.DEBUG_RESET();
-            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
+            BusinessLayer.DataAcquisition.DEBUG_RESET();       
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -60,6 +59,15 @@ namespace CarDealership.Forms
                     break;
                 case 3:
                     this.modelsView1.View();
+                    break;
+                case 4:
+                    this.colorsView.View();
+                    break;
+                case 5:
+                    this.carsView1.View();
+                    break;
+                case 6:
+                    this.customersView.View(null,null);
                     break;
                 default:
                     break;
@@ -137,6 +145,13 @@ namespace CarDealership.Forms
             {
                 this.modelsView1.View();
             }
+        }
+
+        private void AddClrButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new CarDealership.Forms.ColorAdd();
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes) this.colorsView.View();
         }
     }
 }

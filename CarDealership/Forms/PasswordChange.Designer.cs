@@ -125,6 +125,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(298, 155);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonConfirm);
             this.Controls.Add(this.label3);
@@ -133,6 +134,7 @@
             this.Controls.Add(this.textBoxRepeatPWD);
             this.Controls.Add(this.textBoxNewPWD);
             this.Controls.Add(this.textBoxOldPWD);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "PasswordChange";
             this.Text = "PasswordChange";
             this.ResumeLayout(false);

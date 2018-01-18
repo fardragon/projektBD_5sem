@@ -109,5 +109,70 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public static void UpdateOrderNotes(int orderID, String Notes)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var ord = (
+                          from res in database.Active_Orders
+                          where
+                          res.ORDER_ID == orderID
+                          select res
+                          ).Single();
+                ord.NOTES = Notes;
+                ord.LAST_UPDATE = DateTime.Now;
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void ChangeOrderStauts(int orderID, String newStatus)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var ord = (
+                          from res in database.Active_Orders
+                          where
+                          res.ORDER_ID == orderID
+                          select res
+                          ).Single();
+                
+                switch (newStatus)
+                {
+                    case "Open":
+                        ord.ORDER_STATUS_ID = 1;
+                        break;
+                    case "Waiting":
+                        ord.ORDER_STATUS_ID = 2;
+                        break;
+                    case "Complete":
+                        ord.ORDER_STATUS_ID = 3;
+                        break;
+                }
+                ord.LAST_UPDATE = DateTime.Now;
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

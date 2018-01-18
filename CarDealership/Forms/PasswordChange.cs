@@ -67,30 +67,30 @@ namespace CarDealership.Forms
             {
                 this.toolTip.Show("Enter new password", textBoxNewPWD);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (textBoxNewPWD.Text != textBoxRepeatPWD.Text)
             {
                 this.toolTip.Show("Passwords don't match", textBoxRepeatPWD);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (!BusinessLayer.DataAcquisition.CheckPassword(this.employeeID, textBoxOldPWD.Text))
             {
                 this.toolTip.Show("Old password does not match", textBoxOldPWD);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
             BusinessLayer.DataUpdate.ChangePassword(employeeID, textBoxNewPWD.Text);
             this.DialogResult = DialogResult.Yes;
-            this.Close();
-
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort;
-            this.Close();
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }

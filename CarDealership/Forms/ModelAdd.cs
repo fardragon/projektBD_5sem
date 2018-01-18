@@ -19,8 +19,7 @@ namespace CarDealership.Forms
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort;
-            this.Close();
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
@@ -39,8 +38,9 @@ namespace CarDealership.Forms
                 this.DialogResult = DialogResult.None;
                 return;
             }
-            var dupa = this.PriceTextbox.Text.Trim();
-            dupa.Replace(' ', '0');
+            var price = this.PriceTextbox.Text.Trim();
+            price = price.Replace(' ', '0');
+            BusinessLayer.DataAddition.AddModel(this.NameTextbox.Text.Trim(), price);
             this.DialogResult = DialogResult.Yes;
         }
 
