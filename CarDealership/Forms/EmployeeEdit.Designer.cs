@@ -181,6 +181,11 @@
             // roleSelector1
             // 
             this.roleSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.roleSelector1.Items.AddRange(new object[] {
+            "Administrator",
+            "Manager",
+            "Mechanic",
+            "Seller"});
             this.roleSelector1.Location = new System.Drawing.Point(102, 125);
             this.roleSelector1.Name = "roleSelector1";
             this.roleSelector1.Size = new System.Drawing.Size(145, 21);
@@ -190,6 +195,10 @@
             // 
             this.dealershipSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dealershipSelector1.FormattingEnabled = true;
+            this.dealershipSelector1.Items.AddRange(new object[] {
+            "",
+            1,
+            2});
             this.dealershipSelector1.Location = new System.Drawing.Point(102, 99);
             this.dealershipSelector1.Name = "dealershipSelector1";
             this.dealershipSelector1.Size = new System.Drawing.Size(145, 21);
@@ -202,6 +211,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonEXIT;
             this.ClientSize = new System.Drawing.Size(310, 239);
+            this.ControlBox = false;
             this.Controls.Add(this.dealershipSelector1);
             this.Controls.Add(this.roleSelector1);
             this.Controls.Add(this.label7);
@@ -218,6 +228,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonEXIT);
             this.Controls.Add(this.buttonCONFIRM);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "EmployeeEdit";
             this.Text = "EmployeeEdit";
             this.ResumeLayout(false);

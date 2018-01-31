@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using BusinessLayer;
 
 
-namespace CarDealership
+namespace CarDealership.Forms
 {
     public partial class LoginScreen : ScreenForm
     {
@@ -61,6 +61,7 @@ namespace CarDealership
             if (loggedIn)
             {
                 this.DefaultDealership = user.Dealership;
+                this.EmployeeID = user.ID;
                 this.Close();
             }
         }

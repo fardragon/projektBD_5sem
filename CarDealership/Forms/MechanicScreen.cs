@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CarDealership
+namespace CarDealership.Forms
 {
     public partial class MechanicScreen : ScreenForm
     {

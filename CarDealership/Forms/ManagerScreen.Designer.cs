@@ -1,4 +1,4 @@
-﻿namespace CarDealership
+﻿namespace CarDealership.Forms
 {
     partial class ManagerScreen
     {
@@ -30,20 +30,30 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.HomeTab = new System.Windows.Forms.TabPage();
-            this.EmployeesView = new System.Windows.Forms.TabPage();
+            this.EmployeesTab = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.employeesManagerView1 = new CarDealership.Controls.EmployeesManagerView();
+            this.CarsTab = new System.Windows.Forms.TabPage();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.carsView1 = new CarDealership.Controls.CarsView();
+            this.CarDetailsButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
-            this.EmployeesView.SuspendLayout();
+            this.EmployeesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.CarsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.HomeTab);
-            this.tabControl1.Controls.Add(this.EmployeesView);
+            this.tabControl1.Controls.Add(this.EmployeesTab);
+            this.tabControl1.Controls.Add(this.CarsTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -62,16 +72,16 @@
             this.HomeTab.Text = "Home";
             this.HomeTab.UseVisualStyleBackColor = true;
             // 
-            // EmployeesView
+            // EmployeesTab
             // 
-            this.EmployeesView.Controls.Add(this.splitContainer1);
-            this.EmployeesView.Location = new System.Drawing.Point(4, 22);
-            this.EmployeesView.Name = "EmployeesView";
-            this.EmployeesView.Padding = new System.Windows.Forms.Padding(3);
-            this.EmployeesView.Size = new System.Drawing.Size(823, 425);
-            this.EmployeesView.TabIndex = 1;
-            this.EmployeesView.Text = "Employees";
-            this.EmployeesView.UseVisualStyleBackColor = true;
+            this.EmployeesTab.Controls.Add(this.splitContainer1);
+            this.EmployeesTab.Location = new System.Drawing.Point(4, 22);
+            this.EmployeesTab.Name = "EmployeesTab";
+            this.EmployeesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.EmployeesTab.Size = new System.Drawing.Size(823, 425);
+            this.EmployeesTab.TabIndex = 1;
+            this.EmployeesTab.Text = "Employees";
+            this.EmployeesTab.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
@@ -99,6 +109,52 @@
             this.employeesManagerView1.Size = new System.Drawing.Size(643, 419);
             this.employeesManagerView1.TabIndex = 0;
             // 
+            // CarsTab
+            // 
+            this.CarsTab.Controls.Add(this.splitContainer2);
+            this.CarsTab.Location = new System.Drawing.Point(4, 22);
+            this.CarsTab.Name = "CarsTab";
+            this.CarsTab.Size = new System.Drawing.Size(823, 425);
+            this.CarsTab.TabIndex = 2;
+            this.CarsTab.Text = "Cars";
+            this.CarsTab.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.Color.DarkGray;
+            this.splitContainer2.Panel1.Controls.Add(this.CarDetailsButton);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.carsView1);
+            this.splitContainer2.Size = new System.Drawing.Size(823, 425);
+            this.splitContainer2.SplitterDistance = 207;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // carsView1
+            // 
+            this.carsView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.carsView1.Location = new System.Drawing.Point(0, 0);
+            this.carsView1.Name = "carsView1";
+            this.carsView1.Size = new System.Drawing.Size(612, 425);
+            this.carsView1.TabIndex = 0;
+            // 
+            // CarDetailsButton
+            // 
+            this.CarDetailsButton.Location = new System.Drawing.Point(52, 156);
+            this.CarDetailsButton.Name = "CarDetailsButton";
+            this.CarDetailsButton.Size = new System.Drawing.Size(75, 23);
+            this.CarDetailsButton.TabIndex = 0;
+            this.CarDetailsButton.Text = "Details...";
+            this.CarDetailsButton.UseVisualStyleBackColor = true;
+            this.CarDetailsButton.Click += new System.EventHandler(this.CarDetailsButton_Click);
+            // 
             // ManagerScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -108,10 +164,15 @@
             this.Name = "ManagerScreen";
             this.Text = "ManagerScreencs";
             this.tabControl1.ResumeLayout(false);
-            this.EmployeesView.ResumeLayout(false);
+            this.EmployeesTab.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.CarsTab.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -120,8 +181,12 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage HomeTab;
-        private System.Windows.Forms.TabPage EmployeesView;
+        private System.Windows.Forms.TabPage EmployeesTab;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private Controls.EmployeesManagerView employeesManagerView1;
+        private System.Windows.Forms.TabPage CarsTab;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private Controls.CarsView carsView1;
+        private System.Windows.Forms.Button CarDetailsButton;
     }
 }

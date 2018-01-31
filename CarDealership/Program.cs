@@ -16,7 +16,7 @@ namespace CarDealership
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            CarDealership.ScreenForm Screen = new LoginScreen();
+            CarDealership.ScreenForm Screen = new Forms.LoginScreen();
             Application.Run(Screen);
 
             while (Screen.NextScreen != Screens.Exit)
@@ -24,19 +24,19 @@ namespace CarDealership
                 switch (Screen.NextScreen)
                 {
                     case Screens.LoginScreen:
-                        Screen = new LoginScreen();
+                        Screen = new Forms.LoginScreen();
                         break;
                     case Screens.AdminScreen:
-                        Screen = new AdminScreen();
+                        Screen = new Forms.AdminScreen(Screen.EmployeeID);
                         break;
                     case Screens.SellerScreen:
-                        Screen = new SellerScreen(Screen.DefaultDealership);
+                        Screen = new Forms.SellerScreen(Screen.DefaultDealership,Screen.EmployeeID);
                         break;
                     case Screens.ManagerScreen:
-                        Screen = new ManagerScreen(Screen.DefaultDealership);
+                        Screen = new Forms.ManagerScreen(Screen.DefaultDealership,Screen.EmployeeID);
                         break;
                     case Screens.MechanicScreen:
-                        Screen = new MechanicScreen();
+                        Screen = new Forms.MechanicScreen();
                         break;
                 }
                 Application.Run(Screen);

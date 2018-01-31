@@ -47,32 +47,33 @@ namespace CarDealership
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            this.Close();
         }
 
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
-            if (this.textBoxAdress.Text.Length < 0)
+            if (this.textBoxAdress.Text.Length == 0)
             {
                 this.toolTip.Show("Address cannot be empty", this.textBoxAdress);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
-            if (this.textBoxCity.Text.Length < 0)
+            if (this.textBoxCity.Text.Length == 0)
             {
                 this.toolTip.Show("City cannot be empty", this.textBoxCity);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
-            if (this.textBoxZipcode.Text.Length < 0)
+            if (this.textBoxZipcode.Text.Length == 0)
             {
                 this.toolTip.Show("Zipcode cannot be empty", this.textBoxZipcode);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
             BusinessLayer.DataAddition.AddDealership(this.textBoxAdress.Text, this.textBoxCity.Text, this.textBoxZipcode.Text);
             this.DialogResult = DialogResult.Yes;
-            this.Close();
         }
     }
 }

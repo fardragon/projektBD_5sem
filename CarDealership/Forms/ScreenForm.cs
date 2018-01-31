@@ -10,8 +10,9 @@ namespace CarDealership
 {
     public class ScreenForm : Form
     {
-        protected CarDealership.Screens nextScreen;
-        protected int defaultDealership;
+        private CarDealership.Screens nextScreen;
+        private int defaultDealership;
+        private int employeeID;
         public CarDealership.Screens NextScreen
         {
             get { return nextScreen; }
@@ -21,6 +22,11 @@ namespace CarDealership
         {
             get { return defaultDealership; }
             set { defaultDealership = value; }
+        }
+        public int EmployeeID
+        {
+            get { return employeeID; }
+            set { employeeID = value; }
         }
     }
 }

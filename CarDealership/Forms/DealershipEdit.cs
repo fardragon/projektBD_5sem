@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using DataLayer;
 using BusinessLayer;
 
-namespace CarDealership
+namespace CarDealership.Forms
 {
     public partial class DealershipEdit : Form
     {
@@ -24,18 +24,17 @@ namespace CarDealership
             var managers = BusinessLayer.DataAcquisition.GetManagers(DealershipID);
             foreach (Employee man in managers)
             {
-                this.comboBoxManager.Items.Add(man.EMPLOYEE_ID);
+                this.comboBoxManager.Items.Add(man.EMPLOYEE_ID.ToString() +": " + man.NAME.ToString() + " " + man.SURNAME.ToString());
             }
             this.comboBoxManager.SelectedIndex = 0;
             //
-            this.labelID.Text = DealershipID.ToString();
             //
             var deal = BusinessLayer.DataAcquisition.GetDealership(DealershipID);
             this.textBoxAdress.Text = deal.STREET_ADDRESS;
             this.textBoxCity.Text = deal.CITY;
             this.textBoxZipcode.Text = deal.ZIPCODE;
-            if (deal.MANAGER_ID.HasValue) this.comboBoxManager.SelectedIndex = this.comboBoxManager.FindStringExact(deal.MANAGER_ID.ToString());
-
+            if (deal.MANAGER_ID.HasValue) this.comboBoxManager.SelectedIndex = this.comboBoxManager.FindString(deal.MANAGER_ID.ToString() + ": ");
+            this.Text = "Editing dealership with id: " + DealershipID.ToString();
         }
 
         private void textBoxAdress_Enter(object sender, EventArgs e)
@@ -67,8 +66,7 @@ namespace CarDealership
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Abort;
-            this.Close();
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void buttonConfirm_Click(object sender, EventArgs e)
@@ -77,23 +75,34 @@ namespace CarDealership
             {
                 this.toolTip.Show("Address cannot be empty", this.textBoxAdress);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (this.textBoxCity.Text.Length < 0)
             {
                 this.toolTip.Show("City cannot be empty", this.textBoxCity);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (this.textBoxZipcode.Text.Length < 0)
             {
                 this.toolTip.Show("Zipcode cannot be empty", this.textBoxZipcode);
                 System.Media.SystemSounds.Asterisk.Play();
+                this.DialogResult = DialogResult.None;
                 return;
             }
-            BusinessLayer.DataUpdate.DealershipUpdate(DealershipID, this.textBoxAdress.Text, this.textBoxCity.Text, this.textBoxZipcode.Text, this.comboBoxManager.SelectedItem.ToString());
+            if (String.IsNullOrEmpty(this.comboBoxManager.SelectedItem.ToString()))
+            {
+                BusinessLayer.DataUpdate.DealershipUpdate(DealershipID, this.textBoxAdress.Text, this.textBoxCity.Text, this.textBoxZipcode.Text, null);
+            }
+            else
+            {
+                BusinessLayer.DataUpdate.DealershipUpdate(DealershipID, this.textBoxAdress.Text, this.textBoxCity.Text, this.textBoxZipcode.Text, this.comboBoxManager.SelectedItem.ToString().Substring(0, this.comboBoxManager.SelectedItem.ToString().IndexOf(":")));
+            }
             this.DialogResult = DialogResult.Yes;
-            this.Close();
         }
+
+ 
     }
 }

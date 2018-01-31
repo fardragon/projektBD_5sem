@@ -16,6 +16,7 @@ namespace CarDealership.Controls
         public DealershipsView()
         {
             InitializeComponent();
+            this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         public void View()
@@ -25,7 +26,9 @@ namespace CarDealership.Controls
             var list = BusinessLayer.DataAcquisition.GetDealerships(null);
             foreach (Dealership deal in list)
             {
-                dataGridView.Rows.Add(deal.DEALERSHIP_ID,deal.STREET_ADDRESS,deal.CITY,deal.ZIPCODE,deal.MANAGER_ID);
+                // TODO
+                // manager name
+                dataGridView.Rows.Add(deal.DEALERSHIP_ID,deal.STREET_ADDRESS,deal.CITY,deal.ZIPCODE,deal.MANAGER_ID.ToString());
             }
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }

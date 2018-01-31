@@ -75,5 +75,105 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public static void AddModel(string name, string price)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                price.Replace('.', ',');
+                var model = new Model()
+                {
+                    NAME = name,
+                    BASE_PRICE = Decimal.Parse(price)
+                };
+
+                database.Models.InsertOnSubmit(model);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void AddColor(String name)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var color = new DataLayer.Color()
+                {
+                    NAME = name
+                };
+
+                database.Colors.InsertOnSubmit(color);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void OpenOrder(String CarVIN, int CustomerID, int SellerID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var Order = new DataLayer.Active_Order
+                {
+                    CAR_VIN = CarVIN,
+                    CUSTOMER_ID = CustomerID,
+                    EMPLOYEE_ID = SellerID,
+                    OPENED_DATE = DateTime.Now.Date,
+                    LAST_UPDATE = DateTime.Now,
+                    ORDER_STATUS_ID = 1
+                };
+                database.Active_Orders.InsertOnSubmit(Order);
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void AccessoryInstall(int orderID, int accID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var install = new DataLayer.Accessories_Install_Order
+                {
+                    ORDER_ID = orderID,
+                    ACCESSORY_ID = accID
+                };
+                database.Accessories_Install_Orders.InsertOnSubmit(install);
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

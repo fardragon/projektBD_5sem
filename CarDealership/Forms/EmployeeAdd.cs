@@ -23,7 +23,6 @@ namespace CarDealership
         private void buttonEXIT_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            this.Close();
         }
 
         private void textBoxUSERNAME_KeyPress(object sender, KeyPressEventArgs e)
@@ -49,24 +48,28 @@ namespace CarDealership
             {
                 System.Media.SystemSounds.Asterisk.Play();
                 this.toolTipEdit.Show("Name cannot be empty", this.textBoxNAME);
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (this.textBoxSURNAME.Text.Length == 0)
             {
                 System.Media.SystemSounds.Asterisk.Play();
                 this.toolTipEdit.Show("Surname cannot be empty", this.textBoxSURNAME);
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (this.textBoxUSERNAME.Text.Length == 0)
             {
                 System.Media.SystemSounds.Asterisk.Play();
                 this.toolTipEdit.Show("Login cannot be empty", this.textBoxUSERNAME);
+                this.DialogResult = DialogResult.None;
                 return;
             }
             if (this.textBoxPASSWORD.Text.Length == 0)
             {
                 System.Media.SystemSounds.Asterisk.Play();
                 this.toolTipEdit.Show("Password cannot be empty", this.textBoxPASSWORD);
+                this.DialogResult = DialogResult.None;
                 return;
             }
             string name = this.textBoxNAME.Text;
@@ -77,7 +80,6 @@ namespace CarDealership
             string dealership = this.dealershipSelector1.SelectedItem.ToString();
             BusinessLayer.DataAddition.AddEmployee(name, surname, role, dealership, login, password);
             this.DialogResult = DialogResult.Yes;
-            this.Close();
         }
 
         private void textBoxPASSWORD_Enter(object sender, EventArgs e)

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using BusinessLayer;
 using DataLayer;
 
-namespace CarDealership
+namespace CarDealership.Controls
 {
 
     public partial class EmployeesView : UserControl

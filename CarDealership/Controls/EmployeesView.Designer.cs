@@ -1,4 +1,4 @@
-﻿namespace CarDealership
+﻿namespace CarDealership.Controls
 {
     partial class EmployeesView
     {
