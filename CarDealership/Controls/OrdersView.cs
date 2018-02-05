@@ -32,6 +32,7 @@ namespace CarDealership.Controls
         public void SetEmployeeID(int? EmployeeID)
         {
             m_EmployeeID = EmployeeID;
+            dataGridView1.Columns[4].Visible = false;
         }
 
         public void View()
@@ -41,7 +42,8 @@ namespace CarDealership.Controls
             var orders = BusinessLayer.DataAcquisition.GetOrders(m_DealershipID, m_EmployeeID, m_OrderStatusID);
             foreach (var ord in orders)
             {
-                this.dataGridView1.Rows.Add(ord.ORDER_ID, ord.CAR_VIN, ord.Customer.NAME, "cena", ord.EMPLOYEE_ID, ord.Order_Statuse.STATUS, ord.Accessories_Install_Orders.Count, ord.OPENED_DATE, ord.LAST_UPDATE);
+                var price = BusinessLayer.DataAcquisition.CalculatePrice(ord.ORDER_ID);
+                this.dataGridView1.Rows.Add(ord.ORDER_ID, ord.CAR_VIN, ord.Customer.NAME, price, ord.EMPLOYEE_ID, ord.Order_Statuse.STATUS, ord.Accessories_Install_Orders.Count, ord.OPENED_DATE, ord.LAST_UPDATE);
             }
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
@@ -62,6 +64,18 @@ namespace CarDealership.Controls
         {
             if (this.dataGridView1.SelectedRows.Count == 0) return String.Empty;
             return this.dataGridView1.CurrentRow.Cells[5].Value.ToString();
+        }
+
+        public void SelectOrdeByVIN(String VIN)
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if(row.Cells[1].Value.ToString() == VIN)
+                {
+                    row.Selected = true;
+                    return;
+                }
+            }
         }
 
     }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.CarsTab = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.CarDetailsButton = new System.Windows.Forms.Button();
@@ -49,6 +50,7 @@
             this.LogoutButton = new System.Windows.Forms.Button();
             this.CustomersTab = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.NewCustomerButton = new System.Windows.Forms.Button();
             this.AddCustomerToOrderButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,6 +61,8 @@
             this.customersView1 = new CarDealership.Controls.CustomersView();
             this.OrdersTab = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.DiscountsButton = new System.Windows.Forms.Button();
+            this.orderNotesButton = new System.Windows.Forms.Button();
             this.OrderCancelButton = new System.Windows.Forms.Button();
             this.OrderCompleteButton = new System.Windows.Forms.Button();
             this.OrderInstallButton = new System.Windows.Forms.Button();
@@ -73,7 +77,7 @@
             this.CustomerTextBox = new System.Windows.Forms.TextBox();
             this.CustomerSelectButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.orderNotesButton = new System.Windows.Forms.Button();
+            this.NewOrderToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CarsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -320,6 +324,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.NewCustomerButton);
             this.splitContainer2.Panel1.Controls.Add(this.AddCustomerToOrderButton);
             this.splitContainer2.Panel1.Controls.Add(this.label3);
             this.splitContainer2.Panel1.Controls.Add(this.label2);
@@ -335,13 +340,23 @@
             this.splitContainer2.SplitterDistance = 187;
             this.splitContainer2.TabIndex = 0;
             // 
+            // NewCustomerButton
+            // 
+            this.NewCustomerButton.Location = new System.Drawing.Point(16, 132);
+            this.NewCustomerButton.Name = "NewCustomerButton";
+            this.NewCustomerButton.Size = new System.Drawing.Size(151, 23);
+            this.NewCustomerButton.TabIndex = 7;
+            this.NewCustomerButton.Text = "New Customer";
+            this.NewCustomerButton.UseVisualStyleBackColor = true;
+            this.NewCustomerButton.Click += new System.EventHandler(this.NewCustomerButton_Click);
+            // 
             // AddCustomerToOrderButton
             // 
             this.AddCustomerToOrderButton.Location = new System.Drawing.Point(16, 103);
             this.AddCustomerToOrderButton.Name = "AddCustomerToOrderButton";
             this.AddCustomerToOrderButton.Size = new System.Drawing.Size(151, 23);
             this.AddCustomerToOrderButton.TabIndex = 6;
-            this.AddCustomerToOrderButton.Text = "Add To Order";
+            this.AddCustomerToOrderButton.Text = "To Order...";
             this.AddCustomerToOrderButton.UseVisualStyleBackColor = true;
             this.AddCustomerToOrderButton.Click += new System.EventHandler(this.AddCustomerToOrderButton_Click);
             // 
@@ -424,6 +439,7 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer3.Panel1.Controls.Add(this.DiscountsButton);
             this.splitContainer3.Panel1.Controls.Add(this.orderNotesButton);
             this.splitContainer3.Panel1.Controls.Add(this.OrderCancelButton);
             this.splitContainer3.Panel1.Controls.Add(this.OrderCompleteButton);
@@ -437,6 +453,26 @@
             this.splitContainer3.Size = new System.Drawing.Size(686, 410);
             this.splitContainer3.SplitterDistance = 173;
             this.splitContainer3.TabIndex = 0;
+            // 
+            // DiscountsButton
+            // 
+            this.DiscountsButton.Location = new System.Drawing.Point(17, 127);
+            this.DiscountsButton.Name = "DiscountsButton";
+            this.DiscountsButton.Size = new System.Drawing.Size(124, 23);
+            this.DiscountsButton.TabIndex = 6;
+            this.DiscountsButton.Text = "Discounts";
+            this.DiscountsButton.UseVisualStyleBackColor = true;
+            this.DiscountsButton.Click += new System.EventHandler(this.DiscountsButton_Click);
+            // 
+            // orderNotesButton
+            // 
+            this.orderNotesButton.Location = new System.Drawing.Point(17, 98);
+            this.orderNotesButton.Name = "orderNotesButton";
+            this.orderNotesButton.Size = new System.Drawing.Size(124, 23);
+            this.orderNotesButton.TabIndex = 5;
+            this.orderNotesButton.Text = "Notes";
+            this.orderNotesButton.UseVisualStyleBackColor = true;
+            this.orderNotesButton.Click += new System.EventHandler(this.orderNotesButton_Click);
             // 
             // OrderCancelButton
             // 
@@ -576,16 +612,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Customer:";
             // 
-            // orderNotesButton
-            // 
-            this.orderNotesButton.Location = new System.Drawing.Point(17, 98);
-            this.orderNotesButton.Name = "orderNotesButton";
-            this.orderNotesButton.Size = new System.Drawing.Size(124, 23);
-            this.orderNotesButton.TabIndex = 5;
-            this.orderNotesButton.Text = "Notes";
-            this.orderNotesButton.UseVisualStyleBackColor = true;
-            this.orderNotesButton.Click += new System.EventHandler(this.orderNotesButton_Click);
-            // 
             // SellerScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -593,7 +619,7 @@
             this.ClientSize = new System.Drawing.Size(694, 436);
             this.Controls.Add(this.tabControl);
             this.Name = "SellerScreen";
-            this.Text = "SellerScreen";
+            this.Text = "Car Dealership Seller";
             this.CarsTab.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -669,5 +695,8 @@
         private System.Windows.Forms.Button OrderInstallButton;
         private System.Windows.Forms.Button ChPwdButton;
         private System.Windows.Forms.Button orderNotesButton;
+        private System.Windows.Forms.Button DiscountsButton;
+        private System.Windows.Forms.ToolTip NewOrderToolTip;
+        private System.Windows.Forms.Button NewCustomerButton;
     }
 }

@@ -24,6 +24,8 @@ namespace CarDealership.Forms
         private void LoadData()
         {
             var categories = BusinessLayer.DataAcquisition.GetAccesssoriesTypes();
+            var mounted = BusinessLayer.DataAcquisition.GetMountedAccessoriesIDsFromOrderID(m_orderID);
+            var ordered = BusinessLayer.DataAcquisition.GetOrderedAccessoriesIdsFromOrderID(m_orderID);
             foreach (var cat in categories)
             {
                 var tab = new TabPage
@@ -40,7 +42,9 @@ namespace CarDealership.Forms
                 {
                     foreach (var acc in collection)
                     {
-                        clbox.Items.Add(acc.ACCESSORY_ID + " " + acc.NAME + " " + acc.PRICE, false);
+                        if (mounted.Contains(acc.ACCESSORY_ID)) continue;
+                        bool check = ordered.Contains(acc.ACCESSORY_ID);
+                        clbox.Items.Add(acc.ACCESSORY_ID + " " + acc.NAME + " " + acc.PRICE, check);
                     }
                 }
                 
@@ -54,8 +58,8 @@ namespace CarDealership.Forms
 
         private void InstallButton_Click(object sender, EventArgs e)
         {
+            BusinessLayer.DataDeletion.ClearAccessoriesInstallOrders(m_orderID);
             int installed = 0;
-            bool success = true;
             foreach (TabPage tab in this.tabControl1.TabPages)
             {
                 var selected = (tab.Controls[0] as CheckedListBox).CheckedItems;
@@ -63,23 +67,20 @@ namespace CarDealership.Forms
                 foreach(var item in selected)
                 {
                     int accID = int.Parse(item.ToString().Substring(0, item.ToString().IndexOf(' ')));
-                    if (BusinessLayer.DataAcquisition.CanInstallAcc(m_orderID, accID))
-                    {
-                        BusinessLayer.DataAddition.AccessoryInstall(m_orderID, accID);
-                        ++installed;
-                    }
-                    else
-                    {
-                        success = false;
-                    }
-
+                    BusinessLayer.DataAddition.AccessoryInstall(m_orderID, accID);
+                    ++installed;
                 }
             }
-            if (installed != 0) BusinessLayer.DataUpdate.ChangeOrderStauts(m_orderID, "Waiting");
-            if (!success)
+            if (installed == 0)
             {
-                MessageBox.Show("Some of the selected accessories are already installed or are waiting to be installed", "Duplicates", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                BusinessLayer.DataUpdate.ChangeOrderStauts(m_orderID, "Open");
             }
+            else
+            {
+                BusinessLayer.DataUpdate.ChangeOrderStauts(m_orderID, "Waiting");
+            }
+
+
             this.DialogResult = DialogResult.Yes;
 
         }

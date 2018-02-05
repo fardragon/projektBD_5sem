@@ -174,5 +174,40 @@ namespace BusinessLayer
             }
         }
 
+        public static void SetActiveDiscounts(int orderID, List<int> activeDiscounts)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var old = from disc in database.Active_Discounts
+                          where disc.ORDER_ID == orderID
+                          select disc;
+                foreach (var disc in old)
+                {
+                    database.Active_Discounts.DeleteOnSubmit(disc);
+                }
+                database.SubmitChanges();
+                foreach(var act in activeDiscounts)
+                {
+                    var active = new Active_Discount
+                    {
+                        ORDER_ID = orderID,
+                        DISCOUNT_ID = act
+                    };
+                    database.Active_Discounts.InsertOnSubmit(active);
+                    database.SubmitChanges();
+                }
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

@@ -531,36 +531,130 @@ namespace BusinessLayer
             return String.Empty;
         }
 
-        public static bool CanInstallAcc(int orderID, int accID)
+        public static Decimal CalculatePrice(int orderID)
         {
+            try
             {
-                try
+                var database = DataLayer.Utility.GetContext();
+                var order = (from ord in database.Active_Orders
+                             where ord.ORDER_ID == orderID
+                             select ord).Single();
+                Decimal price = order.Cars_for_Sale.Model.BASE_PRICE;
+                var accessories = order.Cars_for_Sale.Mounted_Accessories;
+                foreach (var acc in accessories)
                 {
-                    var order = DataAcquisition.GetOrderFromID(orderID);
-                    
-                    foreach (var install in order.Accessories_Install_Orders)
-                    {
-                        if (install.ACCESSORY_ID == accID) return false;
-                    }
-
-                    foreach (var acc in order.Cars_for_Sale.Mounted_Accessories)
-                    {
-                        if (acc.ACCESSORY_ID == accID) return false;
-                    }
-                    return true;
+                    price += acc.Accessory.PRICE;
                 }
-                catch (System.Data.SqlClient.SqlException ex)
+                var discounts = order.Active_Discounts;
+                foreach (var disc in discounts)
                 {
-                    MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    price -= disc.Discount.VALUE;
                 }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return false;
+                return price;
             }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return 0;
         }
 
+        public static IQueryable<DataLayer.Discount> GetDiscounts()
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                return database.Discounts.AsQueryable();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return Enumerable.Empty<Discount>().AsQueryable();
+        }
+
+        public static IQueryable<DataLayer.Active_Discount> GetActiveDiscounts(int OrderID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var active = from disc in database.Active_Discounts
+                             where disc.ORDER_ID == OrderID
+                             select disc;
+                return active;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return Enumerable.Empty<Active_Discount>().AsQueryable();
+        }
+
+        public static List<int> GetMountedAccessoriesIDsFromOrderID(int orderID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var order = (from ord in database.Active_Orders
+                             where
+                             ord.ORDER_ID == orderID
+                             select ord).Single();
+                var result = new List<int>();
+                foreach (var item in order.Cars_for_Sale.Mounted_Accessories)
+                {
+                    result.Add(item.ACCESSORY_ID);
+                }
+                return result;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return new List<int>();
+        }
+
+        public static List<int> GetOrderedAccessoriesIdsFromOrderID(int orderID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var order = (from ord in database.Active_Orders
+                             where
+                             ord.ORDER_ID == orderID
+                             select ord).Single();
+                var result = new List<int>();
+                foreach (var item in order.Accessories_Install_Orders)
+                {
+                    result.Add(item.ACCESSORY_ID);
+                }
+                return result;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return new List<int>();
+        }
     }
 
 

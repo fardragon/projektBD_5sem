@@ -175,5 +175,62 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public static void AddCustomer(string name, string address, string city, string zipcode, string phone, string mail)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var customer = new Customer
+                {
+                    NAME = name,
+                    STREET_ADDRESS = address,
+                    CITY = city,
+                    ZIPCODE = zipcode,
+                    PHONE = phone,
+                    MAIL = mail
+                };
+                database.Customers.InsertOnSubmit(customer);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void AddCar(string VIN, int model, int color, int dealership, string prodyear)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var car = new Cars_for_Sale
+                {
+                    CAR_VIN = VIN,
+                    MODEL_ID = model,
+                    DEALERSHIP_ID = dealership,
+                    COLOR_ID = color,
+                    PRODUCTION_YEAR = prodyear
+                };
+                database.Cars_for_Sales.InsertOnSubmit(car);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace CarDealership.Forms
             this.employeesManagerView1.SetDealershipID(DealershipID);
             this.carsView1.SetDealership(DealershipID);
             this.carsView1.SetShowOrderedCars(true);
+            this.ordersView1.SetDealershipID(DealershipID);
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -35,6 +36,9 @@ namespace CarDealership.Forms
                 case 2:
                     this.carsView1.View();
                     break;
+                case 3:
+                    this.ordersView1.View();
+                    break;
             }
         }
 
@@ -42,6 +46,42 @@ namespace CarDealership.Forms
         {
             var dialog = new CarDetails(this.carsView1.SelectedCar());
             dialog.ShowDialog(this);
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            this.NextScreen = Screens.LoginScreen;
+            this.Close();
+        }
+
+        private void ChPwdButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.PasswordChange(EmployeeID);
+            dialog.ShowDialog(this);
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            this.NextScreen = Screens.Exit;
+            this.Close();
+        }
+
+        private void AddCarsButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.AddCar(this.DefaultDealership);
+            dialog.ShowDialog(this);
+            this.carsView1.View();
+        }
+
+        private void GoToOrderButton_Click(object sender, EventArgs e)
+        {
+            if (!this.carsView1.SelectedCarOrdered()) return;
+            var vin = this.carsView1.SelectedCar();
+            if (!String.IsNullOrEmpty(vin))
+            {
+                this.tabControl1.SelectedIndex = 3;
+                this.ordersView1.SelectOrdeByVIN(vin);
+            }
         }
     }
 }
