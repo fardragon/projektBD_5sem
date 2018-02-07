@@ -165,6 +165,7 @@ namespace BusinessLayer
                 };
                 database.Accessories_Install_Orders.InsertOnSubmit(install);
                 database.SubmitChanges();
+                DataUpdate.ChangeOrderUpdateTime(orderID);
             }
             catch (System.Data.SqlClient.SqlException ex)
             {

@@ -11,20 +11,6 @@ namespace BusinessLayer
 {
     public static class DataAcquisition
     {
-        public static void DEBUG_RESET()
-        {
-            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;          
-            try
-            {
-                var database = DataLayer.Utility.GetContext();
-                database.ExecuteCommand("EXEC dbo.reset;");
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
-        }
 
         public static IQueryable<Employee> GetEmployees(Employee criteria)
         {
@@ -654,6 +640,28 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return new List<int>();
+        }
+
+        public static DataLayer.Customer LoadCustomer(int customerID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var customer = (from cust in database.Customers
+                                where
+                                cust.CUSTOMER_ID == customerID
+                                select cust).Single();
+                return customer;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return new DataLayer.Customer();
         }
     }
 

@@ -39,6 +39,19 @@ namespace CarDealership.Forms
                 case 3:
                     this.ordersView1.View();
                     break;
+                case 4:                  
+                    try
+                    {
+                        this.employeesTableAdapter.FillBy(this.sellersDataSet.Employees);
+                        this.dealershipsTableAdapter.FillBy(this.dealershipsDataSet.Dealerships);
+                        this.modelsTableAdapter.Fill(this.modelsDataSet.Models);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        System.Windows.Forms.MessageBox.Show(ex.Message);
+
+                    }
+                    break;
             }
         }
 
@@ -80,8 +93,75 @@ namespace CarDealership.Forms
             if (!String.IsNullOrEmpty(vin))
             {
                 this.tabControl1.SelectedIndex = 3;
-                this.ordersView1.SelectOrdeByVIN(vin);
+                this.ordersView1.SelectOrderByVIN(vin);
             }
+        }
+
+        private void AddSellerButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.AddEmployeeManager("Seller", this.DefaultDealership);
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes) this.employeesManagerView1.View();
+        }
+
+        private void AddMechanicButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.AddEmployeeManager("Mechanic", this.DefaultDealership);
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes) this.employeesManagerView1.View();
+        }
+
+        private void RemoveCarButton_Click(object sender, EventArgs e)
+        {
+            var ordered = this.carsView1.SelectedCarOrdered();
+            if (ordered)
+            {
+                MessageBox.Show("Selected car belongs to an order", "Cannot remove", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var car = this.carsView1.SelectedCar();
+            if (!String.IsNullOrEmpty(car))
+            {
+                BusinessLayer.DataDeletion.RemoveCar(car);
+                this.carsView1.View();
+            }
+
+        }
+
+        private void OrderNotesButton_Click(object sender, EventArgs e)
+        {
+            var id = this.ordersView1.SelectedOrderID();
+            if (id > 0)
+            {
+                var dialog = new Forms.OrderNotes(id);
+                dialog.ReadOnly(true);
+                dialog.ShowDialog(this);
+            }          
+        }
+
+        private void OrderCancelButton_Click(object sender, EventArgs e)
+        {
+            var status = this.ordersView1.GetOrderStatus();
+            if (String.IsNullOrEmpty(status)) return;
+            if (status == "Complete")
+            {
+                MessageBox.Show("Cannot remove completed orders", "Cannot remove", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            BusinessLayer.DataDeletion.DeleteOrder(this.ordersView1.SelectedOrderID());
+            this.ordersView1.View();
+        }
+
+        private void OrderReassignButton_Click(object sender, EventArgs e)
+        {
+            var id = this.ordersView1.SelectedOrderID();
+            if (id > 0)
+            {
+                var dialog = new Forms.OrderReassign(this.DefaultDealership,id);
+                var result = dialog.ShowDialog(this);
+                if (result == DialogResult.Yes) this.ordersView1.View();
+            }
+            
         }
     }
 }

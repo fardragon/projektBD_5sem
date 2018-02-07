@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
-
+using System.Windows.Forms;
 
 namespace BusinessLayer
 {
@@ -14,6 +14,21 @@ namespace BusinessLayer
             var hashBytes = hash.ComputeHash(passBytes);
             var hexString = new SoapHexBinary(hashBytes);
             return hexString.ToString();
+        }
+
+        public static void DEBUG_RESET()
+        {
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                database.ExecuteCommand("EXEC dbo.reset;");
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
 
     }

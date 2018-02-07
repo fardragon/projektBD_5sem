@@ -172,7 +172,7 @@ namespace CarDealership.Forms
             {
                 BusinessLayer.DataAddition.OpenOrder(m_CarVIN, m_CustomerID.Value, EmployeeID);             
                 this.tabControl.SelectedIndex = 3;
-                this.ordersView1.SelectOrdeByVIN(m_CarVIN);
+                this.ordersView1.SelectOrderByVIN(m_CarVIN);
                 m_CarVIN = null;
                 m_CustomerID = null;
                 CustomerTextBox.Clear();
@@ -191,15 +191,14 @@ namespace CarDealership.Forms
         }
 
         private void OrderCustomerDetailsButton_Click(object sender, EventArgs e)
-        {
-            this.tabControl.SelectedIndex = 2;
-            try
-            {
-                this.customersView1.ChangeSelectedCustomer(BusinessLayer.DataAcquisition.GetOrderFromID(this.ordersView1.SelectedOrderID()).CUSTOMER_ID);
+        {           
+            var order = this.ordersView1.SelectedOrderID();
+            if (order > 0 )
+            {               
+                this.tabControl.SelectedIndex = 2;
+                this.customersView1.ChangeSelectedCustomer(order);
             }
-            catch (System.Exception)
-            {              
-            }
+
         }
 
         private void OrderCancelButton_Click(object sender, EventArgs e)
@@ -297,6 +296,13 @@ namespace CarDealership.Forms
             }
         }
 
-
+        private void EditCustomerButton_Click(object sender, EventArgs e)
+        {
+            var customer = this.customersView1.SelectedCustomer();
+            if (customer == null) return;
+            var dialog = new Forms.CustomerEdit(customer.Value);
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.OK) this.customersView1.View(this.NameTextBox.Text,this.CityTextBox.Text);
+        }
     }
 }

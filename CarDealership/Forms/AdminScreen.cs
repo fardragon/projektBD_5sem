@@ -22,10 +22,8 @@ namespace CarDealership.Forms
             this.carsView1.SetShowOrderedCars(true);
         }
 
-        private void ResetButton_Click(object sender, EventArgs e)
-        {
-            BusinessLayer.DataAcquisition.DEBUG_RESET();       
-        }
+                  
+
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
@@ -152,6 +150,11 @@ namespace CarDealership.Forms
             var dialog = new CarDealership.Forms.ColorAdd();
             var result = dialog.ShowDialog(this);
             if (result == DialogResult.Yes) this.colorsView.View();
+        }
+
+        private void ResetButton_Click_1(object sender, EventArgs e)
+        {
+            BusinessLayer.Utility.DEBUG_RESET();
         }
     }
 }

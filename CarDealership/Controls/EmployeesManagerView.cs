@@ -19,6 +19,7 @@ namespace CarDealership.Controls
         {
             InitializeComponent();
             dealershipID = 0;
+            this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         public void SetDealershipID(int id)

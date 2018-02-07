@@ -123,6 +123,11 @@
     <Compile Include="Controls\RoleSelector.Designer.cs">
       <DependentUpon>RoleSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="DealershipsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DealershipsDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AccessoriesPicker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +139,12 @@
     </Compile>
     <Compile Include="Forms\AddCar.Designer.cs">
       <DependentUpon>AddCar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddEmployeeManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddEmployeeManager.Designer.cs">
+      <DependentUpon>AddEmployeeManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AdminScreen.cs">
       <SubType>Form</SubType>
@@ -158,6 +169,12 @@
     </Compile>
     <Compile Include="Forms\ColorAdd.Designer.cs">
       <DependentUpon>ColorAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerEdit.Designer.cs">
+      <DependentUpon>CustomerEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CustomerAdd.cs">
       <SubType>Form</SubType>
@@ -225,6 +242,12 @@
     <Compile Include="Forms\OrderNotes.Designer.cs">
       <DependentUpon>OrderNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrderReassign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderReassign.Designer.cs">
+      <DependentUpon>OrderReassign.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PasswordChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +269,11 @@
     </Compile>
     <Compile Include="Forms\SellerScreen.Designer.cs">
       <DependentUpon>SellerScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SellersDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SellersDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
     <EmbeddedResource Include="Controls\CarsView.resx">
@@ -275,6 +303,9 @@
     <EmbeddedResource Include="Forms\AddCar.resx">
       <DependentUpon>AddCar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddEmployeeManager.resx">
+      <DependentUpon>AddEmployeeManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminScreen.resx">
       <DependentUpon>AdminScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -286,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ColorAdd.resx">
       <DependentUpon>ColorAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerEdit.resx">
+      <DependentUpon>CustomerEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomerAdd.resx">
       <DependentUpon>CustomerAdd.cs</DependentUpon>
@@ -317,6 +351,9 @@
     <EmbeddedResource Include="Forms\OrderNotes.resx">
       <DependentUpon>OrderNotes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderReassign.resx">
+      <DependentUpon>OrderReassign.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\PasswordChange.resx">
       <DependentUpon>PasswordChange.cs</DependentUpon>
     </EmbeddedResource>
@@ -344,6 +381,17 @@
     <None Include="ColorsDataSet.xss">
       <DependentUpon>ColorsDataSet.xsd</DependentUpon>
     </None>
+    <None Include="DealershipsDataSet.xsc">
+      <DependentUpon>DealershipsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DealershipsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DealershipsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DealershipsDataSet.xss">
+      <DependentUpon>DealershipsDataSet.xsd</DependentUpon>
+    </None>
     <None Include="ModelsDataSet.xsc">
       <DependentUpon>ModelsDataSet.xsd</DependentUpon>
     </None>
@@ -364,6 +412,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SellersDataSet.xsc">
+      <DependentUpon>SellersDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SellersDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SellersDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SellersDataSet.xss">
+      <DependentUpon>SellersDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

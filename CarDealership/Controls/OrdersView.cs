@@ -66,7 +66,7 @@ namespace CarDealership.Controls
             return this.dataGridView1.CurrentRow.Cells[5].Value.ToString();
         }
 
-        public void SelectOrdeByVIN(String VIN)
+        public void SelectOrderByVIN(String VIN)
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {

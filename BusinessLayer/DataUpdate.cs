@@ -197,6 +197,86 @@ namespace BusinessLayer
                     database.Active_Discounts.InsertOnSubmit(active);
                     database.SubmitChanges();
                 }
+                DataUpdate.ChangeOrderUpdateTime(orderID);
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void ModifyCustomer(int CustomerID, string name, string address, string city, string zipcode, string phone, string mail)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var customer = (from cust in database.Customers
+                                where cust.CUSTOMER_ID == CustomerID
+                                select cust).Single();
+                customer.NAME = name;
+                customer.STREET_ADDRESS = address;
+                customer.CITY = city;
+                customer.ZIPCODE = zipcode;
+                customer.PHONE = phone;
+                customer.MAIL = mail;
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void ChangeOrderSeller(int OrderID, int SellerID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var ord = (
+                          from res in database.Active_Orders
+                          where
+                          res.ORDER_ID == OrderID
+                          select res
+                          ).Single();
+
+                ord.EMPLOYEE_ID = SellerID;
+                ord.LAST_UPDATE = DateTime.Now;
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void ChangeOrderUpdateTime(int OrderID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var ord = (
+                          from res in database.Active_Orders
+                          where
+                          res.ORDER_ID == OrderID
+                          select res
+                          ).Single();
+                ord.LAST_UPDATE = DateTime.Now;
+                database.SubmitChanges();
 
             }
             catch (System.Data.SqlClient.SqlException ex)

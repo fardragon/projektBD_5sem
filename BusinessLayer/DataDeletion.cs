@@ -99,6 +99,54 @@ namespace BusinessLayer
             }
         }
 
+        public static void DeleteMountedAccessories(String VIN)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var accessories = from acc in database.Mounted_Accessories
+                          where
+                          acc.CAR_VIN == VIN
+                          select acc;
+                foreach (var acc in accessories)
+                {
+                    database.Mounted_Accessories.DeleteOnSubmit(acc);
+                }
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void RemoveCar(String VIN)
+        {
+            DataDeletion.DeleteMountedAccessories(VIN);
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var del = (from car in database.Cars_for_Sales
+                                  where
+                                  car.CAR_VIN == VIN
+                                  select car).Single();
+
+                database.Cars_for_Sales.DeleteOnSubmit(del);
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
     }
 }
