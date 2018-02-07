@@ -13,19 +13,26 @@ namespace CarDealership.Forms
 {
     public partial class AccessoriesPicker : Form
     {
-        private int m_orderID;
+        private List<int> m_accList;
         public AccessoriesPicker(int orderID)
         {
             InitializeComponent();
-            m_orderID = orderID;
+            this.LoadData(orderID);
+            m_accList = new List<int>();
+        }
+
+        public AccessoriesPicker()
+        {
+            InitializeComponent();
+            m_accList = new List<int>();
             this.LoadData();
         }
 
-        private void LoadData()
+        private void LoadData(int orderID)
         {
             var categories = BusinessLayer.DataAcquisition.GetAccesssoriesTypes();
-            var mounted = BusinessLayer.DataAcquisition.GetMountedAccessoriesIDsFromOrderID(m_orderID);
-            var ordered = BusinessLayer.DataAcquisition.GetOrderedAccessoriesIdsFromOrderID(m_orderID);
+            var mounted = BusinessLayer.DataAcquisition.GetMountedAccessoriesIDsFromOrderID(orderID);
+            var ordered = BusinessLayer.DataAcquisition.GetOrderedAccessoriesIdsFromOrderID(orderID);
             foreach (var cat in categories)
             {
                 var tab = new TabPage
@@ -33,8 +40,10 @@ namespace CarDealership.Forms
                     Text = cat.TYPE
                 };
 
-                var clbox = new CheckedListBox();
-                clbox.Dock = DockStyle.Fill;
+                var clbox = new CheckedListBox
+                {
+                    Dock = DockStyle.Fill
+                };
 
                 var collection = cat.Accessories;
 
@@ -56,9 +65,38 @@ namespace CarDealership.Forms
 
         }
 
+        private void LoadData()
+        {
+            var categories = BusinessLayer.DataAcquisition.GetAccesssoriesTypes();
+            foreach (var cat in categories)
+            {
+                var tab = new TabPage
+                {
+                    Text = cat.TYPE
+                };
+
+                var clbox = new CheckedListBox
+                {
+                    Dock = DockStyle.Fill
+                };
+
+                var collection = cat.Accessories;
+
+                if (collection.Count > 0)
+                {
+                    foreach (var acc in collection)
+                    {
+                        clbox.Items.Add(acc.ACCESSORY_ID + " " + acc.NAME + " " + acc.PRICE, false);
+                    }
+                }
+
+
+                tab.Controls.Add(clbox);
+                this.tabControl1.TabPages.Add(tab);
+            }
+        }
         private void InstallButton_Click(object sender, EventArgs e)
         {
-            BusinessLayer.DataDeletion.ClearAccessoriesInstallOrders(m_orderID);
             int installed = 0;
             foreach (TabPage tab in this.tabControl1.TabPages)
             {
@@ -67,22 +105,17 @@ namespace CarDealership.Forms
                 foreach(var item in selected)
                 {
                     int accID = int.Parse(item.ToString().Substring(0, item.ToString().IndexOf(' ')));
-                    BusinessLayer.DataAddition.AccessoryInstall(m_orderID, accID);
+                    m_accList.Add(accID);
                     ++installed;
                 }
             }
-            if (installed == 0)
-            {
-                BusinessLayer.DataUpdate.ChangeOrderStauts(m_orderID, "Open");
-            }
-            else
-            {
-                BusinessLayer.DataUpdate.ChangeOrderStauts(m_orderID, "Waiting");
-            }
-
-
             this.DialogResult = DialogResult.Yes;
 
+        }
+
+        public List<int> GetSelected()
+        {
+            return m_accList;
         }
 
         private void ClearButton_Click(object sender, EventArgs e)

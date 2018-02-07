@@ -41,7 +41,7 @@
             this.ZipcodeLabel = new System.Windows.Forms.Label();
             this.PhoneLabel = new System.Windows.Forms.Label();
             this.MailLabel = new System.Windows.Forms.Label();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
@@ -142,15 +142,15 @@
             this.MailLabel.TabIndex = 11;
             this.MailLabel.Text = "Mail:";
             // 
-            // CancelButton
+            // ExitButton
             // 
-            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(82, 222);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.CancelButton.TabIndex = 12;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
+            this.ExitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.ExitButton.Location = new System.Drawing.Point(82, 222);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(75, 23);
+            this.ExitButton.TabIndex = 12;
+            this.ExitButton.Text = "Cancel";
+            this.ExitButton.UseVisualStyleBackColor = true;
             // 
             // OKButton
             // 
@@ -167,10 +167,11 @@
             this.AcceptButton = this.OKButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.ExitButton;
             this.ClientSize = new System.Drawing.Size(328, 256);
             this.ControlBox = false;
             this.Controls.Add(this.OKButton);
-            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.MailLabel);
             this.Controls.Add(this.PhoneLabel);
             this.Controls.Add(this.ZipcodeLabel);
@@ -204,7 +205,7 @@
         private System.Windows.Forms.Label ZipcodeLabel;
         private System.Windows.Forms.Label PhoneLabel;
         private System.Windows.Forms.Label MailLabel;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Button OKButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox MailTextbox;

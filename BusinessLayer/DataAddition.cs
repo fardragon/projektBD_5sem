@@ -233,5 +233,61 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public static void AddMountedAccessory(string VIN, List<int> AccId)
+        {
+            foreach(int id in AccId)
+            {
+                DataAddition.AddMountedAccessory(VIN, id);
+            }
+        }
+        public static void AddMountedAccessory(string VIN, int AccID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var car = new Mounted_Accessory
+                {
+                    CAR_VIN = VIN,
+                    ACCESSORY_ID = AccID
+                };
+                database.Mounted_Accessories.InsertOnSubmit(car);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void AddAccessoryType(string name)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var type = new Accessories_Type
+                {
+                    TYPE = name
+                };
+                database.Accessories_Types.InsertOnSubmit(type);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

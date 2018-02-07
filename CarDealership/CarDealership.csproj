@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,10 +65,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccCatDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccCatDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ColorsDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ColorsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AccView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccView.Designer.cs">
+      <DependentUpon>AccView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CarsView.cs">
       <SubType>UserControl</SubType>
@@ -139,6 +151,12 @@
     </Compile>
     <Compile Include="Forms\AddCar.Designer.cs">
       <DependentUpon>AddCar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddCategory.Designer.cs">
+      <DependentUpon>AddCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AddEmployeeManager.cs">
       <SubType>Form</SubType>
@@ -276,6 +294,9 @@
       <DependentUpon>SellersDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="Controls\AccView.resx">
+      <DependentUpon>AccView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CarsView.resx">
       <DependentUpon>CarsView.cs</DependentUpon>
     </EmbeddedResource>
@@ -302,6 +323,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddCar.resx">
       <DependentUpon>AddCar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddCategory.resx">
+      <DependentUpon>AddCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddEmployeeManager.resx">
       <DependentUpon>AddEmployeeManager.cs</DependentUpon>
@@ -370,6 +394,17 @@
     <EmbeddedResource Include="Forms\SellerScreen.resx">
       <DependentUpon>SellerScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="AccCatDataSet.xsc">
+      <DependentUpon>AccCatDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AccCatDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AccCatDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AccCatDataSet.xss">
+      <DependentUpon>AccCatDataSet.xsd</DependentUpon>
+    </None>
     <None Include="ColorsDataSet.xsc">
       <DependentUpon>ColorsDataSet.xsd</DependentUpon>
     </None>

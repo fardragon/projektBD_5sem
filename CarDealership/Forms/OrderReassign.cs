@@ -25,7 +25,7 @@ namespace CarDealership.Forms
         {
             try
             {
-                this.employeesBindingSource.Filter = "DEALERSHIP_ID = " + Order.ToString();
+                this.employeesBindingSource.Filter = "DEALERSHIP_ID = " + Dealership.ToString();
                 this.employeesTableAdapter.FillBy(this.sellersDataSet.Employees);
             }
             catch (System.Exception ex)

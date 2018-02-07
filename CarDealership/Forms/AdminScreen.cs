@@ -20,6 +20,7 @@ namespace CarDealership.Forms
             this.NextScreen = Screens.Exit;
             this.roleSelector1.AllowNull();
             this.carsView1.SetShowOrderedCars(true);
+            this.accessories_TypesTableAdapter.Fill(this.accCatDataSet.Accessories_Types);
         }
 
                   
@@ -66,6 +67,10 @@ namespace CarDealership.Forms
                     break;
                 case 6:
                     this.customersView.View(null,null);
+                    break;
+                case 7:
+                    this.accessories_TypesTableAdapter.Fill(this.accCatDataSet.Accessories_Types);
+                    this.AccessoriesTabLoad();
                     break;
                 default:
                     break;
@@ -155,6 +160,37 @@ namespace CarDealership.Forms
         private void ResetButton_Click_1(object sender, EventArgs e)
         {
             BusinessLayer.Utility.DEBUG_RESET();
+        }
+        
+        private void AccessoriesTabLoad()
+        {
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;        
+            var Type = (DataRowView)this.CategoryComboBox.SelectedItem;
+            if (Type != null)
+            {
+                var TypeID = (int)Type.Row.ItemArray[0];
+                this.accView1.SetType(TypeID);
+            }
+            this.accView1.View();
+
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
+        }
+
+        private void AddAccCatButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.AddCategory();
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes)
+            {
+                this.accessories_TypesTableAdapter.Fill(this.accCatDataSet.Accessories_Types);
+                this.AccessoriesTabLoad();
+            }
+               
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.AccessoriesTabLoad();   
         }
     }
 }

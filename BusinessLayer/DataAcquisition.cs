@@ -47,7 +47,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Employee>().AsQueryable();
         }
-
         public static IQueryable<Employee> GetEmployees(string name, string surname, string dealership, string role)
         {
             var criteria = new Employee();
@@ -64,7 +63,6 @@ namespace BusinessLayer
             }
             return BusinessLayer.DataAcquisition.GetEmployees(criteria);
         }
-
         public static IQueryable<Dealership> GetDealerships(Dealership criteria)
         {
             try
@@ -93,7 +91,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Dealership>().AsQueryable();
         }
-
         public static IQueryable<Role> GetRoles(Role criteria)
         {
             try
@@ -123,7 +120,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Role>().AsQueryable();
         }
-
         public static int GetRoleID(string ROLE_NAME)
         {
             try
@@ -148,7 +144,6 @@ namespace BusinessLayer
             }
             return 0;
         }
-
         public static IQueryable<Employee> GetManagers(int dealershipid)
         {
             try
@@ -191,7 +186,6 @@ namespace BusinessLayer
             }
             return new Dealership();
         }
-
         public static int GetEmployeeOrdersCount(int id)
         {
             try
@@ -252,7 +246,6 @@ namespace BusinessLayer
             return false;
 
         }
-
         public static IQueryable<Model> GetModels()
         {
             try
@@ -271,7 +264,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Model>().AsQueryable();
         }
-
         public static IQueryable<Color> GetColors()
         {
             try
@@ -290,7 +282,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Color>().AsQueryable();
         }
-
         public static IQueryable<Cars_for_Sale> GetCars(int? DealershipID, bool ShowOrderedCars)
         {
             try
@@ -323,7 +314,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Cars_for_Sale>().AsQueryable();
         }
-
         public static Cars_for_Sale GetCar(String VIN)
         {
             try
@@ -344,9 +334,6 @@ namespace BusinessLayer
             }
             return null;
         }
-
-
-
         public static IQueryable<Customer> GetCustomers(string Id, string Name, string City)
         {
             var criteria = new Customer();
@@ -364,7 +351,6 @@ namespace BusinessLayer
             }
             return BusinessLayer.DataAcquisition.GetCustomers(criteria);
         }
-
         public static IQueryable<Customer> GetCustomers(Customer criteria)
         {
             try
@@ -400,14 +386,15 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Customer>().AsQueryable();
         }
-
         public static IQueryable<Active_Order> GetOrders(int? DealershipID, int? EmployeeID, int? OrderStatus)
         {
             try
             {
                 var database = DataLayer.Utility.GetContext();
-                var criteria = new Active_Order();
-                criteria.Cars_for_Sale = new Cars_for_Sale();
+                var criteria = new Active_Order
+                {
+                    Cars_for_Sale = new Cars_for_Sale()
+                };
                 if (DealershipID.HasValue)
                 {
                     criteria.Cars_for_Sale.DEALERSHIP_ID = DealershipID.Value;
@@ -455,7 +442,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Active_Order>().AsQueryable();
         }
-
         public static DataLayer.Active_Order GetOrderFromID (int orderID)
         {
             try
@@ -477,7 +463,6 @@ namespace BusinessLayer
             }
             return new DataLayer.Active_Order();
         }
-
         public static IQueryable<Accessories_Type> GetAccesssoriesTypes()
         {
             try
@@ -495,7 +480,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Accessories_Type>().AsQueryable();
         }
-
         public static String GetOrderNotes(int orderID)
         {
             try
@@ -516,7 +500,6 @@ namespace BusinessLayer
             }
             return String.Empty;
         }
-
         public static Decimal CalculatePrice(int orderID)
         {
             try
@@ -548,7 +531,6 @@ namespace BusinessLayer
             }
             return 0;
         }
-
         public static IQueryable<DataLayer.Discount> GetDiscounts()
         {
             try
@@ -566,7 +548,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Discount>().AsQueryable();
         }
-
         public static IQueryable<DataLayer.Active_Discount> GetActiveDiscounts(int OrderID)
         {
             try
@@ -587,7 +568,6 @@ namespace BusinessLayer
             }
             return Enumerable.Empty<Active_Discount>().AsQueryable();
         }
-
         public static List<int> GetMountedAccessoriesIDsFromOrderID(int orderID)
         {
             try
@@ -614,7 +594,6 @@ namespace BusinessLayer
             }
             return new List<int>();
         }
-
         public static List<int> GetOrderedAccessoriesIdsFromOrderID(int orderID)
         {
             try
@@ -641,7 +620,6 @@ namespace BusinessLayer
             }
             return new List<int>();
         }
-
         public static DataLayer.Customer LoadCustomer(int customerID)
         {
             try
@@ -662,6 +640,28 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return new DataLayer.Customer();
+        }
+
+        public static List<DataLayer.Accessory> GetAccessories(int Type)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var accessories = from acc in database.Accessories
+                                  where
+                                  acc.TYPE_ID == Type
+                                  select acc;
+                return accessories.ToList();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return new List<DataLayer.Accessory>();
         }
     }
 

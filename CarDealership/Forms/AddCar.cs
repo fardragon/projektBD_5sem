@@ -14,9 +14,11 @@ namespace CarDealership.Forms
     public partial class AddCar : Form
     {
         private int DealershipID;
+        private List<int> Accessories;
         public AddCar(int DealershipID)
         {
             this.DealershipID = DealershipID;
+            Accessories = new List<int>();
             InitializeComponent();
         }
 
@@ -48,6 +50,7 @@ namespace CarDealership.Forms
             var color = (DataRowView)ColorsComboBox.SelectedItem;
             int colorID = (int)color.Row.ItemArray[0];
             DataAddition.AddCar(VINTextbox.Text, modelID, colorID, DealershipID, ProdYearTextbox.Text);
+            DataAddition.AddMountedAccessory(VINTextbox.Text, this.Accessories);
             return true;
         }
 
@@ -71,6 +74,13 @@ namespace CarDealership.Forms
                 this.VINTextbox.Select();
             }
             this.DialogResult = DialogResult.None;
+        }
+
+        private void PickAccessoriessButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.AccessoriesPicker();
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes) this.Accessories = dialog.GetSelected();
         }
     }
 }

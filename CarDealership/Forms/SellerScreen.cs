@@ -224,14 +224,34 @@ namespace CarDealership.Forms
         {
             int id = this.ordersView1.SelectedOrderID();
             if (id == 0) return;
-            if (this.ordersView1.GetOrderStatus() == "Complete")
+            var status = this.ordersView1.GetOrderStatus();
+            if ( status == "Complete")
             {
                 System.Windows.Forms.MessageBox.Show("Cannot change completed orders", "Order complete", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             var picker = new AccessoriesPicker(id);
             var result = picker.ShowDialog(this);
-            if (result == DialogResult.Yes) this.ordersView1.View();
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+            if (result == DialogResult.Yes)
+            {
+                BusinessLayer.DataDeletion.ClearAccessoriesInstallOrders(id);
+                var picked = picker.GetSelected();
+                foreach (int acc in picked)
+                {
+                    BusinessLayer.DataAddition.AccessoryInstall(id, acc);
+                }
+                if (picked.Count > 0)
+                {
+                    if (status != "Waiting") BusinessLayer.DataUpdate.ChangeOrderStauts(id, "Waiting");
+                }
+                else
+                {
+                    if (status != "Open") BusinessLayer.DataUpdate.ChangeOrderStauts(id, "Open");
+                }
+                this.ordersView1.View();
+                System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
+            }
         }
 
         private void OrderCompleteButton_Click(object sender, EventArgs e)

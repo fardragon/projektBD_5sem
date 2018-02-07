@@ -1,6 +1,6 @@
 ﻿namespace CarDealership.Forms
 {
-    partial class DiscountsPicker
+    partial class AddCategory
     {
         /// <summary>
         /// Required designer variable.
@@ -28,26 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.DiscountsListBox = new System.Windows.Forms.CheckedListBox();
+            this.components = new System.ComponentModel.Container();
+            this.NameTextBox = new System.Windows.Forms.TextBox();
+            this.NameLabel = new System.Windows.Forms.Label();
             this.ConfirmButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
-            // DiscountsListBox
+            // NameTextBox
             // 
-            this.DiscountsListBox.FormattingEnabled = true;
-            this.DiscountsListBox.Location = new System.Drawing.Point(12, 12);
-            this.DiscountsListBox.Name = "DiscountsListBox";
-            this.DiscountsListBox.ScrollAlwaysVisible = true;
-            this.DiscountsListBox.Size = new System.Drawing.Size(364, 304);
-            this.DiscountsListBox.TabIndex = 0;
+            this.NameTextBox.Location = new System.Drawing.Point(94, 25);
+            this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.Size = new System.Drawing.Size(178, 20);
+            this.NameTextBox.TabIndex = 0;
+            // 
+            // NameLabel
+            // 
+            this.NameLabel.AutoSize = true;
+            this.NameLabel.Location = new System.Drawing.Point(12, 28);
+            this.NameLabel.Name = "NameLabel";
+            this.NameLabel.Size = new System.Drawing.Size(76, 13);
+            this.NameLabel.TabIndex = 1;
+            this.NameLabel.Text = "New category:";
             // 
             // ConfirmButton
             // 
-            this.ConfirmButton.Location = new System.Drawing.Point(301, 351);
+            this.ConfirmButton.Location = new System.Drawing.Point(172, 68);
             this.ConfirmButton.Name = "ConfirmButton";
-            this.ConfirmButton.Size = new System.Drawing.Size(75, 23);
-            this.ConfirmButton.TabIndex = 1;
+            this.ConfirmButton.Size = new System.Drawing.Size(100, 25);
+            this.ConfirmButton.TabIndex = 2;
             this.ConfirmButton.Text = "Confirm";
             this.ConfirmButton.UseVisualStyleBackColor = true;
             this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
@@ -55,36 +65,39 @@
             // ExitButton
             // 
             this.ExitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.ExitButton.Location = new System.Drawing.Point(12, 351);
+            this.ExitButton.Location = new System.Drawing.Point(12, 68);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(75, 23);
-            this.ExitButton.TabIndex = 2;
+            this.ExitButton.Size = new System.Drawing.Size(100, 25);
+            this.ExitButton.TabIndex = 3;
             this.ExitButton.Text = "Cancel";
             this.ExitButton.UseVisualStyleBackColor = true;
-            this.ExitButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // DiscountsPicker
+            // AddCategory
             // 
             this.AcceptButton = this.ConfirmButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ExitButton;
-            this.ClientSize = new System.Drawing.Size(388, 386);
+            this.ClientSize = new System.Drawing.Size(284, 105);
             this.ControlBox = false;
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.ConfirmButton);
-            this.Controls.Add(this.DiscountsListBox);
+            this.Controls.Add(this.NameLabel);
+            this.Controls.Add(this.NameTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "DiscountsPicker";
-            this.Text = "Discounts";
+            this.Name = "AddCategory";
+            this.Text = "Add category";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.CheckedListBox DiscountsListBox;
+        private System.Windows.Forms.TextBox NameTextBox;
+        private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Button ConfirmButton;
         private System.Windows.Forms.Button ExitButton;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

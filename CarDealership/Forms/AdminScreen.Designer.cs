@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.CustomersTab = new System.Windows.Forms.TabPage();
             this.customersView = new CarDealership.Controls.CustomersView();
             this.CarsTab = new System.Windows.Forms.TabPage();
@@ -73,6 +74,14 @@
             this.ExitButton = new System.Windows.Forms.Button();
             this.LogoutButton = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.AccTab = new System.Windows.Forms.TabPage();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.AddAccCatButton = new System.Windows.Forms.Button();
+            this.accessoriesTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.accCatDataSet = new CarDealership.AccCatDataSet();
+            this.accView1 = new CarDealership.Controls.AccView();
+            this.accessories_TypesTableAdapter = new CarDealership.AccCatDataSetTableAdapters.Accessories_TypesTableAdapter();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.CustomersTab.SuspendLayout();
             this.CarsTab.SuspendLayout();
             this._ColorsTab.SuspendLayout();
@@ -98,6 +107,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.HomeTab.SuspendLayout();
             this.tabControl.SuspendLayout();
+            this.AccTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.accessoriesTypesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accCatDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // CustomersTab
@@ -396,11 +412,6 @@
             // 
             this.roleSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.roleSelector1.FormattingEnabled = true;
-            this.roleSelector1.Items.AddRange(new object[] {
-            "Administrator",
-            "Manager",
-            "Mechanic",
-            "Seller"});
             this.roleSelector1.Location = new System.Drawing.Point(71, 107);
             this.roleSelector1.Name = "roleSelector1";
             this.roleSelector1.Size = new System.Drawing.Size(121, 21);
@@ -411,6 +422,33 @@
             this.dealershipSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dealershipSelector1.FormattingEnabled = true;
             this.dealershipSelector1.Items.AddRange(new object[] {
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
             "",
             1,
             2,
@@ -638,6 +676,7 @@
             this.tabControl.Controls.Add(this._ColorsTab);
             this.tabControl.Controls.Add(this.CarsTab);
             this.tabControl.Controls.Add(this.CustomersTab);
+            this.tabControl.Controls.Add(this.AccTab);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.HotTrack = true;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
@@ -646,6 +685,80 @@
             this.tabControl.Size = new System.Drawing.Size(855, 516);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            // 
+            // AccTab
+            // 
+            this.AccTab.Controls.Add(this.splitContainer4);
+            this.AccTab.Location = new System.Drawing.Point(4, 22);
+            this.AccTab.Name = "AccTab";
+            this.AccTab.Padding = new System.Windows.Forms.Padding(3);
+            this.AccTab.Size = new System.Drawing.Size(847, 490);
+            this.AccTab.TabIndex = 8;
+            this.AccTab.Text = "Accessorries";
+            this.AccTab.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.AddAccCatButton);
+            this.splitContainer4.Panel1.Controls.Add(this.CategoryComboBox);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.accView1);
+            this.splitContainer4.Size = new System.Drawing.Size(841, 484);
+            this.splitContainer4.SplitterDistance = 189;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // AddAccCatButton
+            // 
+            this.AddAccCatButton.Location = new System.Drawing.Point(31, 64);
+            this.AddAccCatButton.Name = "AddAccCatButton";
+            this.AddAccCatButton.Size = new System.Drawing.Size(121, 23);
+            this.AddAccCatButton.TabIndex = 1;
+            this.AddAccCatButton.Text = "Add category...";
+            this.AddAccCatButton.UseVisualStyleBackColor = true;
+            this.AddAccCatButton.Click += new System.EventHandler(this.AddAccCatButton_Click);
+            // 
+            // accessoriesTypesBindingSource
+            // 
+            this.accessoriesTypesBindingSource.DataMember = "Accessories_Types";
+            this.accessoriesTypesBindingSource.DataSource = this.accCatDataSet;
+            // 
+            // accCatDataSet
+            // 
+            this.accCatDataSet.DataSetName = "AccCatDataSet";
+            this.accCatDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // accView1
+            // 
+            this.accView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.accView1.Location = new System.Drawing.Point(0, 0);
+            this.accView1.Name = "accView1";
+            this.accView1.Size = new System.Drawing.Size(648, 484);
+            this.accView1.TabIndex = 0;
+            // 
+            // accessories_TypesTableAdapter
+            // 
+            this.accessories_TypesTableAdapter.ClearBeforeFill = true;
+            // 
+            // CategoryComboBox
+            // 
+            this.CategoryComboBox.DataSource = this.accessoriesTypesBindingSource;
+            this.CategoryComboBox.DisplayMember = "TYPE";
+            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(31, 23);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(121, 21);
+            this.CategoryComboBox.TabIndex = 0;
+            this.CategoryComboBox.ValueMember = "TYPE_ID";
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // AdminScreen
             // 
@@ -681,6 +794,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.HomeTab.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
+            this.AccTab.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.accessoriesTypesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.accCatDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -732,5 +852,13 @@
         private System.Windows.Forms.TabControl tabControl;
         private Controls.CustomersView customersView;
         private Controls.CarsView carsView1;
+        private System.Windows.Forms.TabPage AccTab;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private AccCatDataSet accCatDataSet;
+        private System.Windows.Forms.BindingSource accessoriesTypesBindingSource;
+        private AccCatDataSetTableAdapters.Accessories_TypesTableAdapter accessories_TypesTableAdapter;
+        private System.Windows.Forms.Button AddAccCatButton;
+        private Controls.AccView accView1;
+        private System.Windows.Forms.ComboBox CategoryComboBox;
     }
 }

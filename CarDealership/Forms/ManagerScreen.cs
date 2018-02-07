@@ -26,7 +26,7 @@ namespace CarDealership.Forms
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch ((sender as TabControl).SelectedIndex)
+            switch (this.tabControl1.SelectedIndex)
             {
                 case 0:
                     break;
@@ -49,6 +49,7 @@ namespace CarDealership.Forms
                     catch (System.Exception ex)
                     {
                         System.Windows.Forms.MessageBox.Show(ex.Message);
+                        this.tabControl1.SelectedIndex = 0;
 
                     }
                     break;
