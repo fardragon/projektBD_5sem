@@ -27,6 +27,11 @@ namespace CarDealership.Controls
                 this.dataGridView1.Rows.Add(disc.DISCOUNT_ID, disc.NAME, disc.VALUE);
             }
         }
+        public int GetSelectedDiscountID()
+        {
+            if (this.dataGridView1.SelectedRows.Count == 0) return 0;
+            return (int)this.dataGridView1.CurrentRow.Cells[0].Value;
+        }
 
     }
 }

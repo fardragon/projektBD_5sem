@@ -749,7 +749,108 @@ namespace BusinessLayer
 
             return new List<DataLayer.Cars_for_Sale>();
         }
+
+        public static bool CanDeleteAccessory(int accID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var accessory= (from acc in database.Accessories
+                                where
+                                acc.ACCESSORY_ID == accID
+                                select acc).Single();
+
+                if (accessory.Mounted_Accessories.Count > 0) return false;
+                if (accessory.Sold_Accessories.Count > 0) return false;
+                if (accessory.Accessories_Install_Orders.Count > 0) return false;
+                return true;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return false;
+        }
+        public static bool CanDeleteDiscount(int DiscID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var discount = (from disc in database.Discounts
+                                where
+                                disc.DISCOUNT_ID == DiscID
+                                select disc).Single();
+
+                if (discount.Active_Discounts.Count > 0) return false;
+                if (discount.Sold_Discounts.Count > 0) return false;
+                return true;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return false;
+        }
+        public static bool CanDeleteModel(int ModelID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var model = (from mod in database.Models
+                            where
+                            mod.MODEL_ID == ModelID
+                            select mod).Single();
+
+                if (model.Cars_for_Sales.Count > 0) return false;
+                if (model.Sold_Cars.Count > 0) return false;
+                return true;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return false;
+        }
+        public static bool CanDeleteColor(int ColorID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var color = (from col in database.Colors
+                             where
+                             col.COLOR_ID == ColorID
+                             select col).Single();
+
+                if (color.Cars_for_Sales.Count > 0) return false;
+                if (color.Sold_Cars.Count > 0) return false;
+                return true;
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return false;
+        }
+
     }
+
+
 
 
     

@@ -37,5 +37,11 @@ namespace CarDealership.Controls
             }
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
+
+        public int GetSelectedAccID()
+        {
+            if (this.dataGridView1.SelectedRows.Count == 0) return 0;
+            return (int)this.dataGridView1.CurrentRow.Cells[0].Value;
+        }
     }
 }

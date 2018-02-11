@@ -210,5 +210,91 @@ namespace BusinessLayer
             }
         }
 
+        public static void DeleteAccessory(int accID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var accessory = (from acc in database.Accessories
+                                 where
+                                 acc.ACCESSORY_ID == accID
+                                 select acc).Single();
+                database.Accessories.DeleteOnSubmit(accessory);
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void DeleteDiscount(int DiscID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var discount = (from disc in database.Discounts
+                                where
+                                disc.DISCOUNT_ID == DiscID
+                                select disc).Single();
+
+                database.Discounts.DeleteOnSubmit(discount);
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void DeleteModel(int ModelID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var model = (from mod in database.Models
+                             where
+                             mod.MODEL_ID == ModelID
+                             select mod).Single();
+                database.Models.DeleteOnSubmit(model);
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void DeleteColor(int ColorID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var color = (from col in database.Colors
+                             where
+                             col.COLOR_ID == ColorID
+                             select col).Single();
+                database.Colors.DeleteOnSubmit(color);
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }

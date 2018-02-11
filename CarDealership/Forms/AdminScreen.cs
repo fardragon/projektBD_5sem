@@ -89,7 +89,7 @@ namespace CarDealership.Forms
             var id = this.employeesView1.CurrentID();
             if (id == this.EmployeeID)
             {
-                System.Windows.Forms.MessageBox.Show("Cannot delete yourself");
+                System.Windows.Forms.MessageBox.Show(this, "Cannot delete yourself", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Media.SystemSounds.Asterisk.Play();
                 return;
             }
@@ -209,6 +209,66 @@ namespace CarDealership.Forms
             var dialog = new Forms.AddDiscount();
             var result = dialog.ShowDialog(this);
             if (result == DialogResult.Yes) this.discountsView1.View();
+        }
+
+        private void AccDelBUtton_Click(object sender, EventArgs e)
+        {
+            var id = this.accView1.GetSelectedAccID();
+            if (id == 0) return;
+            if (BusinessLayer.DataAcquisition.CanDeleteAccessory(id))
+            {
+                BusinessLayer.DataDeletion.DeleteAccessory(id);
+                this.accView1.View();                
+            }
+            else
+            {
+                MessageBox.Show(this, "This item is in use", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DiscDelButton_Click(object sender, EventArgs e)
+        {
+            var id = this.discountsView1.GetSelectedDiscountID();
+            if (id == 0) return;
+            if (BusinessLayer.DataAcquisition.CanDeleteDiscount(id))
+            {
+                BusinessLayer.DataDeletion.DeleteDiscount(id);
+                this.discountsView1.View();
+            }
+            else
+            {
+                MessageBox.Show(this, "This item is in use", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DelColButton_Click(object sender, EventArgs e)
+        {
+            var id = this.colorsView.GetSelectedColorID();
+            if (id == 0) return;
+            if (BusinessLayer.DataAcquisition.CanDeleteColor(id))
+            {
+                BusinessLayer.DataDeletion.DeleteColor(id);
+                this.colorsView.View();
+            }
+            else
+            {
+                MessageBox.Show(this, "This item is in use", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DelModelButton_Click(object sender, EventArgs e)
+        {
+            var id = this.modelsView1.GetSelectedModelID();
+            if (id == 0) return;
+            if (BusinessLayer.DataAcquisition.CanDeleteModel(id))
+            {
+                BusinessLayer.DataDeletion.DeleteModel(id);
+                this.modelsView1.View();
+            }
+            else
+            {
+                MessageBox.Show(this, "This item is in use", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
