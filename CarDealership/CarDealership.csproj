@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,6 +65,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccCatDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccCatDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ColorsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ColorsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AccInstallView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccInstallView.Designer.cs">
+      <DependentUpon>AccInstallView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AccView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccView.Designer.cs">
+      <DependentUpon>AccView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArchiveView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ArchiveView.Designer.cs">
+      <DependentUpon>ArchiveView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CarsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -94,6 +123,12 @@
     <Compile Include="Controls\DealershipsView.Designer.cs">
       <DependentUpon>DealershipsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DiscountsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DiscountsView.Designer.cs">
+      <DependentUpon>DiscountsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EmployeesManagerView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,11 +153,46 @@
     <Compile Include="Controls\RoleSelector.Designer.cs">
       <DependentUpon>RoleSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="DealershipsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DealershipsDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AccessoriesPicker.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AccessoriesPicker.Designer.cs">
       <DependentUpon>AccessoriesPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddAccessory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddAccessory.Designer.cs">
+      <DependentUpon>AddAccessory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddCar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddCar.Designer.cs">
+      <DependentUpon>AddCar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddCategory.Designer.cs">
+      <DependentUpon>AddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddDiscount.Designer.cs">
+      <DependentUpon>AddDiscount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddEmployeeManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddEmployeeManager.Designer.cs">
+      <DependentUpon>AddEmployeeManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AdminScreen.cs">
       <SubType>Form</SubType>
@@ -136,6 +206,12 @@
     <Compile Include="Controls\EmployeesView.Designer.cs">
       <DependentUpon>EmployeesView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ArchiveDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ArchiveDetails.Designer.cs">
+      <DependentUpon>ArchiveDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CarDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +224,18 @@
     <Compile Include="Forms\ColorAdd.Designer.cs">
       <DependentUpon>ColorAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CustomerEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerEdit.Designer.cs">
+      <DependentUpon>CustomerEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomerAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerAdd.Designer.cs">
+      <DependentUpon>CustomerAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DealershipAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +247,12 @@
     </Compile>
     <Compile Include="Forms\DealershipEdit.Designer.cs">
       <DependentUpon>DealershipEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DiscountsPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DiscountsPicker.Designer.cs">
+      <DependentUpon>DiscountsPicker.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\EmployeeAdd.cs">
       <SubType>Form</SubType>
@@ -202,11 +296,22 @@
     <Compile Include="Forms\OrderNotes.Designer.cs">
       <DependentUpon>OrderNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OrderReassign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OrderReassign.Designer.cs">
+      <DependentUpon>OrderReassign.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PasswordChange.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\PasswordChange.Designer.cs">
       <DependentUpon>PasswordChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelsDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,7 +324,24 @@
     <Compile Include="Forms\SellerScreen.Designer.cs">
       <DependentUpon>SellerScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="SellersDataSet.cs">
+      <DependentUpon>SellersDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SellersDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SellersDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="Controls\AccInstallView.resx">
+      <DependentUpon>AccInstallView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AccView.resx">
+      <DependentUpon>AccView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ArchiveView.resx">
+      <DependentUpon>ArchiveView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CarsView.resx">
       <DependentUpon>CarsView.cs</DependentUpon>
     </EmbeddedResource>
@@ -231,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DealershipsView.resx">
       <DependentUpon>DealershipsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DiscountsView.resx">
+      <DependentUpon>DiscountsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EmployeesManagerView.resx">
       <DependentUpon>EmployeesManagerView.cs</DependentUpon>
@@ -244,11 +369,29 @@
     <EmbeddedResource Include="Forms\AccessoriesPicker.resx">
       <DependentUpon>AccessoriesPicker.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddAccessory.resx">
+      <DependentUpon>AddAccessory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddCar.resx">
+      <DependentUpon>AddCar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddCategory.resx">
+      <DependentUpon>AddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddDiscount.resx">
+      <DependentUpon>AddDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddEmployeeManager.resx">
+      <DependentUpon>AddEmployeeManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminScreen.resx">
       <DependentUpon>AdminScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EmployeesView.resx">
       <DependentUpon>EmployeesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ArchiveDetails.resx">
+      <DependentUpon>ArchiveDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CarDetails.resx">
       <DependentUpon>CarDetails.cs</DependentUpon>
@@ -256,11 +399,20 @@
     <EmbeddedResource Include="Forms\ColorAdd.resx">
       <DependentUpon>ColorAdd.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerEdit.resx">
+      <DependentUpon>CustomerEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerAdd.resx">
+      <DependentUpon>CustomerAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DealershipAdd.resx">
       <DependentUpon>DealershipAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DealershipEdit.resx">
       <DependentUpon>DealershipEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DiscountsPicker.resx">
+      <DependentUpon>DiscountsPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EmployeeAdd.resx">
       <DependentUpon>EmployeeAdd.cs</DependentUpon>
@@ -274,11 +426,17 @@
     <EmbeddedResource Include="Forms\ManagerScreen.resx">
       <DependentUpon>ManagerScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MechanicScreen.resx">
+      <DependentUpon>MechanicScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ModelAdd.resx">
       <DependentUpon>ModelAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OrderNotes.resx">
       <DependentUpon>OrderNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OrderReassign.resx">
+      <DependentUpon>OrderReassign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PasswordChange.resx">
       <DependentUpon>PasswordChange.cs</DependentUpon>
@@ -296,6 +454,50 @@
     <EmbeddedResource Include="Forms\SellerScreen.resx">
       <DependentUpon>SellerScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="AccCatDataSet.xsc">
+      <DependentUpon>AccCatDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AccCatDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AccCatDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AccCatDataSet.xss">
+      <DependentUpon>AccCatDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ColorsDataSet.xsc">
+      <DependentUpon>ColorsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ColorsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ColorsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ColorsDataSet.xss">
+      <DependentUpon>ColorsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DealershipsDataSet.xsc">
+      <DependentUpon>DealershipsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DealershipsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DealershipsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DealershipsDataSet.xss">
+      <DependentUpon>DealershipsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ModelsDataSet.xsc">
+      <DependentUpon>ModelsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ModelsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ModelsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ModelsDataSet.xss">
+      <DependentUpon>ModelsDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -305,6 +507,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SellersDataSet.xsc">
+      <DependentUpon>SellersDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SellersDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SellersDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SellersDataSet.xss">
+      <DependentUpon>SellersDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

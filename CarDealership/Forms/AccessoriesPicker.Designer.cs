@@ -30,9 +30,9 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.InstallButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
             this.ClearButton = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
+            this.InstallButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -42,6 +42,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -53,7 +55,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ClearButton);
-            this.splitContainer1.Panel2.Controls.Add(this.CancelButton);
+            this.splitContainer1.Panel2.Controls.Add(this.ExitButton);
             this.splitContainer1.Panel2.Controls.Add(this.InstallButton);
             this.splitContainer1.Size = new System.Drawing.Size(568, 401);
             this.splitContainer1.SplitterDistance = 331;
@@ -68,6 +70,27 @@
             this.tabControl1.Size = new System.Drawing.Size(568, 331);
             this.tabControl1.TabIndex = 0;
             // 
+            // ClearButton
+            // 
+            this.ClearButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.ClearButton.Location = new System.Drawing.Point(225, 31);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearButton.TabIndex = 2;
+            this.ClearButton.Text = "Clear";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            // 
+            // ExitButton
+            // 
+            this.ExitButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.ExitButton.Location = new System.Drawing.Point(389, 31);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(75, 23);
+            this.ExitButton.TabIndex = 1;
+            this.ExitButton.Text = "Cancel";
+            this.ExitButton.UseVisualStyleBackColor = true;
+            // 
             // InstallButton
             // 
             this.InstallButton.Location = new System.Drawing.Point(470, 31);
@@ -78,38 +101,18 @@
             this.InstallButton.UseVisualStyleBackColor = true;
             this.InstallButton.Click += new System.EventHandler(this.InstallButton_Click);
             // 
-            // CancelButton
-            // 
-            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(389, 31);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.CancelButton.TabIndex = 1;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            // 
-            // ClearButton
-            // 
-            this.ClearButton.Location = new System.Drawing.Point(225, 31);
-            this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(75, 23);
-            this.ClearButton.TabIndex = 2;
-            this.ClearButton.Text = "Clear";
-            this.ClearButton.UseVisualStyleBackColor = true;
-            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
-            // 
             // AccessoriesPicker
             // 
             this.AcceptButton = this.InstallButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.CancelButton;
+            this.CancelButton = this.ExitButton;
             this.ClientSize = new System.Drawing.Size(568, 401);
             this.ControlBox = false;
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AccessoriesPicker";
-            this.Text = "Pick accessories to install";
+            this.Text = "Pick accessories";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -122,7 +125,7 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Button InstallButton;
         private System.Windows.Forms.Button ClearButton;
     }

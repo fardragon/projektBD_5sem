@@ -100,7 +100,11 @@ namespace CarDealership.Forms
 
         private void AddToOrderButton_Click(object sender, EventArgs e)
         {
-            if (this.carsView1.SelectedCarOrdered())
+            if (this.DealerShipSelector1.Value != this.DefaultDealership)
+            {
+                MessageBox.Show("Viewing cars from another dealership", "Cannot order", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (this.carsView1.SelectedCarOrdered())
             {
                 MessageBox.Show("Car already ordered", "Cannot order", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -147,44 +151,54 @@ namespace CarDealership.Forms
         private void CarDetailsButton_Click(object sender, EventArgs e)
         {
             var selected = this.carsView1.SelectedCar();
+            if (selected == null) return;
             var dialog = new CarDetails(selected);
             dialog.ShowDialog(this);
         }
 
         private void PlaceOrderButton_Click(object sender, EventArgs e)
         {
-            BusinessLayer.DataAddition.OpenOrder(m_CarVIN, m_CustomerID.Value, EmployeeID);
-            m_CarVIN = null;
-            m_CustomerID = null;
-            CustomerTextBox.Clear();
-            CarTextBox.Clear();
-            this.tabControl.SelectedIndex = 3;
+            if (String.IsNullOrEmpty(m_CarVIN))
+            {
+                this.NewOrderToolTip.Show("Select car to order", this.CarTextBox);
+                System.Media.SystemSounds.Asterisk.Play();
+            }
+            else if (!m_CustomerID.HasValue)
+            {
+                this.NewOrderToolTip.Show("Select customer", this.CustomerTextBox);
+                System.Media.SystemSounds.Asterisk.Play();
+            }
+            else
+            {
+                BusinessLayer.DataAddition.OpenOrder(m_CarVIN, m_CustomerID.Value, EmployeeID);             
+                this.tabControl.SelectedIndex = 3;
+                this.ordersView1.SelectOrderByVIN(m_CarVIN);
+                m_CarVIN = null;
+                m_CustomerID = null;
+                CustomerTextBox.Clear();
+                CarTextBox.Clear();
+            }
         }
 
         private void OrderCarDetailsButton_Click(object sender, EventArgs e)
         {
-            this.tabControl.SelectedIndex = 1;
-            this.ShowOrderedCarsCheckBox.Checked = true;
-            try
+            var selected = this.ordersView1.SelectedCarVIN();
+            if (!String.IsNullOrEmpty(selected))
             {
-                this.carsView1.ChangeSelectedCar(this.ordersView1.SelectedCarVIN());
+                var dialog = new CarDetails(selected);
+                dialog.ShowDialog(this);
             }
-            catch (System.Exception)
-            {         	
-            }
-            
         }
 
         private void OrderCustomerDetailsButton_Click(object sender, EventArgs e)
-        {
-            this.tabControl.SelectedIndex = 2;
-            try
-            {
-                this.customersView1.ChangeSelectedCustomer(BusinessLayer.DataAcquisition.GetOrderFromID(this.ordersView1.SelectedOrderID()).CUSTOMER_ID);
+        {           
+            var order = this.ordersView1.SelectedOrderID();
+            if (order > 0 )
+            {               
+                this.tabControl.SelectedIndex = 2;
+                this.customersView1.ChangeSelectedCustomer(order);
             }
-            catch (System.Exception)
-            {              
-            }
+
         }
 
         private void OrderCancelButton_Click(object sender, EventArgs e)
@@ -192,7 +206,17 @@ namespace CarDealership.Forms
             var status = this.ordersView1.GetOrderStatus();
             if (status != String.Empty)
             {
-
+                if (status == "Complete")
+                {
+                    System.Windows.Forms.MessageBox.Show("Cannot change completed orders", "Order complete", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    var id = this.ordersView1.SelectedOrderID();
+                    BusinessLayer.DataDeletion.DeleteOrder(id);
+                    this.ordersView1.View();
+                }
             }
         }
 
@@ -200,14 +224,34 @@ namespace CarDealership.Forms
         {
             int id = this.ordersView1.SelectedOrderID();
             if (id == 0) return;
-            if (this.ordersView1.GetOrderStatus() == "Complete")
+            var status = this.ordersView1.GetOrderStatus();
+            if ( status == "Complete")
             {
                 System.Windows.Forms.MessageBox.Show("Cannot change completed orders", "Order complete", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             var picker = new AccessoriesPicker(id);
             var result = picker.ShowDialog(this);
-            if (result == DialogResult.Yes) this.ordersView1.View();
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+            if (result == DialogResult.Yes)
+            {
+                BusinessLayer.DataDeletion.ClearAccessoriesInstallOrders(id);
+                var picked = picker.GetSelected();
+                foreach (int acc in picked)
+                {
+                    BusinessLayer.DataAddition.AccessoryInstall(id, acc);
+                }
+                if (picked.Count > 0)
+                {
+                    if (status != "Waiting") BusinessLayer.DataUpdate.ChangeOrderStauts(id, "Waiting");
+                }
+                else
+                {
+                    if (status != "Open") BusinessLayer.DataUpdate.ChangeOrderStauts(id, "Open");
+                }
+                this.ordersView1.View();
+                System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
+            }
         }
 
         private void OrderCompleteButton_Click(object sender, EventArgs e)
@@ -239,8 +283,45 @@ namespace CarDealership.Forms
 
         private void orderNotesButton_Click(object sender, EventArgs e)
         {
-            var dialog = new CarDealership.Forms.OrderNotes(this.ordersView1.SelectedOrderID());
+            int id = this.ordersView1.SelectedOrderID();
+            if (id != 0)
+            {
+                var dialog = new CarDealership.Forms.OrderNotes(this.ordersView1.SelectedOrderID());
+                dialog.ShowDialog(this);
+            }
+        }
+
+        private void DiscountsButton_Click(object sender, EventArgs e)
+        {
+            int id = this.ordersView1.SelectedOrderID();
+            if (id == 0) return;
+            if (this.ordersView1.GetOrderStatus() == "Complete")
+            {
+                System.Windows.Forms.MessageBox.Show("Cannot change completed orders", "Order complete", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var dialog = new Forms.DiscountsPicker(id);
             dialog.ShowDialog(this);
+            this.ordersView1.View();
+        }
+
+        private void NewCustomerButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.CustomerAdd();
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                this.ResetButton.PerformClick();
+            }
+        }
+
+        private void EditCustomerButton_Click(object sender, EventArgs e)
+        {
+            var customer = this.customersView1.SelectedCustomer();
+            if (customer == null) return;
+            var dialog = new Forms.CustomerEdit(customer.Value);
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.OK) this.customersView1.View(this.NameTextBox.Text,this.CityTextBox.Text);
         }
     }
 }

@@ -19,6 +19,7 @@ namespace CarDealership.Controls
         {
             InitializeComponent();
             dealershipID = 0;
+            this.dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         public void SetDealershipID(int id)
@@ -40,6 +41,24 @@ namespace CarDealership.Controls
                 dataGridView.Rows.Add(emp.EMPLOYEE_ID, emp.NAME, emp.SURNAME, emp.Role.ROLE_NAME,BusinessLayer.DataAcquisition.GetEmployeeOrdersCount(emp.EMPLOYEE_ID),BusinessLayer.DataAcquisition.GetEmployeeSalesCount(emp.EMPLOYEE_ID));
             }
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
+        }
+
+        public String SelectedEmployeeRole()
+        {
+            if (this.dataGridView.SelectedRows.Count > 0)
+            {
+                return dataGridView.CurrentRow.Cells[3].Value.ToString();
+            }
+            return null;
+        }
+
+        public int SelectedEmployeeID()
+        {
+            if (this.dataGridView.SelectedRows.Count > 0)
+            {
+                return (int)dataGridView.CurrentRow.Cells[0].Value;
+            }
+            return 0;
         }
     }
 }

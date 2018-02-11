@@ -20,12 +20,11 @@ namespace CarDealership.Forms
             this.NextScreen = Screens.Exit;
             this.roleSelector1.AllowNull();
             this.carsView1.SetShowOrderedCars(true);
+            this.accessories_TypesTableAdapter.Fill(this.accCatDataSet.Accessories_Types);
         }
 
-        private void ResetButton_Click(object sender, EventArgs e)
-        {
-            BusinessLayer.DataAcquisition.DEBUG_RESET();       
-        }
+                  
+
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
@@ -59,15 +58,18 @@ namespace CarDealership.Forms
                     break;
                 case 3:
                     this.modelsView1.View();
-                    break;
-                case 4:
                     this.colorsView.View();
                     break;
-                case 5:
+                case 4:
                     this.carsView1.View();
                     break;
-                case 6:
+                case 5:
                     this.customersView.View(null,null);
+                    break;
+                case 6:
+                    this.accessories_TypesTableAdapter.Fill(this.accCatDataSet.Accessories_Types);
+                    this.AccessoriesTabLoad();
+                    this.discountsView1.View();
                     break;
                 default:
                     break;
@@ -152,6 +154,61 @@ namespace CarDealership.Forms
             var dialog = new CarDealership.Forms.ColorAdd();
             var result = dialog.ShowDialog(this);
             if (result == DialogResult.Yes) this.colorsView.View();
+        }
+
+        private void ResetButton_Click_1(object sender, EventArgs e)
+        {
+            BusinessLayer.Utility.DEBUG_RESET();
+        }
+        
+        private void AccessoriesTabLoad()
+        {
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;        
+            var Type = (DataRowView)this.CategoryComboBox.SelectedItem;
+            if (Type != null)
+            {
+                var TypeID = (int)Type.Row.ItemArray[0];
+                this.accView1.SetType(TypeID);
+            }
+            this.accView1.View();
+
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
+        }
+
+        private void AddAccCatButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.AddCategory();
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes)
+            {
+                this.accessories_TypesTableAdapter.Fill(this.accCatDataSet.Accessories_Types);
+                this.AccessoriesTabLoad();
+            }
+               
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.AccessoriesTabLoad();   
+        }
+
+        private void AddAccButton_Click(object sender, EventArgs e)
+        {
+            var Type = (DataRowView)this.CategoryComboBox.SelectedItem;
+            if (Type != null)
+            {
+                var TypeID = (int)Type.Row.ItemArray[0];
+                var dialog = new Forms.AddAccessory(TypeID);
+                var result = dialog.ShowDialog(this);
+                if (result == DialogResult.Yes) this.accView1.View();
+            }
+        }
+
+        private void AddDiscButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new Forms.AddDiscount();
+            var result = dialog.ShowDialog(this);
+            if (result == DialogResult.Yes) this.discountsView1.View();
         }
     }
 }

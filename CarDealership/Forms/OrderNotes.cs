@@ -23,8 +23,13 @@ namespace CarDealership.Forms
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            BusinessLayer.DataUpdate.UpdateOrderNotes(m_orderID, this.textBox1.Text);
+            if (this.textBox1.ReadOnly == false) BusinessLayer.DataUpdate.UpdateOrderNotes(m_orderID, this.textBox1.Text);
             this.DialogResult = DialogResult.Yes;
+        }
+
+        public void ReadOnly(bool value)
+        {
+            this.textBox1.ReadOnly = value;
         }
     }
 }

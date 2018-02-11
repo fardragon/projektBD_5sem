@@ -55,7 +55,11 @@ namespace CarDealership.Controls
 
         public bool SelectedCarOrdered()
         {
-            return (bool)dataGridView1.CurrentRow.Cells[7].Value;
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                return (bool)dataGridView1.CurrentRow.Cells[7].Value;
+            }
+            return false;
         }
 
         public String GetSelectedCarInfo()

@@ -161,11 +161,6 @@
             // roleSelector1
             // 
             this.roleSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.roleSelector1.Items.AddRange(new object[] {
-            "Administrator",
-            "Manager",
-            "Mechanic",
-            "Seller"});
             this.roleSelector1.Location = new System.Drawing.Point(105, 99);
             this.roleSelector1.Name = "roleSelector1";
             this.roleSelector1.Size = new System.Drawing.Size(145, 21);

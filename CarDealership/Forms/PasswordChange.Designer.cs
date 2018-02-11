@@ -136,7 +136,7 @@
             this.Controls.Add(this.textBoxOldPWD);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "PasswordChange";
-            this.Text = "PasswordChange";
+            this.Text = "Change Password";
             this.ResumeLayout(false);
             this.PerformLayout();
 

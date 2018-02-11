@@ -181,11 +181,6 @@
             // roleSelector1
             // 
             this.roleSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.roleSelector1.Items.AddRange(new object[] {
-            "Administrator",
-            "Manager",
-            "Mechanic",
-            "Seller"});
             this.roleSelector1.Location = new System.Drawing.Point(102, 125);
             this.roleSelector1.Name = "roleSelector1";
             this.roleSelector1.Size = new System.Drawing.Size(145, 21);
@@ -195,10 +190,6 @@
             // 
             this.dealershipSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dealershipSelector1.FormattingEnabled = true;
-            this.dealershipSelector1.Items.AddRange(new object[] {
-            "",
-            1,
-            2});
             this.dealershipSelector1.Location = new System.Drawing.Point(102, 99);
             this.dealershipSelector1.Name = "dealershipSelector1";
             this.dealershipSelector1.Size = new System.Drawing.Size(145, 21);
