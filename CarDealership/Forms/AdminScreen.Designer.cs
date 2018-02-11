@@ -75,6 +75,8 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.AccTab = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.AccDelBUtton = new System.Windows.Forms.Button();
+            this.AddDiscButton = new System.Windows.Forms.Button();
             this.AddAccButton = new System.Windows.Forms.Button();
             this.AddAccCatButton = new System.Windows.Forms.Button();
             this.CategoryComboBox = new System.Windows.Forms.ComboBox();
@@ -84,7 +86,9 @@
             this.accView1 = new CarDealership.Controls.AccView();
             this.discountsView1 = new CarDealership.Controls.DiscountsView();
             this.accessories_TypesTableAdapter = new CarDealership.AccCatDataSetTableAdapters.Accessories_TypesTableAdapter();
-            this.AddDiscButton = new System.Windows.Forms.Button();
+            this.DiscDelButton = new System.Windows.Forms.Button();
+            this.DelColButton = new System.Windows.Forms.Button();
+            this.DelModelButton = new System.Windows.Forms.Button();
             this.CustomersTab.SuspendLayout();
             this.CarsTab.SuspendLayout();
             this._ColorsTab.SuspendLayout();
@@ -179,6 +183,8 @@
             // splitContainer5.Panel1
             // 
             this.splitContainer5.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainer5.Panel1.Controls.Add(this.DelModelButton);
+            this.splitContainer5.Panel1.Controls.Add(this.DelColButton);
             this.splitContainer5.Panel1.Controls.Add(this.ModelAddButton);
             this.splitContainer5.Panel1.Controls.Add(this.AddClrButton);
             // 
@@ -427,6 +433,14 @@
             "Administrator",
             "Manager",
             "Mechanic",
+            "Seller",
+            "Administrator",
+            "Manager",
+            "Mechanic",
+            "Seller",
+            "Administrator",
+            "Manager",
+            "Mechanic",
             "Seller"});
             this.roleSelector1.Location = new System.Drawing.Point(71, 107);
             this.roleSelector1.Name = "roleSelector1";
@@ -438,6 +452,12 @@
             this.dealershipSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dealershipSelector1.FormattingEnabled = true;
             this.dealershipSelector1.Items.AddRange(new object[] {
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
             "",
             1,
             2,
@@ -735,6 +755,8 @@
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.Controls.Add(this.DiscDelButton);
+            this.splitContainer4.Panel1.Controls.Add(this.AccDelBUtton);
             this.splitContainer4.Panel1.Controls.Add(this.AddDiscButton);
             this.splitContainer4.Panel1.Controls.Add(this.AddAccButton);
             this.splitContainer4.Panel1.Controls.Add(this.AddAccCatButton);
@@ -746,6 +768,26 @@
             this.splitContainer4.Size = new System.Drawing.Size(841, 484);
             this.splitContainer4.SplitterDistance = 175;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // AccDelBUtton
+            // 
+            this.AccDelBUtton.Location = new System.Drawing.Point(12, 109);
+            this.AccDelBUtton.Name = "AccDelBUtton";
+            this.AccDelBUtton.Size = new System.Drawing.Size(150, 25);
+            this.AccDelBUtton.TabIndex = 4;
+            this.AccDelBUtton.Text = "Delete accessory";
+            this.AccDelBUtton.UseVisualStyleBackColor = true;
+            this.AccDelBUtton.Click += new System.EventHandler(this.AccDelBUtton_Click);
+            // 
+            // AddDiscButton
+            // 
+            this.AddDiscButton.Location = new System.Drawing.Point(12, 223);
+            this.AddDiscButton.Name = "AddDiscButton";
+            this.AddDiscButton.Size = new System.Drawing.Size(150, 25);
+            this.AddDiscButton.TabIndex = 3;
+            this.AddDiscButton.Text = "Add discount...";
+            this.AddDiscButton.UseVisualStyleBackColor = true;
+            this.AddDiscButton.Click += new System.EventHandler(this.AddDiscButton_Click);
             // 
             // AddAccButton
             // 
@@ -828,15 +870,35 @@
             // 
             this.accessories_TypesTableAdapter.ClearBeforeFill = true;
             // 
-            // AddDiscButton
+            // DiscDelButton
             // 
-            this.AddDiscButton.Location = new System.Drawing.Point(12, 223);
-            this.AddDiscButton.Name = "AddDiscButton";
-            this.AddDiscButton.Size = new System.Drawing.Size(150, 25);
-            this.AddDiscButton.TabIndex = 3;
-            this.AddDiscButton.Text = "Add discount...";
-            this.AddDiscButton.UseVisualStyleBackColor = true;
-            this.AddDiscButton.Click += new System.EventHandler(this.AddDiscButton_Click);
+            this.DiscDelButton.Location = new System.Drawing.Point(12, 254);
+            this.DiscDelButton.Name = "DiscDelButton";
+            this.DiscDelButton.Size = new System.Drawing.Size(150, 25);
+            this.DiscDelButton.TabIndex = 5;
+            this.DiscDelButton.Text = "Delete discount";
+            this.DiscDelButton.UseVisualStyleBackColor = true;
+            this.DiscDelButton.Click += new System.EventHandler(this.DiscDelButton_Click);
+            // 
+            // DelColButton
+            // 
+            this.DelColButton.Location = new System.Drawing.Point(12, 51);
+            this.DelColButton.Name = "DelColButton";
+            this.DelColButton.Size = new System.Drawing.Size(150, 25);
+            this.DelColButton.TabIndex = 1;
+            this.DelColButton.Text = "Delete color";
+            this.DelColButton.UseVisualStyleBackColor = true;
+            this.DelColButton.Click += new System.EventHandler(this.DelColButton_Click);
+            // 
+            // DelModelButton
+            // 
+            this.DelModelButton.Location = new System.Drawing.Point(12, 280);
+            this.DelModelButton.Name = "DelModelButton";
+            this.DelModelButton.Size = new System.Drawing.Size(150, 25);
+            this.DelModelButton.TabIndex = 2;
+            this.DelModelButton.Text = "Delete model";
+            this.DelModelButton.UseVisualStyleBackColor = true;
+            this.DelModelButton.Click += new System.EventHandler(this.DelModelButton_Click);
             // 
             // AdminScreen
             // 
@@ -944,5 +1006,9 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private Controls.DiscountsView discountsView1;
         private System.Windows.Forms.Button AddDiscButton;
+        private System.Windows.Forms.Button AccDelBUtton;
+        private System.Windows.Forms.Button DiscDelButton;
+        private System.Windows.Forms.Button DelModelButton;
+        private System.Windows.Forms.Button DelColButton;
     }
 }

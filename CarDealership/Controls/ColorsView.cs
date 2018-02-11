@@ -29,5 +29,10 @@ namespace CarDealership.Controls
             }
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
+        public int GetSelectedColorID()
+        {
+            if (this.dataGridView.SelectedRows.Count == 0) return 0;
+            return (int)this.dataGridView.CurrentRow.Cells[0].Value;
+        }
     }
 }
