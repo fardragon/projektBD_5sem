@@ -22,6 +22,19 @@ namespace CarDealership.Forms
             this.carsView1.SetDealership(DealershipID);
             this.carsView1.SetShowOrderedCars(true);
             this.ordersView1.SetDealershipID(DealershipID);
+
+            try
+            {
+                this.employeesTableAdapter.FillBy(this.sellersDataSet.Employees);
+                this.dealershipsTableAdapter.FillBy(this.dealershipsDataSet.Dealerships);
+                this.modelsTableAdapter.Fill(this.modelsDataSet.Models);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+                this.tabControl1.SelectedIndex = 0;
+            }
+
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -52,6 +65,7 @@ namespace CarDealership.Forms
                         this.tabControl1.SelectedIndex = 0;
 
                     }
+                    this.archiveView1.View();
                     break;
             }
         }
@@ -153,6 +167,29 @@ namespace CarDealership.Forms
             this.ordersView1.View();
         }
 
+        private void ArchivizeButton_Click(object sender, EventArgs e)
+        {
+            var status = this.ordersView1.GetOrderStatus();
+            if (String.IsNullOrEmpty(status)) return;
+            if (status != "Complete")
+            {
+                MessageBox.Show("Cannot archivize orders that are not completed", "Cannot archivize", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            BusinessLayer.DataUpdate.ArchivizeOrder(this.ordersView1.SelectedOrderID());
+            this.ordersView1.View();
+        }
+
+        private void ArchivizeAllButton_Click(object sender, EventArgs e)
+        {
+            var orders = this.ordersView1.GetOrdersWithStatus("Complete");
+            foreach (int order in orders)
+            {
+                BusinessLayer.DataUpdate.ArchivizeOrder(order);
+            }
+            this.ordersView1.View();
+        }
+
         private void OrderReassignButton_Click(object sender, EventArgs e)
         {
             var id = this.ordersView1.SelectedOrderID();
@@ -163,6 +200,129 @@ namespace CarDealership.Forms
                 if (result == DialogResult.Yes) this.ordersView1.View();
             }
             
+        }
+
+        private void LoadArchive()
+        {
+            if (DealershipCheckBox.Checked)
+            {
+                var deal = (DataRowView)DealershipComboBox.SelectedItem;
+                if (deal != null)
+                {
+                    var dealID = (int)deal.Row.ItemArray[0];
+                    this.employeesBindingSource.Filter = "DEALERSHIP_ID =" + dealID.ToString();
+                    this.archiveView1.SetDealership(dealID);
+                }
+                else
+                {
+                    this.employeesBindingSource.Filter = null;
+                    this.archiveView1.SetDealership(null);
+                }
+            }
+            else
+            {
+                this.employeesBindingSource.Filter = null;
+                this.archiveView1.SetDealership(null);
+            }
+
+            if (EmployeeCheckBox.Checked)
+            {
+                var employee = (DataRowView)EmployeeComboBox.SelectedItem;
+                if (employee != null)
+                {
+                    var employeeID = (int)employee.Row.ItemArray[0];
+                    this.archiveView1.SetEmployee(employeeID);
+                }
+                else
+                {
+                    this.archiveView1.SetEmployee(null);
+                }
+            }
+            else
+            {
+                this.archiveView1.SetEmployee(null);
+            }
+
+            if (ModelCheckBox.Checked)
+            {
+                var model = (DataRowView)ModelComboBox.SelectedItem;
+                if (model != null)
+                {
+                    var modelID = (int)model.Row.ItemArray[0];
+                    this.archiveView1.SetModel(modelID);
+                }
+                else
+                {
+                    this.archiveView1.SetModel(null);
+                }
+            }
+            else
+            {
+                this.archiveView1.SetModel(null);
+            }
+            this.archiveView1.View();
+        }
+
+        private void DealershipComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadArchive();
+        }
+
+        private void DealershipCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadArchive();
+        }
+
+        private void EmployeeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadArchive();
+        }
+
+        private void EmployeeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadArchive();
+        }
+
+        private void ModelCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadArchive();
+        }
+
+        private void ModelComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadArchive();
+        }
+
+        private void ArchiveDetailsButton_Click(object sender, EventArgs e)
+        {
+            var id = this.archiveView1.SelectedSaleID();
+            if (id != 0)
+            {
+                var dialog = new ArchiveDetails(id);
+                dialog.ShowDialog(this);
+            }
+        }
+
+        private void RemoveEmployeeButton_Click(object sender, EventArgs e)
+        {
+            var role = this.employeesManagerView1.SelectedEmployeeRole();
+            if (String.IsNullOrEmpty(role)) return;
+            if ((role == "Seller") || (role == "Mechanic"))
+            {
+                var id = this.employeesManagerView1.SelectedEmployeeID();
+                var count = BusinessLayer.DataAcquisition.GetEmployeeOrdersCount(id);
+                if (count > 0)
+                {
+                    var result = MessageBox.Show("This employee has an active order. Do you want to proceed?", "Active orders!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result != DialogResult.Yes) return;                
+                }
+                BusinessLayer.DataDeletion.DeleteEmployee(id);
+                this.employeesManagerView1.View();
+            }
+            else
+            {
+                MessageBox.Show("Cannot remove this employee", "Cannot remove", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

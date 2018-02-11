@@ -36,6 +36,7 @@
             this.ChPwdButton = new System.Windows.Forms.Button();
             this.EmployeesTab = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.RemoveEmployeeButton = new System.Windows.Forms.Button();
             this.AddMechanicButton = new System.Windows.Forms.Button();
             this.AddSellerButton = new System.Windows.Forms.Button();
             this.employeesManagerView1 = new CarDealership.Controls.EmployeesManagerView();
@@ -48,12 +49,15 @@
             this.carsView1 = new CarDealership.Controls.CarsView();
             this.OrdersTab = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.ArchivizeAllButton = new System.Windows.Forms.Button();
+            this.ArchivizeButton = new System.Windows.Forms.Button();
             this.OrderCancelButton = new System.Windows.Forms.Button();
             this.OrderReassignButton = new System.Windows.Forms.Button();
             this.OrderNotesButton = new System.Windows.Forms.Button();
             this.ordersView1 = new CarDealership.Controls.OrdersView();
             this.ArchiveTab = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.ArchiveDetailsButton = new System.Windows.Forms.Button();
             this.ModelComboBox = new System.Windows.Forms.ComboBox();
             this.modelsDataSet = new CarDealership.ModelsDataSet();
             this.ModelCheckBox = new System.Windows.Forms.CheckBox();
@@ -62,10 +66,11 @@
             this.sellersDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sellersDataSet = new CarDealership.SellersDataSet();
             this.EmployeeCheckBox = new System.Windows.Forms.CheckBox();
-            this.DealershipCehckBox = new System.Windows.Forms.CheckBox();
+            this.DealershipCheckBox = new System.Windows.Forms.CheckBox();
             this.DealershipComboBox = new System.Windows.Forms.ComboBox();
             this.dealershipsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dealershipsDataSet = new CarDealership.DealershipsDataSet();
+            this.archiveView1 = new CarDealership.Controls.ArchiveView();
             this.modelsDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dealershipsTableAdapter = new CarDealership.DealershipsDataSetTableAdapters.DealershipsTableAdapter();
             this.employeesTableAdapter = new CarDealership.SellersDataSetTableAdapters.EmployeesTableAdapter();
@@ -92,6 +97,7 @@
             this.ArchiveTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modelsDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeesBindingSource)).BeginInit();
@@ -156,7 +162,7 @@
             this.ChPwdButton.Name = "ChPwdButton";
             this.ChPwdButton.Size = new System.Drawing.Size(306, 25);
             this.ChPwdButton.TabIndex = 0;
-            this.ChPwdButton.Text = "Change password";
+            this.ChPwdButton.Text = "Change Password...";
             this.ChPwdButton.UseVisualStyleBackColor = true;
             this.ChPwdButton.Click += new System.EventHandler(this.ChPwdButton_Click);
             // 
@@ -182,6 +188,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainer1.Panel1.Controls.Add(this.RemoveEmployeeButton);
             this.splitContainer1.Panel1.Controls.Add(this.AddMechanicButton);
             this.splitContainer1.Panel1.Controls.Add(this.AddSellerButton);
             // 
@@ -193,13 +200,23 @@
             this.splitContainer1.SplitterDistance = 175;
             this.splitContainer1.TabIndex = 0;
             // 
+            // RemoveEmployeeButton
+            // 
+            this.RemoveEmployeeButton.Location = new System.Drawing.Point(12, 82);
+            this.RemoveEmployeeButton.Name = "RemoveEmployeeButton";
+            this.RemoveEmployeeButton.Size = new System.Drawing.Size(150, 25);
+            this.RemoveEmployeeButton.TabIndex = 2;
+            this.RemoveEmployeeButton.Text = "Remove";
+            this.RemoveEmployeeButton.UseVisualStyleBackColor = true;
+            this.RemoveEmployeeButton.Click += new System.EventHandler(this.RemoveEmployeeButton_Click);
+            // 
             // AddMechanicButton
             // 
             this.AddMechanicButton.Location = new System.Drawing.Point(12, 51);
             this.AddMechanicButton.Name = "AddMechanicButton";
             this.AddMechanicButton.Size = new System.Drawing.Size(150, 25);
             this.AddMechanicButton.TabIndex = 1;
-            this.AddMechanicButton.Text = "Add mechanic";
+            this.AddMechanicButton.Text = "Add Mechanic...";
             this.AddMechanicButton.UseVisualStyleBackColor = true;
             this.AddMechanicButton.Click += new System.EventHandler(this.AddMechanicButton_Click);
             // 
@@ -209,7 +226,7 @@
             this.AddSellerButton.Name = "AddSellerButton";
             this.AddSellerButton.Size = new System.Drawing.Size(150, 25);
             this.AddSellerButton.TabIndex = 0;
-            this.AddSellerButton.Text = "Add seller";
+            this.AddSellerButton.Text = "Add Seller...";
             this.AddSellerButton.UseVisualStyleBackColor = true;
             this.AddSellerButton.Click += new System.EventHandler(this.AddSellerButton_Click);
             // 
@@ -322,6 +339,8 @@
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.Controls.Add(this.ArchivizeAllButton);
+            this.splitContainer3.Panel1.Controls.Add(this.ArchivizeButton);
             this.splitContainer3.Panel1.Controls.Add(this.OrderCancelButton);
             this.splitContainer3.Panel1.Controls.Add(this.OrderReassignButton);
             this.splitContainer3.Panel1.Controls.Add(this.OrderNotesButton);
@@ -332,6 +351,26 @@
             this.splitContainer3.Size = new System.Drawing.Size(817, 419);
             this.splitContainer3.SplitterDistance = 175;
             this.splitContainer3.TabIndex = 0;
+            // 
+            // ArchivizeAllButton
+            // 
+            this.ArchivizeAllButton.Location = new System.Drawing.Point(12, 162);
+            this.ArchivizeAllButton.Name = "ArchivizeAllButton";
+            this.ArchivizeAllButton.Size = new System.Drawing.Size(150, 25);
+            this.ArchivizeAllButton.TabIndex = 4;
+            this.ArchivizeAllButton.Text = "Archivize All";
+            this.ArchivizeAllButton.UseVisualStyleBackColor = true;
+            this.ArchivizeAllButton.Click += new System.EventHandler(this.ArchivizeAllButton_Click);
+            // 
+            // ArchivizeButton
+            // 
+            this.ArchivizeButton.Location = new System.Drawing.Point(12, 131);
+            this.ArchivizeButton.Name = "ArchivizeButton";
+            this.ArchivizeButton.Size = new System.Drawing.Size(150, 25);
+            this.ArchivizeButton.TabIndex = 3;
+            this.ArchivizeButton.Text = "Archivize";
+            this.ArchivizeButton.UseVisualStyleBackColor = true;
+            this.ArchivizeButton.Click += new System.EventHandler(this.ArchivizeButton_Click);
             // 
             // OrderCancelButton
             // 
@@ -349,7 +388,7 @@
             this.OrderReassignButton.Name = "OrderReassignButton";
             this.OrderReassignButton.Size = new System.Drawing.Size(150, 25);
             this.OrderReassignButton.TabIndex = 1;
-            this.OrderReassignButton.Text = "Reassign";
+            this.OrderReassignButton.Text = "Reassign...";
             this.OrderReassignButton.UseVisualStyleBackColor = true;
             this.OrderReassignButton.Click += new System.EventHandler(this.OrderReassignButton_Click);
             // 
@@ -359,7 +398,7 @@
             this.OrderNotesButton.Name = "OrderNotesButton";
             this.OrderNotesButton.Size = new System.Drawing.Size(150, 25);
             this.OrderNotesButton.TabIndex = 0;
-            this.OrderNotesButton.Text = "Notes";
+            this.OrderNotesButton.Text = "Notes...";
             this.OrderNotesButton.UseVisualStyleBackColor = true;
             this.OrderNotesButton.Click += new System.EventHandler(this.OrderNotesButton_Click);
             // 
@@ -393,15 +432,30 @@
             // splitContainer4.Panel1
             // 
             this.splitContainer4.Panel1.AutoScroll = true;
+            this.splitContainer4.Panel1.Controls.Add(this.ArchiveDetailsButton);
             this.splitContainer4.Panel1.Controls.Add(this.ModelComboBox);
             this.splitContainer4.Panel1.Controls.Add(this.ModelCheckBox);
             this.splitContainer4.Panel1.Controls.Add(this.EmployeeComboBox);
             this.splitContainer4.Panel1.Controls.Add(this.EmployeeCheckBox);
-            this.splitContainer4.Panel1.Controls.Add(this.DealershipCehckBox);
+            this.splitContainer4.Panel1.Controls.Add(this.DealershipCheckBox);
             this.splitContainer4.Panel1.Controls.Add(this.DealershipComboBox);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.archiveView1);
             this.splitContainer4.Size = new System.Drawing.Size(817, 419);
             this.splitContainer4.SplitterDistance = 175;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // ArchiveDetailsButton
+            // 
+            this.ArchiveDetailsButton.Location = new System.Drawing.Point(12, 188);
+            this.ArchiveDetailsButton.Name = "ArchiveDetailsButton";
+            this.ArchiveDetailsButton.Size = new System.Drawing.Size(150, 25);
+            this.ArchiveDetailsButton.TabIndex = 7;
+            this.ArchiveDetailsButton.Text = "Details...";
+            this.ArchiveDetailsButton.UseVisualStyleBackColor = true;
+            this.ArchiveDetailsButton.Click += new System.EventHandler(this.ArchiveDetailsButton_Click);
             // 
             // ModelComboBox
             // 
@@ -413,6 +467,7 @@
             this.ModelComboBox.Size = new System.Drawing.Size(167, 21);
             this.ModelComboBox.TabIndex = 6;
             this.ModelComboBox.ValueMember = "Models.MODEL_ID";
+            this.ModelComboBox.SelectedIndexChanged += new System.EventHandler(this.ModelComboBox_SelectedIndexChanged);
             // 
             // modelsDataSet
             // 
@@ -428,6 +483,7 @@
             this.ModelCheckBox.TabIndex = 5;
             this.ModelCheckBox.Text = "Model filter";
             this.ModelCheckBox.UseVisualStyleBackColor = true;
+            this.ModelCheckBox.CheckedChanged += new System.EventHandler(this.ModelCheckBox_CheckedChanged);
             // 
             // EmployeeComboBox
             // 
@@ -439,6 +495,7 @@
             this.EmployeeComboBox.Size = new System.Drawing.Size(167, 21);
             this.EmployeeComboBox.TabIndex = 4;
             this.EmployeeComboBox.ValueMember = "EMPLOYEE_ID";
+            this.EmployeeComboBox.SelectedIndexChanged += new System.EventHandler(this.EmployeeComboBox_SelectedIndexChanged);
             // 
             // employeesBindingSource
             // 
@@ -464,18 +521,20 @@
             this.EmployeeCheckBox.TabIndex = 3;
             this.EmployeeCheckBox.Text = "Employee filter";
             this.EmployeeCheckBox.UseVisualStyleBackColor = true;
+            this.EmployeeCheckBox.CheckedChanged += new System.EventHandler(this.EmployeeCheckBox_CheckedChanged);
             // 
-            // DealershipCehckBox
+            // DealershipCheckBox
             // 
-            this.DealershipCehckBox.AutoSize = true;
-            this.DealershipCehckBox.Checked = true;
-            this.DealershipCehckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.DealershipCehckBox.Location = new System.Drawing.Point(5, 18);
-            this.DealershipCehckBox.Name = "DealershipCehckBox";
-            this.DealershipCehckBox.Size = new System.Drawing.Size(98, 17);
-            this.DealershipCehckBox.TabIndex = 2;
-            this.DealershipCehckBox.Text = "Dealership filter";
-            this.DealershipCehckBox.UseVisualStyleBackColor = true;
+            this.DealershipCheckBox.AutoSize = true;
+            this.DealershipCheckBox.Checked = true;
+            this.DealershipCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.DealershipCheckBox.Location = new System.Drawing.Point(5, 18);
+            this.DealershipCheckBox.Name = "DealershipCheckBox";
+            this.DealershipCheckBox.Size = new System.Drawing.Size(98, 17);
+            this.DealershipCheckBox.TabIndex = 2;
+            this.DealershipCheckBox.Text = "Dealership filter";
+            this.DealershipCheckBox.UseVisualStyleBackColor = true;
+            this.DealershipCheckBox.CheckedChanged += new System.EventHandler(this.DealershipCheckBox_CheckedChanged);
             // 
             // DealershipComboBox
             // 
@@ -487,6 +546,7 @@
             this.DealershipComboBox.Size = new System.Drawing.Size(167, 21);
             this.DealershipComboBox.TabIndex = 1;
             this.DealershipComboBox.ValueMember = "DEALERSHIP_ID";
+            this.DealershipComboBox.SelectedIndexChanged += new System.EventHandler(this.DealershipComboBox_SelectedIndexChanged);
             // 
             // dealershipsBindingSource
             // 
@@ -497,6 +557,14 @@
             // 
             this.dealershipsDataSet.DataSetName = "DealershipsDataSet";
             this.dealershipsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // archiveView1
+            // 
+            this.archiveView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.archiveView1.Location = new System.Drawing.Point(0, 0);
+            this.archiveView1.Name = "archiveView1";
+            this.archiveView1.Size = new System.Drawing.Size(638, 419);
+            this.archiveView1.TabIndex = 0;
             // 
             // modelsDataSetBindingSource
             // 
@@ -555,6 +623,7 @@
             this.ArchiveTab.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel1.PerformLayout();
+            this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.modelsDataSet)).EndInit();
@@ -600,7 +669,7 @@
         private System.Windows.Forms.CheckBox ModelCheckBox;
         private System.Windows.Forms.ComboBox EmployeeComboBox;
         private System.Windows.Forms.CheckBox EmployeeCheckBox;
-        private System.Windows.Forms.CheckBox DealershipCehckBox;
+        private System.Windows.Forms.CheckBox DealershipCheckBox;
         private System.Windows.Forms.ComboBox DealershipComboBox;
         private System.Windows.Forms.BindingSource modelsDataSetBindingSource;
         private DealershipsDataSet dealershipsDataSet;
@@ -613,5 +682,10 @@
         private System.Windows.Forms.BindingSource employeesBindingSource;
         private ModelsDataSetTableAdapters.ModelsTableAdapter modelsTableAdapter;
         private ModelsDataSetTableAdapters.TableAdapterManager tableAdapterManager1;
+        private Controls.ArchiveView archiveView1;
+        private System.Windows.Forms.Button ArchivizeButton;
+        private System.Windows.Forms.Button ArchivizeAllButton;
+        private System.Windows.Forms.Button ArchiveDetailsButton;
+        private System.Windows.Forms.Button RemoveEmployeeButton;
     }
 }

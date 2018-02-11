@@ -42,5 +42,23 @@ namespace CarDealership.Controls
             }
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
+
+        public String SelectedEmployeeRole()
+        {
+            if (this.dataGridView.SelectedRows.Count > 0)
+            {
+                return dataGridView.CurrentRow.Cells[3].Value.ToString();
+            }
+            return null;
+        }
+
+        public int SelectedEmployeeID()
+        {
+            if (this.dataGridView.SelectedRows.Count > 0)
+            {
+                return (int)dataGridView.CurrentRow.Cells[0].Value;
+            }
+            return 0;
+        }
     }
 }

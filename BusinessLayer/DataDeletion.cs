@@ -35,29 +35,14 @@ namespace BusinessLayer
             }
 
         }
-
         public static void DeleteOrder(int id)
         {
+            DataDeletion.DeleteActiveDiscounts(id);
+            DataDeletion.ClearAccessoriesInstallOrders(id);
             try
             {
-                ClearAccessoriesInstallOrders(id);
+                
                 var database = DataLayer.Utility.GetContext();
-                var acc = from inst in database.Accessories_Install_Orders
-                          where
-                          inst.ORDER_ID == id
-                          select inst;
-                foreach (var inst in acc)
-                {
-                    database.Accessories_Install_Orders.DeleteOnSubmit(inst);
-                }
-                var discounts = from disc in database.Active_Discounts
-                                where
-                                disc.ORDER_ID == id
-                                select disc;
-                foreach(var disc in discounts)
-                {
-                    database.Active_Discounts.DeleteOnSubmit(disc);
-                }
                 var ord = (from orders in database.Active_Orders
                            where orders.ORDER_ID == id
                            select orders).Single();
@@ -73,7 +58,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void ClearAccessoriesInstallOrders(int orderID)
         {
             try
@@ -98,7 +82,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void DeleteMountedAccessories(String VIN)
         {
             try
@@ -123,7 +106,30 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        public static void DeleteMountedAccessories(int orderID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var order = (from ord in database.Active_Orders
+                            where
+                            ord.ORDER_ID == orderID
+                            select ord).Single(); 
+                foreach (var acc in order.Cars_for_Sale.Mounted_Accessories)
+                {
+                    database.Mounted_Accessories.DeleteOnSubmit(acc);
+                }
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         public static void RemoveCar(String VIN)
         {
             DataDeletion.DeleteMountedAccessories(VIN);
@@ -137,6 +143,62 @@ namespace BusinessLayer
 
                 database.Cars_for_Sales.DeleteOnSubmit(del);
                 database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void DeleteActiveDiscounts(int orderID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var discounts = from disc in database.Active_Discounts
+                                where
+                                disc.ORDER_ID == orderID
+                                select disc;
+                foreach (var disc in discounts)
+                {
+                    database.Active_Discounts.DeleteOnSubmit(disc);
+                }
+                database.SubmitChanges();
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void DeleteAccOrdOnComplete(string VIN, int accID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var order = (from ord in database.Active_Orders
+                            where
+                            ord.CAR_VIN == VIN
+                            select ord).Single();
+                foreach (var install in order.Accessories_Install_Orders)
+                {
+                    if (install.ACCESSORY_ID == accID)
+                    {
+                        database.Accessories_Install_Orders.DeleteOnSubmit(install);
+                        break;
+                    }
+                }
+                database.SubmitChanges();
+                if (order.Accessories_Install_Orders.Count == 0)
+                {
+                    DataUpdate.ChangeOrderStauts(order.ORDER_ID, "Open");
+                }
             }
             catch (System.Data.SqlClient.SqlException ex)
             {

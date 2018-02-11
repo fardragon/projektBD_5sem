@@ -22,11 +22,7 @@ namespace CarDealership.Forms
             var active = DataAcquisition.GetActiveDiscounts(orderID);
             foreach (var disc in discounts)
             {
-                bool check = false;
-                foreach (var act in active)
-                {
-                    if (disc.DISCOUNT_ID == act.DISCOUNT_ID) check = true;
-                }
+                bool check = active.Contains(disc.DISCOUNT_ID);
                 DiscountsListBox.Items.Add(disc.DISCOUNT_ID + ": " + disc.NAME + ", Value: " + disc.VALUE, check);
             }
         }

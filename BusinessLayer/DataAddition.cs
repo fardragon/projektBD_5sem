@@ -75,7 +75,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void AddModel(string name, string price)
         {
             try
@@ -101,7 +100,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void AddColor(String name)
         {
             try
@@ -125,7 +123,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void OpenOrder(String CarVIN, int CustomerID, int SellerID)
         {
             try
@@ -152,7 +149,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void AccessoryInstall(int orderID, int accID)
         {
             try
@@ -176,7 +172,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void AddCustomer(string name, string address, string city, string zipcode, string phone, string mail)
         {
             try
@@ -205,7 +200,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void AddCar(string VIN, int model, int color, int dealership, string prodyear)
         {
             try
@@ -233,7 +227,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void AddMountedAccessory(string VIN, List<int> AccId)
         {
             foreach(int id in AccId)
@@ -265,7 +258,6 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         public static void AddAccessoryType(string name)
         {
             try
@@ -277,6 +269,117 @@ namespace BusinessLayer
                     TYPE = name
                 };
                 database.Accessories_Types.InsertOnSubmit(type);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void AddAccessory(int TypeID, string name, string price)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var acc = new Accessory
+                {
+                    NAME = name,
+                    PRICE = Decimal.Parse(price),
+                    TYPE_ID = TypeID
+                };
+                database.Accessories.InsertOnSubmit(acc);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void AddSoldAccessory(int SaleID, int AccID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var acc = new Sold_Accessory
+                {
+                    SALE_ID = SaleID,
+                    ACCESSORY_ID = AccID
+                };
+                database.Sold_Accessories.InsertOnSubmit(acc);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void AddSoldAccessory(int SaleID, List<int>AccID)
+        {
+            foreach(int acc in AccID)
+            {
+                DataAddition.AddSoldAccessory(SaleID, acc);
+            }
+        }
+        public static void AddSoldDiscount(int SaleID, int DiscountID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var disc = new Sold_Discount
+                {
+                    SALE_ID = SaleID,
+                    DISCOUNT_ID = DiscountID
+                };
+                database.Sold_Discounts.InsertOnSubmit(disc);
+                database.SubmitChanges();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static void AddSoldDiscount(int SaleID, List<int> DiscountID)
+        {
+            foreach (int disc in DiscountID)
+            {
+                DataAddition.AddSoldDiscount(SaleID, disc);
+            }
+        }
+        public static void AddDiscount(string Name, decimal Value)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var disc = new Discount
+                {
+                    NAME = Name,
+                    VALUE = Value
+                };
+                database.Discounts.InsertOnSubmit(disc);
                 database.SubmitChanges();
 
             }

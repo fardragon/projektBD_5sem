@@ -35,11 +35,10 @@
             this.carsView1 = new CarDealership.Controls.CarsView();
             this._ColorsTab = new System.Windows.Forms.TabPage();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.AddClrButton = new System.Windows.Forms.Button();
-            this.colorsView = new CarDealership.Controls.ColorsView();
-            this.ModelsTab = new System.Windows.Forms.TabPage();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.ModelAddButton = new System.Windows.Forms.Button();
+            this.AddClrButton = new System.Windows.Forms.Button();
+            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.colorsView = new CarDealership.Controls.ColorsView();
             this.modelsView1 = new CarDealership.Controls.ModelsView();
             this.DealershipsTab = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -76,12 +75,16 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.AccTab = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.AddAccButton = new System.Windows.Forms.Button();
             this.AddAccCatButton = new System.Windows.Forms.Button();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.accessoriesTypesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.accCatDataSet = new CarDealership.AccCatDataSet();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.accView1 = new CarDealership.Controls.AccView();
+            this.discountsView1 = new CarDealership.Controls.DiscountsView();
             this.accessories_TypesTableAdapter = new CarDealership.AccCatDataSetTableAdapters.Accessories_TypesTableAdapter();
-            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
+            this.AddDiscButton = new System.Windows.Forms.Button();
             this.CustomersTab.SuspendLayout();
             this.CarsTab.SuspendLayout();
             this._ColorsTab.SuspendLayout();
@@ -89,11 +92,10 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
-            this.ModelsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
+            this.splitContainer6.Panel1.SuspendLayout();
+            this.splitContainer6.Panel2.SuspendLayout();
+            this.splitContainer6.SuspendLayout();
             this.DealershipsTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -114,6 +116,10 @@
             this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.accessoriesTypesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accCatDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // CustomersTab
@@ -159,7 +165,7 @@
             this._ColorsTab.Name = "_ColorsTab";
             this._ColorsTab.Size = new System.Drawing.Size(847, 490);
             this._ColorsTab.TabIndex = 6;
-            this._ColorsTab.Text = "Colors";
+            this._ColorsTab.Text = "Colors and Models";
             this._ColorsTab.UseVisualStyleBackColor = true;
             // 
             // splitContainer5
@@ -173,79 +179,68 @@
             // splitContainer5.Panel1
             // 
             this.splitContainer5.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainer5.Panel1.Controls.Add(this.ModelAddButton);
             this.splitContainer5.Panel1.Controls.Add(this.AddClrButton);
             // 
             // splitContainer5.Panel2
             // 
-            this.splitContainer5.Panel2.Controls.Add(this.colorsView);
+            this.splitContainer5.Panel2.Controls.Add(this.splitContainer6);
             this.splitContainer5.Size = new System.Drawing.Size(847, 490);
-            this.splitContainer5.SplitterDistance = 125;
+            this.splitContainer5.SplitterDistance = 175;
             this.splitContainer5.TabIndex = 0;
+            // 
+            // ModelAddButton
+            // 
+            this.ModelAddButton.Location = new System.Drawing.Point(12, 249);
+            this.ModelAddButton.Name = "ModelAddButton";
+            this.ModelAddButton.Size = new System.Drawing.Size(150, 25);
+            this.ModelAddButton.TabIndex = 0;
+            this.ModelAddButton.Text = "Add model...";
+            this.ModelAddButton.UseVisualStyleBackColor = true;
+            this.ModelAddButton.Click += new System.EventHandler(this.ModelAddButton_Click);
             // 
             // AddClrButton
             // 
-            this.AddClrButton.Location = new System.Drawing.Point(8, 15);
+            this.AddClrButton.Location = new System.Drawing.Point(12, 20);
             this.AddClrButton.Name = "AddClrButton";
-            this.AddClrButton.Size = new System.Drawing.Size(108, 23);
+            this.AddClrButton.Size = new System.Drawing.Size(150, 25);
             this.AddClrButton.TabIndex = 0;
-            this.AddClrButton.Text = "Add";
+            this.AddClrButton.Text = "Add color...";
             this.AddClrButton.UseVisualStyleBackColor = true;
             this.AddClrButton.Click += new System.EventHandler(this.AddClrButton_Click);
+            // 
+            // splitContainer6
+            // 
+            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer6.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer6.Name = "splitContainer6";
+            this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer6.Panel1
+            // 
+            this.splitContainer6.Panel1.Controls.Add(this.colorsView);
+            // 
+            // splitContainer6.Panel2
+            // 
+            this.splitContainer6.Panel2.Controls.Add(this.modelsView1);
+            this.splitContainer6.Size = new System.Drawing.Size(668, 490);
+            this.splitContainer6.SplitterDistance = 245;
+            this.splitContainer6.TabIndex = 1;
             // 
             // colorsView
             // 
             this.colorsView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.colorsView.Location = new System.Drawing.Point(0, 0);
             this.colorsView.Name = "colorsView";
-            this.colorsView.Size = new System.Drawing.Size(718, 490);
+            this.colorsView.Size = new System.Drawing.Size(668, 245);
             this.colorsView.TabIndex = 0;
-            // 
-            // ModelsTab
-            // 
-            this.ModelsTab.Controls.Add(this.splitContainer3);
-            this.ModelsTab.Location = new System.Drawing.Point(4, 22);
-            this.ModelsTab.Name = "ModelsTab";
-            this.ModelsTab.Size = new System.Drawing.Size(847, 490);
-            this.ModelsTab.TabIndex = 4;
-            this.ModelsTab.Text = "Car Models";
-            this.ModelsTab.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer3.IsSplitterFixed = true;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.BackColor = System.Drawing.Color.White;
-            this.splitContainer3.Panel1.Controls.Add(this.ModelAddButton);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.modelsView1);
-            this.splitContainer3.Size = new System.Drawing.Size(847, 490);
-            this.splitContainer3.SplitterDistance = 119;
-            this.splitContainer3.TabIndex = 1;
-            // 
-            // ModelAddButton
-            // 
-            this.ModelAddButton.Location = new System.Drawing.Point(8, 12);
-            this.ModelAddButton.Name = "ModelAddButton";
-            this.ModelAddButton.Size = new System.Drawing.Size(104, 23);
-            this.ModelAddButton.TabIndex = 0;
-            this.ModelAddButton.Text = "Add";
-            this.ModelAddButton.UseVisualStyleBackColor = true;
-            this.ModelAddButton.Click += new System.EventHandler(this.ModelAddButton_Click);
             // 
             // modelsView1
             // 
             this.modelsView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modelsView1.Location = new System.Drawing.Point(0, 0);
             this.modelsView1.Name = "modelsView1";
-            this.modelsView1.Size = new System.Drawing.Size(724, 490);
+            this.modelsView1.Size = new System.Drawing.Size(668, 241);
             this.modelsView1.TabIndex = 0;
             // 
             // DealershipsTab
@@ -277,26 +272,26 @@
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.DarkGray;
             this.splitContainer2.Panel2.Controls.Add(this.dealershipsView1);
             this.splitContainer2.Size = new System.Drawing.Size(847, 490);
-            this.splitContainer2.SplitterDistance = 132;
+            this.splitContainer2.SplitterDistance = 175;
             this.splitContainer2.TabIndex = 0;
             // 
             // buttonEditDeal
             // 
-            this.buttonEditDeal.Location = new System.Drawing.Point(8, 46);
+            this.buttonEditDeal.Location = new System.Drawing.Point(12, 51);
             this.buttonEditDeal.Name = "buttonEditDeal";
-            this.buttonEditDeal.Size = new System.Drawing.Size(114, 23);
+            this.buttonEditDeal.Size = new System.Drawing.Size(150, 25);
             this.buttonEditDeal.TabIndex = 1;
-            this.buttonEditDeal.Text = "Edit";
+            this.buttonEditDeal.Text = "Edit...";
             this.buttonEditDeal.UseVisualStyleBackColor = true;
             this.buttonEditDeal.Click += new System.EventHandler(this.buttonEditDeal_Click);
             // 
             // buttonAddDeal
             // 
-            this.buttonAddDeal.Location = new System.Drawing.Point(8, 17);
+            this.buttonAddDeal.Location = new System.Drawing.Point(12, 20);
             this.buttonAddDeal.Name = "buttonAddDeal";
-            this.buttonAddDeal.Size = new System.Drawing.Size(114, 23);
+            this.buttonAddDeal.Size = new System.Drawing.Size(150, 25);
             this.buttonAddDeal.TabIndex = 0;
-            this.buttonAddDeal.Text = "Add";
+            this.buttonAddDeal.Text = "Add...";
             this.buttonAddDeal.UseVisualStyleBackColor = true;
             this.buttonAddDeal.Click += new System.EventHandler(this.buttonAddDeal_Click);
             // 
@@ -305,7 +300,7 @@
             this.dealershipsView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dealershipsView1.Location = new System.Drawing.Point(0, 0);
             this.dealershipsView1.Name = "dealershipsView1";
-            this.dealershipsView1.Size = new System.Drawing.Size(711, 490);
+            this.dealershipsView1.Size = new System.Drawing.Size(668, 490);
             this.dealershipsView1.TabIndex = 0;
             // 
             // EmployeesTab
@@ -349,7 +344,7 @@
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.employeesView1);
             this.splitContainer1.Size = new System.Drawing.Size(847, 490);
-            this.splitContainer1.SplitterDistance = 198;
+            this.splitContainer1.SplitterDistance = 200;
             this.splitContainer1.TabIndex = 1;
             // 
             // buttonResetEmp
@@ -412,6 +407,27 @@
             // 
             this.roleSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.roleSelector1.FormattingEnabled = true;
+            this.roleSelector1.Items.AddRange(new object[] {
+            "Administrator",
+            "Manager",
+            "Mechanic",
+            "Seller",
+            "Administrator",
+            "Manager",
+            "Mechanic",
+            "Seller",
+            "Administrator",
+            "Manager",
+            "Mechanic",
+            "Seller",
+            "Administrator",
+            "Manager",
+            "Mechanic",
+            "Seller",
+            "Administrator",
+            "Manager",
+            "Mechanic",
+            "Seller"});
             this.roleSelector1.Location = new System.Drawing.Point(71, 107);
             this.roleSelector1.Name = "roleSelector1";
             this.roleSelector1.Size = new System.Drawing.Size(121, 21);
@@ -422,6 +438,21 @@
             this.dealershipSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dealershipSelector1.FormattingEnabled = true;
             this.dealershipSelector1.Items.AddRange(new object[] {
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
+            "",
+            1,
+            2,
             "",
             1,
             2,
@@ -536,7 +567,7 @@
             this.buttonAddEmp.Name = "buttonAddEmp";
             this.buttonAddEmp.Size = new System.Drawing.Size(171, 23);
             this.buttonAddEmp.TabIndex = 2;
-            this.buttonAddEmp.Text = "Add";
+            this.buttonAddEmp.Text = "Add...";
             this.buttonAddEmp.UseVisualStyleBackColor = true;
             this.buttonAddEmp.Click += new System.EventHandler(this.buttonAddEmp_Click);
             // 
@@ -556,7 +587,7 @@
             this.buttonEditEmp.Name = "buttonEditEmp";
             this.buttonEditEmp.Size = new System.Drawing.Size(171, 23);
             this.buttonEditEmp.TabIndex = 0;
-            this.buttonEditEmp.Text = "Edit";
+            this.buttonEditEmp.Text = "Edit...";
             this.buttonEditEmp.UseVisualStyleBackColor = true;
             this.buttonEditEmp.Click += new System.EventHandler(this.buttonEDIT_Click);
             // 
@@ -565,7 +596,7 @@
             this.employeesView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.employeesView1.Location = new System.Drawing.Point(0, 0);
             this.employeesView1.Name = "employeesView1";
-            this.employeesView1.Size = new System.Drawing.Size(645, 490);
+            this.employeesView1.Size = new System.Drawing.Size(643, 490);
             this.employeesView1.TabIndex = 0;
             // 
             // dataGridView1
@@ -615,7 +646,7 @@
             // 
             // HomeTab
             // 
-            this.HomeTab.BackColor = System.Drawing.Color.DarkGray;
+            this.HomeTab.BackColor = System.Drawing.Color.White;
             this.HomeTab.Controls.Add(this.ResetButton);
             this.HomeTab.Controls.Add(this.ChPwdButton);
             this.HomeTab.Controls.Add(this.ExitButton);
@@ -629,9 +660,9 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(8, 397);
+            this.ResetButton.Location = new System.Drawing.Point(8, 393);
             this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(156, 23);
+            this.ResetButton.Size = new System.Drawing.Size(306, 25);
             this.ResetButton.TabIndex = 3;
             this.ResetButton.Text = "Test data";
             this.ResetButton.UseVisualStyleBackColor = true;
@@ -639,19 +670,19 @@
             // 
             // ChPwdButton
             // 
-            this.ChPwdButton.Location = new System.Drawing.Point(8, 426);
+            this.ChPwdButton.Location = new System.Drawing.Point(8, 424);
             this.ChPwdButton.Name = "ChPwdButton";
-            this.ChPwdButton.Size = new System.Drawing.Size(156, 23);
+            this.ChPwdButton.Size = new System.Drawing.Size(306, 25);
             this.ChPwdButton.TabIndex = 2;
-            this.ChPwdButton.Text = "Change password";
+            this.ChPwdButton.Text = "Change password...";
             this.ChPwdButton.UseVisualStyleBackColor = true;
             this.ChPwdButton.Click += new System.EventHandler(this.ChPwdButton_Click);
             // 
             // ExitButton
             // 
-            this.ExitButton.Location = new System.Drawing.Point(89, 455);
+            this.ExitButton.Location = new System.Drawing.Point(164, 455);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(75, 23);
+            this.ExitButton.Size = new System.Drawing.Size(150, 25);
             this.ExitButton.TabIndex = 1;
             this.ExitButton.Text = "Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
@@ -661,7 +692,7 @@
             // 
             this.LogoutButton.Location = new System.Drawing.Point(8, 455);
             this.LogoutButton.Name = "LogoutButton";
-            this.LogoutButton.Size = new System.Drawing.Size(75, 23);
+            this.LogoutButton.Size = new System.Drawing.Size(150, 25);
             this.LogoutButton.TabIndex = 0;
             this.LogoutButton.Text = "Logout";
             this.LogoutButton.UseVisualStyleBackColor = true;
@@ -672,7 +703,6 @@
             this.tabControl.Controls.Add(this.HomeTab);
             this.tabControl.Controls.Add(this.EmployeesTab);
             this.tabControl.Controls.Add(this.DealershipsTab);
-            this.tabControl.Controls.Add(this.ModelsTab);
             this.tabControl.Controls.Add(this._ColorsTab);
             this.tabControl.Controls.Add(this.CarsTab);
             this.tabControl.Controls.Add(this.CustomersTab);
@@ -694,7 +724,7 @@
             this.AccTab.Padding = new System.Windows.Forms.Padding(3);
             this.AccTab.Size = new System.Drawing.Size(847, 490);
             this.AccTab.TabIndex = 8;
-            this.AccTab.Text = "Accessorries";
+            this.AccTab.Text = "Accessories and Discounts";
             this.AccTab.UseVisualStyleBackColor = true;
             // 
             // splitContainer4
@@ -705,25 +735,50 @@
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.Controls.Add(this.AddDiscButton);
+            this.splitContainer4.Panel1.Controls.Add(this.AddAccButton);
             this.splitContainer4.Panel1.Controls.Add(this.AddAccCatButton);
             this.splitContainer4.Panel1.Controls.Add(this.CategoryComboBox);
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.accView1);
+            this.splitContainer4.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer4.Size = new System.Drawing.Size(841, 484);
-            this.splitContainer4.SplitterDistance = 189;
+            this.splitContainer4.SplitterDistance = 175;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // AddAccButton
+            // 
+            this.AddAccButton.Location = new System.Drawing.Point(12, 78);
+            this.AddAccButton.Name = "AddAccButton";
+            this.AddAccButton.Size = new System.Drawing.Size(150, 25);
+            this.AddAccButton.TabIndex = 2;
+            this.AddAccButton.Text = "Add accessory...";
+            this.AddAccButton.UseVisualStyleBackColor = true;
+            this.AddAccButton.Click += new System.EventHandler(this.AddAccButton_Click);
             // 
             // AddAccCatButton
             // 
-            this.AddAccCatButton.Location = new System.Drawing.Point(31, 64);
+            this.AddAccCatButton.Location = new System.Drawing.Point(12, 47);
             this.AddAccCatButton.Name = "AddAccCatButton";
-            this.AddAccCatButton.Size = new System.Drawing.Size(121, 23);
+            this.AddAccCatButton.Size = new System.Drawing.Size(150, 25);
             this.AddAccCatButton.TabIndex = 1;
             this.AddAccCatButton.Text = "Add category...";
             this.AddAccCatButton.UseVisualStyleBackColor = true;
             this.AddAccCatButton.Click += new System.EventHandler(this.AddAccCatButton_Click);
+            // 
+            // CategoryComboBox
+            // 
+            this.CategoryComboBox.DataSource = this.accessoriesTypesBindingSource;
+            this.CategoryComboBox.DisplayMember = "TYPE";
+            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(12, 20);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(150, 21);
+            this.CategoryComboBox.TabIndex = 0;
+            this.CategoryComboBox.ValueMember = "TYPE_ID";
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // accessoriesTypesBindingSource
             // 
@@ -735,30 +790,53 @@
             this.accCatDataSet.DataSetName = "AccCatDataSet";
             this.accCatDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.accView1);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.discountsView1);
+            this.splitContainer3.Size = new System.Drawing.Size(662, 484);
+            this.splitContainer3.SplitterDistance = 219;
+            this.splitContainer3.TabIndex = 1;
+            // 
             // accView1
             // 
             this.accView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.accView1.Location = new System.Drawing.Point(0, 0);
             this.accView1.Name = "accView1";
-            this.accView1.Size = new System.Drawing.Size(648, 484);
+            this.accView1.Size = new System.Drawing.Size(662, 219);
             this.accView1.TabIndex = 0;
+            // 
+            // discountsView1
+            // 
+            this.discountsView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.discountsView1.Location = new System.Drawing.Point(0, 0);
+            this.discountsView1.Name = "discountsView1";
+            this.discountsView1.Size = new System.Drawing.Size(662, 261);
+            this.discountsView1.TabIndex = 0;
             // 
             // accessories_TypesTableAdapter
             // 
             this.accessories_TypesTableAdapter.ClearBeforeFill = true;
             // 
-            // CategoryComboBox
+            // AddDiscButton
             // 
-            this.CategoryComboBox.DataSource = this.accessoriesTypesBindingSource;
-            this.CategoryComboBox.DisplayMember = "TYPE";
-            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CategoryComboBox.FormattingEnabled = true;
-            this.CategoryComboBox.Location = new System.Drawing.Point(31, 23);
-            this.CategoryComboBox.Name = "CategoryComboBox";
-            this.CategoryComboBox.Size = new System.Drawing.Size(121, 21);
-            this.CategoryComboBox.TabIndex = 0;
-            this.CategoryComboBox.ValueMember = "TYPE_ID";
-            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
+            this.AddDiscButton.Location = new System.Drawing.Point(12, 223);
+            this.AddDiscButton.Name = "AddDiscButton";
+            this.AddDiscButton.Size = new System.Drawing.Size(150, 25);
+            this.AddDiscButton.TabIndex = 3;
+            this.AddDiscButton.Text = "Add discount...";
+            this.AddDiscButton.UseVisualStyleBackColor = true;
+            this.AddDiscButton.Click += new System.EventHandler(this.AddDiscButton_Click);
             // 
             // AdminScreen
             // 
@@ -767,7 +845,7 @@
             this.ClientSize = new System.Drawing.Size(855, 516);
             this.Controls.Add(this.tabControl);
             this.Name = "AdminScreen";
-            this.Text = "AdminScreen";
+            this.Text = "Admin";
             this.CustomersTab.ResumeLayout(false);
             this.CarsTab.ResumeLayout(false);
             this._ColorsTab.ResumeLayout(false);
@@ -775,11 +853,10 @@
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
-            this.ModelsTab.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
+            this.splitContainer6.Panel1.ResumeLayout(false);
+            this.splitContainer6.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
+            this.splitContainer6.ResumeLayout(false);
             this.DealershipsTab.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -801,6 +878,10 @@
             this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.accessoriesTypesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accCatDataSet)).EndInit();
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -813,8 +894,6 @@
         private System.Windows.Forms.SplitContainer splitContainer5;
         private System.Windows.Forms.Button AddClrButton;
         private Controls.ColorsView colorsView;
-        private System.Windows.Forms.TabPage ModelsTab;
-        private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Button ModelAddButton;
         private Controls.ModelsView modelsView1;
         private System.Windows.Forms.TabPage DealershipsTab;
@@ -860,5 +939,10 @@
         private System.Windows.Forms.Button AddAccCatButton;
         private Controls.AccView accView1;
         private System.Windows.Forms.ComboBox CategoryComboBox;
+        private System.Windows.Forms.Button AddAccButton;
+        private System.Windows.Forms.SplitContainer splitContainer6;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private Controls.DiscountsView discountsView1;
+        private System.Windows.Forms.Button AddDiscButton;
     }
 }

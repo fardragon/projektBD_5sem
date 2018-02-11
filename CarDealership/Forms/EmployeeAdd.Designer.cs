@@ -170,10 +170,6 @@
             // 
             this.dealershipSelector1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dealershipSelector1.FormattingEnabled = true;
-            this.dealershipSelector1.Items.AddRange(new object[] {
-            "",
-            1,
-            2});
             this.dealershipSelector1.Location = new System.Drawing.Point(105, 73);
             this.dealershipSelector1.Name = "dealershipSelector1";
             this.dealershipSelector1.Size = new System.Drawing.Size(145, 21);

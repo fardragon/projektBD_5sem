@@ -75,11 +75,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ColorsDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AccInstallView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AccInstallView.Designer.cs">
+      <DependentUpon>AccInstallView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AccView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\AccView.Designer.cs">
       <DependentUpon>AccView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArchiveView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ArchiveView.Designer.cs">
+      <DependentUpon>ArchiveView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CarsView.cs">
       <SubType>UserControl</SubType>
@@ -110,6 +122,12 @@
     </Compile>
     <Compile Include="Controls\DealershipsView.Designer.cs">
       <DependentUpon>DealershipsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DiscountsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DiscountsView.Designer.cs">
+      <DependentUpon>DiscountsView.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\EmployeesManagerView.cs">
       <SubType>UserControl</SubType>
@@ -146,6 +164,12 @@
     <Compile Include="Forms\AccessoriesPicker.Designer.cs">
       <DependentUpon>AccessoriesPicker.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddAccessory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddAccessory.Designer.cs">
+      <DependentUpon>AddAccessory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AddCar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +181,12 @@
     </Compile>
     <Compile Include="Forms\AddCategory.Designer.cs">
       <DependentUpon>AddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddDiscount.Designer.cs">
+      <DependentUpon>AddDiscount.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AddEmployeeManager.cs">
       <SubType>Form</SubType>
@@ -175,6 +205,12 @@
     </Compile>
     <Compile Include="Controls\EmployeesView.Designer.cs">
       <DependentUpon>EmployeesView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ArchiveDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ArchiveDetails.Designer.cs">
+      <DependentUpon>ArchiveDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CarDetails.cs">
       <SubType>Form</SubType>
@@ -288,14 +324,23 @@
     <Compile Include="Forms\SellerScreen.Designer.cs">
       <DependentUpon>SellerScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="SellersDataSet.cs">
+      <DependentUpon>SellersDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SellersDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SellersDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
+    <EmbeddedResource Include="Controls\AccInstallView.resx">
+      <DependentUpon>AccInstallView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\AccView.resx">
       <DependentUpon>AccView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ArchiveView.resx">
+      <DependentUpon>ArchiveView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CarsView.resx">
       <DependentUpon>CarsView.cs</DependentUpon>
@@ -309,6 +354,9 @@
     <EmbeddedResource Include="Controls\DealershipsView.resx">
       <DependentUpon>DealershipsView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DiscountsView.resx">
+      <DependentUpon>DiscountsView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\EmployeesManagerView.resx">
       <DependentUpon>EmployeesManagerView.cs</DependentUpon>
     </EmbeddedResource>
@@ -321,11 +369,17 @@
     <EmbeddedResource Include="Forms\AccessoriesPicker.resx">
       <DependentUpon>AccessoriesPicker.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddAccessory.resx">
+      <DependentUpon>AddAccessory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddCar.resx">
       <DependentUpon>AddCar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddCategory.resx">
       <DependentUpon>AddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddDiscount.resx">
+      <DependentUpon>AddDiscount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddEmployeeManager.resx">
       <DependentUpon>AddEmployeeManager.cs</DependentUpon>
@@ -335,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EmployeesView.resx">
       <DependentUpon>EmployeesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ArchiveDetails.resx">
+      <DependentUpon>ArchiveDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CarDetails.resx">
       <DependentUpon>CarDetails.cs</DependentUpon>
@@ -368,6 +425,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ManagerScreen.resx">
       <DependentUpon>ManagerScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MechanicScreen.resx">
+      <DependentUpon>MechanicScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ModelAdd.resx">
       <DependentUpon>ModelAdd.cs</DependentUpon>

@@ -54,16 +54,6 @@ WHERE        (ROLE_ID = 3)</CommandText>
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="CarDealership_samochodyConnectionString (Settings)" DbObjectName="projektbd_samochody.dbo.Employees" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy2" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBy2" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillBy2">
-                <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT        EMPLOYEE_ID, CAST(EMPLOYEE_ID AS varchar(10)) + ' ' + NAME + ' ' + SURNAME AS NAME
-FROM            Employees
-WHERE        (ROLE_ID = 3)</CommandText>
-                    <Parameters />
-                  </DbCommand>
-                </SelectCommand>
-              </DbSource>
             </Sources>
           </TableAdapter>
         </Tables>
@@ -74,7 +64,7 @@ WHERE        (ROLE_ID = 3)</CommandText>
   <xs:element name="SellersDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="SellersDataSet" msprop:Generator_UserDSName="SellersDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Employees" msprop:Generator_TableClassName="EmployeesDataTable" msprop:Generator_TableVarName="tableEmployees" msprop:Generator_TablePropName="Employees" msprop:Generator_RowDeletingName="EmployeesRowDeleting" msprop:Generator_RowChangingName="EmployeesRowChanging" msprop:Generator_RowEvHandlerName="EmployeesRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeesRowDeleted" msprop:Generator_UserTableName="Employees" msprop:Generator_RowChangedName="EmployeesRowChanged" msprop:Generator_RowEvArgName="EmployeesRowChangeEvent" msprop:Generator_RowClassName="EmployeesRow">
+        <xs:element name="Employees" msprop:Generator_TableClassName="EmployeesDataTable" msprop:Generator_TableVarName="tableEmployees" msprop:Generator_RowChangedName="EmployeesRowChanged" msprop:Generator_TablePropName="Employees" msprop:Generator_RowDeletingName="EmployeesRowDeleting" msprop:Generator_RowChangingName="EmployeesRowChanging" msprop:Generator_RowEvHandlerName="EmployeesRowChangeEventHandler" msprop:Generator_RowDeletedName="EmployeesRowDeleted" msprop:Generator_RowClassName="EmployeesRow" msprop:Generator_UserTableName="Employees" msprop:Generator_RowEvArgName="EmployeesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="EMPLOYEE_ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnEMPLOYEE_ID" msprop:Generator_ColumnPropNameInRow="EMPLOYEE_ID" msprop:Generator_ColumnPropNameInTable="EMPLOYEE_IDColumn" msprop:Generator_UserColumnName="EMPLOYEE_ID" type="xs:int" />

@@ -66,6 +66,19 @@ namespace CarDealership.Controls
             return this.dataGridView1.CurrentRow.Cells[5].Value.ToString();
         }
 
+        public List<int> GetOrdersWithStatus(String status)
+        {
+            List<int> result = new List<int>();
+            foreach (DataGridViewRow row in this.dataGridView1.Rows)
+            {
+                if (row.Cells[5].Value.ToString() == status)
+                {
+                    result.Add((int)row.Cells[0].Value);
+                }
+            }
+            return result;
+        }
+
         public void SelectOrderByVIN(String VIN)
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)

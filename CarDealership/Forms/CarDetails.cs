@@ -18,7 +18,7 @@ namespace CarDealership.Forms
             this.View(VIN);
         }
 
-        public void View(String VIN)
+        private void View(String VIN)
         {
             var car = BusinessLayer.DataAcquisition.GetCar(VIN);
 
@@ -50,6 +50,7 @@ namespace CarDealership.Forms
 
             full.Nodes.Add(accessories);
             this.PriceTreeView.Nodes.Add(full);
+            full.Expand();
         }
 
         private void OKButton_Click(object sender, EventArgs e)

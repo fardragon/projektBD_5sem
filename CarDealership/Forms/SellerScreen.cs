@@ -288,7 +288,6 @@ namespace CarDealership.Forms
             {
                 var dialog = new CarDealership.Forms.OrderNotes(this.ordersView1.SelectedOrderID());
                 dialog.ShowDialog(this);
-                this.ordersView1.View();
             }
         }
 
