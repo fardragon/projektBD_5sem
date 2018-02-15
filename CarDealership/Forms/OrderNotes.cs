@@ -27,9 +27,9 @@ namespace CarDealership.Forms
             this.DialogResult = DialogResult.Yes;
         }
 
-        public void ReadOnly(bool value)
+        public void ReadOnly()
         {
-            this.textBox1.ReadOnly = value;
+            this.textBox1.ReadOnly = true;
         }
     }
 }

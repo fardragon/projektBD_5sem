@@ -100,7 +100,7 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static void AddColor(String name)
+        public static void AddColor(string name)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static void OpenOrder(String CarVIN, int CustomerID, int SellerID)
+        public static void OpenOrder(string CarVIN, int CustomerID, int SellerID)
         {
             try
             {
@@ -200,7 +200,7 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static void AddCar(string VIN, int model, int color, int dealership, string prodyear)
+        public static void AddCar(string VIN, int model, int color, int dealershipID, string prodyear)
         {
             try
             {
@@ -210,7 +210,7 @@ namespace BusinessLayer
                 {
                     CAR_VIN = VIN,
                     MODEL_ID = model,
-                    DEALERSHIP_ID = dealership,
+                    DEALERSHIP_ID = dealershipID,
                     COLOR_ID = color,
                     PRODUCTION_YEAR = prodyear
                 };

@@ -107,7 +107,7 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public static void UpdateOrderNotes(int orderID, String Notes)
+        public static void UpdateOrderNotes(int orderID, string Notes)
         {
             try
             {
@@ -302,7 +302,7 @@ namespace BusinessLayer
                     PRODUCTION_YEAR = order.Cars_for_Sale.PRODUCTION_YEAR,
                     EMPLOYEE_ID = order.EMPLOYEE_ID,
                     CUSTOMER_ID = order.CUSTOMER_ID,
-                    SALE_DATE = DateTime.Now
+                    SALE_DATE = order.LAST_UPDATE
                 };
                 database.Sold_Cars.InsertOnSubmit(sale);
                 database.Active_Orders.DeleteOnSubmit(order);

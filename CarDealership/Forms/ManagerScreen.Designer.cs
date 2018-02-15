@@ -57,6 +57,10 @@
             this.ordersView1 = new CarDealership.Controls.OrdersView();
             this.ArchiveTab = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.ArchiveCustomerDetailsButton = new System.Windows.Forms.Button();
+            this.ArchiveEmployeeDetailsButton = new System.Windows.Forms.Button();
+            this.DealReportButton = new System.Windows.Forms.Button();
+            this.EmpReportButton = new System.Windows.Forms.Button();
             this.ArchiveDetailsButton = new System.Windows.Forms.Button();
             this.ModelComboBox = new System.Windows.Forms.ComboBox();
             this.modelsDataSet = new CarDealership.ModelsDataSet();
@@ -71,12 +75,17 @@
             this.dealershipsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dealershipsDataSet = new CarDealership.DealershipsDataSet();
             this.archiveView1 = new CarDealership.Controls.ArchiveView();
+            this.CustTab = new System.Windows.Forms.TabPage();
+            this.customersView1 = new CarDealership.Controls.CustomersView();
             this.modelsDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dealershipsTableAdapter = new CarDealership.DealershipsDataSetTableAdapters.DealershipsTableAdapter();
             this.employeesTableAdapter = new CarDealership.SellersDataSetTableAdapters.EmployeesTableAdapter();
             this.tableAdapterManager = new CarDealership.SellersDataSetTableAdapters.TableAdapterManager();
             this.modelsTableAdapter = new CarDealership.ModelsDataSetTableAdapters.ModelsTableAdapter();
             this.tableAdapterManager1 = new CarDealership.ModelsDataSetTableAdapters.TableAdapterManager();
+            this.OrderCustomerDetailsButton = new System.Windows.Forms.Button();
+            this.OrderEmployeeDetailsButton = new System.Windows.Forms.Button();
+            this.OrderCarDetailsButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.HomeTab.SuspendLayout();
             this.EmployeesTab.SuspendLayout();
@@ -105,6 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sellersDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealershipsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealershipsDataSet)).BeginInit();
+            this.CustTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.modelsDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,6 +125,7 @@
             this.tabControl1.Controls.Add(this.CarsTab);
             this.tabControl1.Controls.Add(this.OrdersTab);
             this.tabControl1.Controls.Add(this.ArchiveTab);
+            this.tabControl1.Controls.Add(this.CustTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -339,6 +350,9 @@
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.Controls.Add(this.OrderCarDetailsButton);
+            this.splitContainer3.Panel1.Controls.Add(this.OrderEmployeeDetailsButton);
+            this.splitContainer3.Panel1.Controls.Add(this.OrderCustomerDetailsButton);
             this.splitContainer3.Panel1.Controls.Add(this.ArchivizeAllButton);
             this.splitContainer3.Panel1.Controls.Add(this.ArchivizeButton);
             this.splitContainer3.Panel1.Controls.Add(this.OrderCancelButton);
@@ -432,6 +446,10 @@
             // splitContainer4.Panel1
             // 
             this.splitContainer4.Panel1.AutoScroll = true;
+            this.splitContainer4.Panel1.Controls.Add(this.ArchiveCustomerDetailsButton);
+            this.splitContainer4.Panel1.Controls.Add(this.ArchiveEmployeeDetailsButton);
+            this.splitContainer4.Panel1.Controls.Add(this.DealReportButton);
+            this.splitContainer4.Panel1.Controls.Add(this.EmpReportButton);
             this.splitContainer4.Panel1.Controls.Add(this.ArchiveDetailsButton);
             this.splitContainer4.Panel1.Controls.Add(this.ModelComboBox);
             this.splitContainer4.Panel1.Controls.Add(this.ModelCheckBox);
@@ -446,6 +464,47 @@
             this.splitContainer4.Size = new System.Drawing.Size(817, 419);
             this.splitContainer4.SplitterDistance = 175;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // ArchiveCustomerDetailsButton
+            // 
+            this.ArchiveCustomerDetailsButton.Location = new System.Drawing.Point(12, 346);
+            this.ArchiveCustomerDetailsButton.Name = "ArchiveCustomerDetailsButton";
+            this.ArchiveCustomerDetailsButton.Size = new System.Drawing.Size(150, 25);
+            this.ArchiveCustomerDetailsButton.TabIndex = 11;
+            this.ArchiveCustomerDetailsButton.Text = "Customer detials";
+            this.ArchiveCustomerDetailsButton.UseVisualStyleBackColor = true;
+            this.ArchiveCustomerDetailsButton.Click += new System.EventHandler(this.ArchiveCustomerDetailsButton_Click);
+            // 
+            // ArchiveEmployeeDetailsButton
+            // 
+            this.ArchiveEmployeeDetailsButton.Location = new System.Drawing.Point(12, 315);
+            this.ArchiveEmployeeDetailsButton.Name = "ArchiveEmployeeDetailsButton";
+            this.ArchiveEmployeeDetailsButton.Size = new System.Drawing.Size(150, 25);
+            this.ArchiveEmployeeDetailsButton.TabIndex = 10;
+            this.ArchiveEmployeeDetailsButton.Text = "Employee details";
+            this.ArchiveEmployeeDetailsButton.UseVisualStyleBackColor = true;
+            this.ArchiveEmployeeDetailsButton.Click += new System.EventHandler(this.ArchiveEmployeeDetailsButton_Click);
+            // 
+            // DealReportButton
+            // 
+            this.DealReportButton.Location = new System.Drawing.Point(12, 219);
+            this.DealReportButton.Name = "DealReportButton";
+            this.DealReportButton.Size = new System.Drawing.Size(150, 25);
+            this.DealReportButton.TabIndex = 9;
+            this.DealReportButton.Text = "Dealership report...";
+            this.DealReportButton.UseVisualStyleBackColor = true;
+            this.DealReportButton.Click += new System.EventHandler(this.DealReportButton_Click);
+            // 
+            // EmpReportButton
+            // 
+            this.EmpReportButton.Enabled = false;
+            this.EmpReportButton.Location = new System.Drawing.Point(12, 250);
+            this.EmpReportButton.Name = "EmpReportButton";
+            this.EmpReportButton.Size = new System.Drawing.Size(150, 25);
+            this.EmpReportButton.TabIndex = 8;
+            this.EmpReportButton.Text = "Employee report...";
+            this.EmpReportButton.UseVisualStyleBackColor = true;
+            this.EmpReportButton.Click += new System.EventHandler(this.EmpReportButton_Click);
             // 
             // ArchiveDetailsButton
             // 
@@ -566,6 +625,24 @@
             this.archiveView1.Size = new System.Drawing.Size(638, 419);
             this.archiveView1.TabIndex = 0;
             // 
+            // CustTab
+            // 
+            this.CustTab.Controls.Add(this.customersView1);
+            this.CustTab.Location = new System.Drawing.Point(4, 22);
+            this.CustTab.Name = "CustTab";
+            this.CustTab.Size = new System.Drawing.Size(823, 425);
+            this.CustTab.TabIndex = 5;
+            this.CustTab.Text = "Local Customers";
+            this.CustTab.UseVisualStyleBackColor = true;
+            // 
+            // customersView1
+            // 
+            this.customersView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customersView1.Location = new System.Drawing.Point(0, 0);
+            this.customersView1.Name = "customersView1";
+            this.customersView1.Size = new System.Drawing.Size(823, 425);
+            this.customersView1.TabIndex = 0;
+            // 
             // modelsDataSetBindingSource
             // 
             this.modelsDataSetBindingSource.DataSource = this.modelsDataSet;
@@ -594,6 +671,36 @@
             this.tableAdapterManager1.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager1.ModelsTableAdapter = this.modelsTableAdapter;
             this.tableAdapterManager1.UpdateOrder = CarDealership.ModelsDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
+            // OrderCustomerDetailsButton
+            // 
+            this.OrderCustomerDetailsButton.Location = new System.Drawing.Point(12, 222);
+            this.OrderCustomerDetailsButton.Name = "OrderCustomerDetailsButton";
+            this.OrderCustomerDetailsButton.Size = new System.Drawing.Size(150, 25);
+            this.OrderCustomerDetailsButton.TabIndex = 5;
+            this.OrderCustomerDetailsButton.Text = "Customer details";
+            this.OrderCustomerDetailsButton.UseVisualStyleBackColor = true;
+            this.OrderCustomerDetailsButton.Click += new System.EventHandler(this.OrderCustomerDetailsButton_Click);
+            // 
+            // OrderEmployeeDetailsButton
+            // 
+            this.OrderEmployeeDetailsButton.Location = new System.Drawing.Point(12, 253);
+            this.OrderEmployeeDetailsButton.Name = "OrderEmployeeDetailsButton";
+            this.OrderEmployeeDetailsButton.Size = new System.Drawing.Size(150, 25);
+            this.OrderEmployeeDetailsButton.TabIndex = 6;
+            this.OrderEmployeeDetailsButton.Text = "Employee details";
+            this.OrderEmployeeDetailsButton.UseVisualStyleBackColor = true;
+            this.OrderEmployeeDetailsButton.Click += new System.EventHandler(this.OrderEmployeeDetailsButton_Click);
+            // 
+            // OrderCarDetailsButton
+            // 
+            this.OrderCarDetailsButton.Location = new System.Drawing.Point(12, 284);
+            this.OrderCarDetailsButton.Name = "OrderCarDetailsButton";
+            this.OrderCarDetailsButton.Size = new System.Drawing.Size(150, 25);
+            this.OrderCarDetailsButton.TabIndex = 7;
+            this.OrderCarDetailsButton.Text = "Car details";
+            this.OrderCarDetailsButton.UseVisualStyleBackColor = true;
+            this.OrderCarDetailsButton.Click += new System.EventHandler(this.OrderCarDetailsButton_Click);
             // 
             // ManagerScreen
             // 
@@ -632,6 +739,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sellersDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealershipsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dealershipsDataSet)).EndInit();
+            this.CustTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.modelsDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -687,5 +795,14 @@
         private System.Windows.Forms.Button ArchivizeAllButton;
         private System.Windows.Forms.Button ArchiveDetailsButton;
         private System.Windows.Forms.Button RemoveEmployeeButton;
+        private System.Windows.Forms.Button EmpReportButton;
+        private System.Windows.Forms.Button DealReportButton;
+        private System.Windows.Forms.TabPage CustTab;
+        private Controls.CustomersView customersView1;
+        private System.Windows.Forms.Button ArchiveCustomerDetailsButton;
+        private System.Windows.Forms.Button ArchiveEmployeeDetailsButton;
+        private System.Windows.Forms.Button OrderCarDetailsButton;
+        private System.Windows.Forms.Button OrderEmployeeDetailsButton;
+        private System.Windows.Forms.Button OrderCustomerDetailsButton;
     }
 }

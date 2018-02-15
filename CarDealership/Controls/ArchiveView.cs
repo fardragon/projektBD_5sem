@@ -27,7 +27,7 @@ namespace CarDealership.Controls
         public void View()
         {
             this.dataGridView1.Rows.Clear();
-            var sales = BusinessLayer.DataAcquisition.GetArchive(DealershipID, ModelID, EmployeeID);
+            var sales = BusinessLayer.DataAcquisition.GetArchive(DealershipID, ModelID, EmployeeID, null, null);
             foreach(var sale in sales)
             {
                 this.dataGridView1.Rows.Add(sale.SALE_ID, sale.CAR_VIN, sale.Model.NAME, sale.Color.NAME, sale.PRODUCTION_YEAR, sale.EMPLOYEE_ID, sale.CUSTOMER_ID, sale.SALE_DATE);
@@ -53,6 +53,19 @@ namespace CarDealership.Controls
         {
             if (this.dataGridView1.SelectedRows.Count == 0) return 0;
             return (int)this.dataGridView1.CurrentRow.Cells[0].Value;
+        }
+
+        public int SelectedCustomerID()
+        {
+            if (this.dataGridView1.SelectedRows.Count == 0) return 0;
+            return (int)this.dataGridView1.CurrentRow.Cells[6].Value;
+        }
+
+        public int SelectedEmployeeID()
+        {
+            if (this.dataGridView1.SelectedRows.Count == 0) return 0;
+            if (this.dataGridView1.CurrentRow.Cells[5].Value == null) return 0;
+            return (int)this.dataGridView1.CurrentRow.Cells[5].Value;
         }
     }
 }

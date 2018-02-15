@@ -60,5 +60,17 @@ namespace CarDealership.Controls
             }
             return 0;
         }
+
+        public void SelectEmployee(int ID)
+        {
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if ((int)row.Cells[0].Value == ID)
+                {
+                    row.Selected = true;
+                    return;
+                }
+            }
+        }
     }
 }

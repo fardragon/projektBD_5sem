@@ -31,6 +31,20 @@ namespace CarDealership.Controls
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
         }
 
+        public void ManagerView(int DealID)
+        {
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+            this.dataGridView1.Rows.Clear();
+            var customers = BusinessLayer.DataAcquisition.GetLocalCustomers(DealID);
+            foreach (var cust in customers)
+            {
+                this.dataGridView1.Rows.Add(cust.CUSTOMER_ID, cust.NAME, cust.STREET_ADDRESS, cust.CITY, cust.ZIPCODE, cust.PHONE, cust.MAIL);
+            }
+
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
+
+        }
+
         public int? SelectedCustomer()
         {
             if (this.dataGridView1.SelectedRows.Count > 0)

@@ -18,7 +18,7 @@ namespace CarDealership.Forms
         {
             this.customerID = customerID;
             InitializeComponent();
-            var customer = DataAcquisition.LoadCustomer(customerID);
+            var customer = DataAcquisition.GetCustomer(customerID);
             this.NameTextbox.Text = customer.NAME;
             this.AddressTextbox.Text = customer.STREET_ADDRESS;
             this.CityTextbox.Text = customer.CITY;

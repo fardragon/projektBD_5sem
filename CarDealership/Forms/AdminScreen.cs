@@ -156,9 +156,9 @@ namespace CarDealership.Forms
             if (result == DialogResult.Yes) this.colorsView.View();
         }
 
-        private void ResetButton_Click_1(object sender, EventArgs e)
+        private void ResetButton_Click(object sender, EventArgs e)
         {
-            BusinessLayer.Utility.DEBUG_RESET();
+            BusinessLayer.Utility.Reset();
         }
         
         private void AccessoriesTabLoad()

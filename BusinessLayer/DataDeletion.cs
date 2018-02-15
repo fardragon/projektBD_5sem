@@ -209,15 +209,14 @@ namespace BusinessLayer
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        public static void DeleteAccessory(int accID)
+        public static void DeleteAccessory(int AccID)
         {
             try
             {
                 var database = DataLayer.Utility.GetContext();
                 var accessory = (from acc in database.Accessories
                                  where
-                                 acc.ACCESSORY_ID == accID
+                                 acc.ACCESSORY_ID == AccID
                                  select acc).Single();
                 database.Accessories.DeleteOnSubmit(accessory);
                 database.SubmitChanges();

@@ -23,7 +23,7 @@ namespace CarDealership.Controls
         public void Initialize()
         {
             this.Items.Clear();
-            var roles = BusinessLayer.DataAcquisition.GetRoles(null);
+            var roles = BusinessLayer.DataAcquisition.GetRoles();
             foreach (Role rol in roles)
             {
                 this.Items.Add(rol.ROLE_NAME);

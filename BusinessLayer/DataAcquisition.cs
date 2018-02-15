@@ -98,27 +98,13 @@ namespace BusinessLayer
             }
             return new List<DataLayer.Dealership>();
         }
-        public static List<DataLayer.Role> GetRoles(Role criteria)
+        public static List<DataLayer.Role> GetRoles()
         {
             try
             {
                 var database = DataLayer.Utility.GetContext();
-                if (criteria == null)
-                {
-                   return database.Roles.ToList();
-                }
-                else
-                {
-                    var res = from rol in database.Roles
-                              where
+                return database.Roles.ToList();
 
-                              ((criteria.ROLE_ID == 0) || (rol.ROLE_ID == criteria.ROLE_ID))
-                              &&
-                              (String.IsNullOrEmpty(criteria.ROLE_NAME) || rol.ROLE_NAME == criteria.ROLE_NAME)
-
-                              select rol;
-                    return res.ToList();
-                }
             }
             catch (System.Data.SqlClient.SqlException ex)
             {
@@ -130,7 +116,7 @@ namespace BusinessLayer
             }
             return new List<DataLayer.Role>();
         }
-        public static int GetRoleID(string ROLE_NAME)
+        public static int GetRoleID(string roleName)
         {
             try
             {
@@ -138,7 +124,7 @@ namespace BusinessLayer
                 var res = (
                           from rol in database.Roles
                           where
-                          rol.ROLE_NAME == ROLE_NAME
+                          rol.ROLE_NAME == roleName
                           select rol
                           ).Single();
 
@@ -154,7 +140,7 @@ namespace BusinessLayer
             }
             return 0;
         }
-        public static List<DataLayer.Employee> GetManagers(int dealershipid)
+        public static List<DataLayer.Employee> GetManagers(int dealershipID)
         {
             try
             {
@@ -162,7 +148,7 @@ namespace BusinessLayer
                 var res = 
                           from man in database.Employees
                           where
-                          (man.DEALERSHIP_ID == dealershipid)
+                          (man.DEALERSHIP_ID == dealershipID)
                           &&
                           (man.Role.ROLE_NAME == "Manager")
                           select man;
@@ -344,12 +330,12 @@ namespace BusinessLayer
             }
             return null;
         }
-        public static List<DataLayer.Customer> GetCustomers(string Id, string Name, string City)
+        public static List<DataLayer.Customer> GetCustomers(string ID, string Name, string City)
         {
             var criteria = new Customer();
-            if (!String.IsNullOrEmpty(Id))
+            if (!String.IsNullOrEmpty(ID))
             {
-                criteria.CUSTOMER_ID = Int32.Parse(Id);
+                criteria.CUSTOMER_ID = Int32.Parse(ID);
             }
             if (!String.IsNullOrEmpty(Name))
             {
@@ -395,6 +381,53 @@ namespace BusinessLayer
             }
             return new List<DataLayer.Customer>();
         }
+        public static List<DataLayer.Customer> GetLocalCustomers(int DealID)
+        {
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+                var customers = from cus in database.Customers
+                                where
+                                (cus.Active_Orders.Any(p => p.Cars_for_Sale.DEALERSHIP_ID == DealID))
+                                ||
+                                (cus.Sold_Cars.Any(p => p.DEALERSHIP_ID == DealID))
+                                select cus;
+                return customers.ToList();
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return new List<DataLayer.Customer>();
+        }
+        public static DataLayer.Customer GetCustomer(int id)
+        {
+                try
+                {
+                    var database = DataLayer.Utility.GetContext();
+                    var res = (from cus in database.Customers
+                              where
+                              (cus.CUSTOMER_ID == id)
+                              select cus).Single();
+                return res;
+
+
+                }
+                catch (System.Data.SqlClient.SqlException ex)
+                {
+                    MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return new DataLayer.Customer();
+            }
         public static List<DataLayer.Active_Order> GetOrders(int? DealershipID, int? EmployeeID, int? OrderStatus)
         {
             try
@@ -589,27 +622,6 @@ namespace BusinessLayer
             }
             return new List<int>();
         }
-        public static DataLayer.Customer LoadCustomer(int customerID)
-        {
-            try
-            {
-                var database = DataLayer.Utility.GetContext();
-                var customer = (from cust in database.Customers
-                                where
-                                cust.CUSTOMER_ID == customerID
-                                select cust).Single();
-                return customer;
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                MessageBox.Show(ex.Message + " " + ex.Number, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return new DataLayer.Customer();
-        }
         public static List<DataLayer.Accessory> GetAccessories(int Type)
         {
             try
@@ -631,7 +643,7 @@ namespace BusinessLayer
             }
             return new List<DataLayer.Accessory>();
         }
-        public static List<DataLayer.Sold_Car> GetArchive(int? DealershipID, int? ModelID, int? EmployeeID)
+        public static List<DataLayer.Sold_Car> GetArchive(int? DealershipID, int? ModelID, int? EmployeeID, DateTime? StartDate, DateTime? EndDate)
         {
             try
             {
@@ -642,7 +654,8 @@ namespace BusinessLayer
                     MODEL_ID = (ModelID == null) ? 0 : ModelID.Value,
                     EMPLOYEE_ID = (EmployeeID == null) ? 0 : EmployeeID.Value
                 };
-
+                DateTime Start = (StartDate == null) ? DateTime.MinValue : StartDate.Value;
+                DateTime End = (EndDate == null) ? DateTime.MaxValue : EndDate.Value;
 
                 var sales = from sal in database.Sold_Cars
                             where
@@ -651,6 +664,10 @@ namespace BusinessLayer
                             ((criteria.MODEL_ID == 0) || (sal.MODEL_ID == criteria.MODEL_ID))
                             &&
                             ((criteria.EMPLOYEE_ID == 0) || (sal.EMPLOYEE_ID == criteria.EMPLOYEE_ID))
+                            &&
+                            (sal.SALE_DATE >= Start)
+                            &&
+                            (sal.SALE_DATE <= End)
                             select sal;
 
                 return sales.ToList();
@@ -716,7 +733,6 @@ namespace BusinessLayer
 
             return new Sold_Car();
         }
-
         public static List<Cars_for_Sale> CarsWithAccInstallOrders(int? DealershipID)
         {
             try
@@ -749,15 +765,14 @@ namespace BusinessLayer
 
             return new List<DataLayer.Cars_for_Sale>();
         }
-
-        public static bool CanDeleteAccessory(int accID)
+        public static bool CanDeleteAccessory(int AccID)
         {
             try
             {
                 var database = DataLayer.Utility.GetContext();
                 var accessory= (from acc in database.Accessories
                                 where
-                                acc.ACCESSORY_ID == accID
+                                acc.ACCESSORY_ID == AccID
                                 select acc).Single();
 
                 if (accessory.Mounted_Accessories.Count > 0) return false;
@@ -847,6 +862,103 @@ namespace BusinessLayer
             }
             return false;
         }
+        public static List<KeyValuePair<string,int>> GetEmployeesSalesData(int DealID, DateTime Start, DateTime End)
+        {
+            var employees = DataAcquisition.GetEmployees(null, null, DealID.ToString(), "Seller");
+            var result = new List<KeyValuePair<string, int>>();
+            foreach (var emp in employees)
+            {
+                var sales = from sal in emp.Sold_Cars
+                            where
+                            (sal.SALE_DATE >= Start)
+                            &&
+                            (sal.SALE_DATE <= End)
+                            select sal;
+                var dataPoint = new KeyValuePair<string, int>(emp.NAME + " " + emp.SURNAME + " ID:" + emp.EMPLOYEE_ID, sales.Count());
+                result.Add(dataPoint);
+            }
+            return result;
+        }
+        public static List<KeyValuePair<string, int>> GetModelsSalesData(int DealID, DateTime Start, DateTime End)
+        {
+            var models = DataAcquisition.GetModels();
+            var result = new List<KeyValuePair<string, int>>();
+            foreach (var model in models)
+            {
+                var sales = from sal in model.Sold_Cars
+                            where
+                            (sal.SALE_DATE >= Start)
+                            &&
+                            (sal.SALE_DATE <= End)
+                            &&
+                            (sal.DEALERSHIP_ID == DealID)
+                            select sal;
+                var dataPoint = new KeyValuePair<string, int>(model.NAME, sales.Count());
+                result.Add(dataPoint);
+            }
+            return result;
+        }
+        public static LoginData Login(string username, string password)
+        {
+            var result = new LoginData
+            {
+                Dealership = -1,
+                ID = -1
+            };
+
+            if ((password.Length == 0) || (username.Length == 0))
+            {
+                result.Type = UserTypes.BadLogin;
+                return result;
+            }
+            var hashedPassword = BusinessLayer.Utility.CalculateMD5Hash(password);
+            try
+            {
+                var database = DataLayer.Utility.GetContext();
+
+                var user = (from users in database.Employees where users.LOGIN == username && users.PASSWORD == hashedPassword select users).Single();
+                if (user.DEALERSHIP_ID.HasValue)
+                {
+                    result.Dealership = user.DEALERSHIP_ID.Value;
+                }
+                result.ID = user.EMPLOYEE_ID;
+                switch (user.Role.ROLE_NAME.ToString())
+                {
+                    case "Administrator":
+                        result.Type = UserTypes.Administrator;
+                        break;
+                    case "Manager":
+                        result.Type = UserTypes.Manager;
+                        break;
+                    case "Seller":
+                        result.Type = UserTypes.Seller;
+                        break;
+                    case "Mechanic":
+                        result.Type = UserTypes.Mechanic;
+                        break;
+                    default:
+                        result.Type = UserTypes.BadLogin;
+                        break;
+                }
+
+                return result;
+
+            }
+            catch (System.InvalidOperationException)
+            {
+                result.Type = UserTypes.BadLogin;
+                return result;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                result.Type = UserTypes.Error;
+                return result;
+            }
+
+
+        }
+
 
     }
 
