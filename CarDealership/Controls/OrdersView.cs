@@ -60,13 +60,20 @@ namespace CarDealership.Controls
             return (int) this.dataGridView1.CurrentRow.Cells[0].Value;
         }
 
-        public String GetOrderStatus()
+        public int SelectedEmployeeID()
+        {
+            if (this.dataGridView1.SelectedRows.Count == 0) return 0;
+            return (int)this.dataGridView1.CurrentRow.Cells[4].Value;
+        }
+
+
+        public string GetOrderStatus()
         {
             if (this.dataGridView1.SelectedRows.Count == 0) return String.Empty;
             return this.dataGridView1.CurrentRow.Cells[5].Value.ToString();
         }
 
-        public List<int> GetOrdersWithStatus(String status)
+        public List<int> GetOrdersWithStatus(string status)
         {
             List<int> result = new List<int>();
             foreach (DataGridViewRow row in this.dataGridView1.Rows)
@@ -79,7 +86,7 @@ namespace CarDealership.Controls
             return result;
         }
 
-        public void SelectOrderByVIN(String VIN)
+        public void SelectOrderByVIN(string VIN)
         {
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {

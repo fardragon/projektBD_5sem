@@ -16,7 +16,7 @@ namespace BusinessLayer
             return hexString.ToString();
         }
 
-        public static void DEBUG_RESET()
+        public static void Reset()
         {
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
             try

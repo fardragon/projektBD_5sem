@@ -29,7 +29,7 @@ namespace CarDealership.Forms
         {
             System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
             this.toolTipLogin.Hide(textBoxPassword);         
-            var user = BusinessLayer.LoginLogic.Login(this.textBoxUsername.Text, this.textBoxPassword.Text);
+            var user = BusinessLayer.DataAcquisition.Login(this.textBoxUsername.Text, this.textBoxPassword.Text);
             bool loggedIn = false;
             switch (user.Type)
             {

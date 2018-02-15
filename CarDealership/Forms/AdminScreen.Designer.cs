@@ -686,7 +686,7 @@
             this.ResetButton.TabIndex = 3;
             this.ResetButton.Text = "Test data";
             this.ResetButton.UseVisualStyleBackColor = true;
-            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click_1);
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // ChPwdButton
             // 
